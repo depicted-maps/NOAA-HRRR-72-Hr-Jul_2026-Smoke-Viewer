@@ -1,0 +1,30 @@
+{
+  "files": [
+    "national_boundaries.png",
+    "ri_boundaries.png"
+  ],
+  "dimensions": [
+    1280,
+    720
+  ],
+  "national_features": 185,
+  "ri_municipalities": 39,
+  "extents": {
+    "national": {
+      "xmin": -13914936.349,
+      "ymin": 2700000.0,
+      "xmax": -7349936.349,
+      "ymax": 6392812.5,
+      "wkid": 3857
+    },
+    "rhode_island": {
+      "xmin": -8145000.0,
+      "ymin": 4900000.0,
+      "xmax": -7775000.0,
+      "ymax": 5108125.0,
+      "wkid": 3857
+    }
+  },
+  "aprx_unchanged": true,
+  "smoke_frames_unchanged": true
+}
