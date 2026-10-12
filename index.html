@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.6 Linked Regional Comparison</title>
+<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.7 Linked National Comparison</title>
 <style>
 :root{
   color-scheme:dark;
@@ -364,7 +364,7 @@ function setAQMCycle(frame){const el=$('riCycleLabel');if(!el||!frame)return;con
 function show(i){
   state.index=i;
   const s=state.smoke.frames[i];
-  const smokePath=s.frames?.rhode_island||s.frames?.national;
+  const smokePath=s.frames?.national||s.frames?.rhode_island;
   $('natFrame').src=abs(smokePath);
   $('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
   $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
@@ -374,7 +374,7 @@ function show(i){
 }
 function step(){show((state.index+1)%72);}
 function toggle(){if(state.timer!==null){stop();return;}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
-async function getJSON(path){const r=await fetch(abs(path)+'?v=1071',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1077',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
 
 async function loadBoundaryImages(){
   // These existing PNG overlays are optional. They are only shown if the repository contains them.
