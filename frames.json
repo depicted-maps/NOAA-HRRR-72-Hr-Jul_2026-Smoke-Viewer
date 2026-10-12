@@ -1,8 +1,8 @@
 {
-  "version": "1.02.3",
+  "version": "1.04.1",
   "model": "NOAA HRRR-Smoke MASSDEN, 8 m above ground, analysis (F00)",
   "display_not_aqi": true,
-  "units": "\u00b5g/m\u00b3",
+  "units": "µg/m³",
   "width": 1280,
   "height": 720,
   "extent_crs": "EPSG:3857",
