@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Historical Smoke and Regional PM2.5 | v1.05.2 LAYOUT REFINEMENT</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.05.5 Timeline Refined</title><style>
 :root { color-scheme: dark; --bg:#071526; --panel:#10243b; --line:#3e5673; --text:#edf4fb; --sub:#c8d6e6; --control:#243a54; --controlLine:#6f88a3; --tip:#091723ee; font-family:Segoe UI,Arial,sans-serif; }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text)}
@@ -101,7 +101,7 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 #status{padding:7px 10px;font-size:11px}
 @media(max-width:900px){.topBand{grid-template-columns:1fr}.maps{grid-template-columns:1fr}.chartPlaceholder{height:145px}}
 
-/* v1.05.3 presentation revisions; image-window aspect ratios unchanged */
+/* v1.05.4 presentation revisions; image-window aspect ratios unchanged */
 .topBand{grid-template-columns:minmax(0,1fr)}
 .topLegend{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:7px 9px;background:#0b1c31}
 .topLegend .legendMeta{font-size:11px;margin-bottom:5px}
@@ -109,17 +109,32 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 .topLegend .label{font-size:10px;top:5px}
 .mapTools button[data-action="reset"]{display:flex;align-items:center;justify-content:center}
 .mapTools button[data-action="reset"] svg{display:block;flex:none}
-.north{left:auto;top:auto;right:10px;bottom:10px;display:flex;align-items:center;justify-content:center;gap:3px;font-size:22px;line-height:1;font-weight:700;padding:4px 6px}
+.north{left:auto;top:auto;right:10px;bottom:18px;display:flex;align-items:center;justify-content:center;gap:3px;font-size:22px;line-height:1;font-weight:700;padding:4px 6px}
 .north span:last-child{font-size:22px;font-weight:600}
 .panelHeader strong{font-size:13px}
 .chartBlank{border:1px solid #425a73;background:#102035}
 @media(max-width:900px){.topBand{grid-template-columns:1fr}}
+
+/* v1.05.7: product headings only, preserving global heading and map dimensions. */
+.panelHeader strong{font-size:18px;line-height:1.2}
+/* v1.05.5: exact hourly timeline labels, Eastern Daylight Time (EDT). */
+.topTimeline .timeline{align-items:center}
+.topTimeline .hourAxis{position:relative;flex:1;min-width:0;padding-top:19px;padding-bottom:25px}
+.topTimeline .hourAxis #scrub{display:block;width:100%;min-width:0;margin:0;position:relative;z-index:2;accent-color:#88b8e8}
+.topTimeline .timeTicks,.topTimeline .dateTicks{position:absolute;left:7px;right:7px;height:19px;pointer-events:none;white-space:nowrap}
+.topTimeline .timeTicks{top:0}
+.topTimeline .dateTicks{bottom:0}
+.topTimeline .tick{position:absolute;transform:translateX(-50%);font-size:clamp(8px,.72vw,11px);color:#eaf4ff;text-align:center;line-height:1.1;font-variant-numeric:tabular-nums}
+.topTimeline .timeTicks .tick{bottom:0;font-weight:600}
+.topTimeline .dateTicks .tick{top:5px;color:#b9cde0;font-size:clamp(8px,.65vw,10px)}
+.topTimeline .timeTicks .tick::after{content:'';position:absolute;left:50%;top:15px;height:5px;border-left:1px solid #6c88a7;opacity:.65}
+@media(max-width:750px){.topTimeline .tick{font-size:8px}.topTimeline .dateTicks .tick{font-size:7px}}
 </style></head><body><main>
 <h1>DEMO - NOAA Modeled Smoke and Air Quality, 15 JUL - 17 JUL 2026</h1>
 <section class="shell">
 <div class="topBand">
 
-<div class="topTimeline"><div class="legendMeta"><span>72-HOUR SYNCHRONIZED TIMELINE</span><span id="hourNo">0 / 72</span></div><div class="timeline"><label for="scrub">Hour</label><input id="scrub" type="range" min="0" max="71" value="0" disabled></div><span id="clock">Waiting for frames</span></div>
+<div class="topTimeline"><div class="legendMeta"><span>72-HOUR SYNCHRONIZED TIMELINE</span><span id="hourNo">0 / 72</span></div><div class="timeline"><label for="scrub">Hour</label><div class="hourAxis"><div id="timeTicks" class="timeTicks" aria-hidden="true"></div><input id="scrub" type="range" min="0" max="71" value="0" disabled aria-label="72-hour synchronized timeline"><div id="dateTicks" class="dateTicks" aria-hidden="true"></div></div></div><span id="clock">Waiting for frames</span></div>
 </div>
 <div class="controls"><button id="play" disabled>▶ Play</button><button id="step" disabled>Next hour</button>
 <label class="ctrl">Speed <select id="speed"><option value="1400">Slow</option><option value="750">Normal</option><option value="350" selected>Fast</option></select></label>
@@ -128,14 +143,14 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 <section class="panel"><header class="panelHeader"><strong>NOAA HRRR-Smoke (Modeled Mass Density, 8 m High), Northeast U.S.</strong><span>µg/m³</span></header>
 <div class="topLegend"><div class="legendMeta"><span>NOAA HRRR-Smoke | 8 m Mass Density (µg/m³)</span></div><div class="legendBox" aria-label="HRRR smoke concentration legend"><div class="tickRow"><span class="label left">0</span><span class="label center" style="left:12.5%">40</span><span class="label center" style="left:31.25%">100</span><span class="label center" style="left:62.5%">200</span><span class="label right">320</span></div></div></div>
 <div class="mapWindow" id="natWin"><div class="mapCanvas" id="natCanvas"><img id="natFrame" alt="HRRR smoke animation frame"><svg class="boundarySvg" id="natBoundary" viewBox="0 0 1280 720" preserveAspectRatio="none"></svg></div><div class="card small" id="natCard">Loading historical smoke data</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div><div class="mapTip">Drag · Pan, Wheel · Zoom, Home · Reset</div></div>
+<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div></div>
 </section>
 <section class="panel rightStack"><header class="panelHeader"><strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, Rhode Island Region</strong><span>µg/m³</span></header>
 <div class="chartPlaceholder" aria-label="Regional PM2.5 trend chart"><strong>72-Hour PM2.5 Trend</strong><div class="chartBlank" aria-hidden="true"></div></div>
 <div class="legendBlock"><small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small><div class="aqmLegend" aria-label="AQM PM2.5 color scale"></div></div>
 
 <div class="mapWindow" id="riWin"><div class="mapCanvas" id="riCanvas"><img id="riFrame" alt="Regional AQM PM2.5 animation frame"></div><div class="card small" id="riCard">NOAA AQM</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div><div class="mapTip">Drag · Pan, Wheel · Zoom, Home · Reset</div></div>
+<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div></div>
 </section></div>
 
 <div id="status" role="status">Starting viewer</div>
@@ -185,6 +200,40 @@ $('play').addEventListener('click',toggle);$('step').addEventListener('click',()
 $('boundaries').addEventListener('change',e=>{$('natBoundary').style.display=e.target.checked?'':'none';});
 document.querySelectorAll('[data-map][data-action]').forEach(b=>b.addEventListener('click',()=>state.views[b.dataset.map][b.dataset.action]()));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+
+function renderHourTicks(){
+ const top=$('timeTicks'),bottom=$('dateTicks');
+ top.replaceChildren();bottom.replaceChildren();
+ const start=Date.UTC(2026,6,15,0,0,0);
+ const formatterTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:true});
+ const formatterDate=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit',year:'2-digit'});
+ // All 72 frames are one hour apart, from 2026-07-15 00Z to 2026-07-17 23Z.
+ // Labels at 9 PM, 3 AM, 9 AM and 3 PM Eastern, every 6 hours.
+ for(let i=0;i<72;i++){
+   const t=new Date(start+i*3600000);
+   const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hourCycle:'h23'}).formatToParts(t);
+   const hour=Number(parts.find(p=>p.type==='hour').value);
+   if(![21,3,9,15].includes(hour))continue;
+   const pos=(100*i/71)+'%';
+   const time=document.createElement('span');time.className='tick';time.style.left=pos;
+   time.textContent=formatterTime.format(t).replace(/\s/g,'').toLowerCase();
+   const date=document.createElement('span');date.className='tick';date.style.left=pos;
+   date.textContent=formatterDate.format(t);
+   top.appendChild(time);bottom.appendChild(date);
+ }
+}
+renderHourTicks();
+// Align left N and arrow vertically to the right map's existing north indicator.
+function alignLeftNorthToRight(){
+ const left=document.querySelector('#natWin .north');
+ const right=document.querySelector('#riWin .north');
+ if(!left||!right)return;
+ left.style.transform='none';
+ const delta=right.getBoundingClientRect().top-left.getBoundingClientRect().top;
+ left.style.transform=`translateY(${delta.toFixed(2)}px)`;
+}
+window.addEventListener('resize',alignLeftNorthToRight);
+requestAnimationFrame(alignLeftNorthToRight);
 viewport('nat',{homeZoom:1,focusX:.2975681889886124,focusY:.5068665028456119,maxZoom:5});
 viewport('ri',{homeZoom:2.6,focusX:.51,focusY:.5,maxZoom:5});load();
 })();
