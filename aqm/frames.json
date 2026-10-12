@@ -1,0 +1,731 @@
+{
+  "version": "1.05.0",
+  "model": "NOAA AQMv7 1-hour average PM2.5 concentration, Rhode Island regional raster",
+  "units": "µg/m³",
+  "display_not_aqi": true,
+  "statistic_scope": "Unweighted mean and maximum of 11,772 valid RI regional raster cells per hour; not population weighted and not a state-boundary zonal statistic",
+  "peak_index": 40,
+  "peak_definition": "Maximum hourly mean concentration across 72 RI regional raster frames",
+  "frames": [
+    {
+      "index": 0,
+      "valid_utc": "2026-07-15T00:00:00Z",
+      "valid_edt": "2026-07-14T20:00:00-04:00",
+      "image": "frames/rhode_island/000.png",
+      "mean_ugm3": 9.608090163856957,
+      "max_ugm3": 19.189998626708984,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 1,
+      "valid_utc": "2026-07-15T01:00:00Z",
+      "valid_edt": "2026-07-14T21:00:00-04:00",
+      "image": "frames/rhode_island/001.png",
+      "mean_ugm3": 9.75573584391801,
+      "max_ugm3": 18.880029678344727,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 2,
+      "valid_utc": "2026-07-15T02:00:00Z",
+      "valid_edt": "2026-07-14T22:00:00-04:00",
+      "image": "frames/rhode_island/002.png",
+      "mean_ugm3": 9.85862921019861,
+      "max_ugm3": 18.221569061279297,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 3,
+      "valid_utc": "2026-07-15T03:00:00Z",
+      "valid_edt": "2026-07-14T23:00:00-04:00",
+      "image": "frames/rhode_island/003.png",
+      "mean_ugm3": 9.937282214977285,
+      "max_ugm3": 17.536697387695312,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 4,
+      "valid_utc": "2026-07-15T04:00:00Z",
+      "valid_edt": "2026-07-15T00:00:00-04:00",
+      "image": "frames/rhode_island/004.png",
+      "mean_ugm3": 9.989003254773461,
+      "max_ugm3": 16.748109817504883,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 5,
+      "valid_utc": "2026-07-15T05:00:00Z",
+      "valid_edt": "2026-07-15T01:00:00-04:00",
+      "image": "frames/rhode_island/005.png",
+      "mean_ugm3": 10.022354405306247,
+      "max_ugm3": 15.158109664916992,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 6,
+      "valid_utc": "2026-07-15T06:00:00Z",
+      "valid_edt": "2026-07-15T02:00:00-04:00",
+      "image": "frames/rhode_island/006.png",
+      "mean_ugm3": 10.06580770983811,
+      "max_ugm3": 14.92777156829834,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 7,
+      "valid_utc": "2026-07-15T07:00:00Z",
+      "valid_edt": "2026-07-15T03:00:00-04:00",
+      "image": "frames/rhode_island/007.png",
+      "mean_ugm3": 10.842160772677794,
+      "max_ugm3": 16.639999389648438,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 8,
+      "valid_utc": "2026-07-15T08:00:00Z",
+      "valid_edt": "2026-07-15T04:00:00-04:00",
+      "image": "frames/rhode_island/008.png",
+      "mean_ugm3": 10.965630600616878,
+      "max_ugm3": 17.90752601623535,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 9,
+      "valid_utc": "2026-07-15T09:00:00Z",
+      "valid_edt": "2026-07-15T05:00:00-04:00",
+      "image": "frames/rhode_island/009.png",
+      "mean_ugm3": 11.071742112483454,
+      "max_ugm3": 18.534902572631836,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 10,
+      "valid_utc": "2026-07-15T10:00:00Z",
+      "valid_edt": "2026-07-15T06:00:00-04:00",
+      "image": "frames/rhode_island/010.png",
+      "mean_ugm3": 11.142190050479307,
+      "max_ugm3": 18.677467346191406,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 11,
+      "valid_utc": "2026-07-15T11:00:00Z",
+      "valid_edt": "2026-07-15T07:00:00-04:00",
+      "image": "frames/rhode_island/011.png",
+      "mean_ugm3": 11.212353191041963,
+      "max_ugm3": 19.02977752685547,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 12,
+      "valid_utc": "2026-07-15T12:00:00Z",
+      "valid_edt": "2026-07-15T08:00:00-04:00",
+      "image": "frames/rhode_island/012.png",
+      "mean_ugm3": 11.125109585883704,
+      "max_ugm3": 18.541467666625977,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 13,
+      "valid_utc": "2026-07-15T13:00:00Z",
+      "valid_edt": "2026-07-15T09:00:00-04:00",
+      "image": "frames/rhode_island/013.png",
+      "mean_ugm3": 10.622799649171347,
+      "max_ugm3": 17.3799991607666,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 14,
+      "valid_utc": "2026-07-15T14:00:00Z",
+      "valid_edt": "2026-07-15T10:00:00-04:00",
+      "image": "frames/rhode_island/014.png",
+      "mean_ugm3": 10.133748180761735,
+      "max_ugm3": 18.32575225830078,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 15,
+      "valid_utc": "2026-07-15T15:00:00Z",
+      "valid_edt": "2026-07-15T11:00:00-04:00",
+      "image": "frames/rhode_island/015.png",
+      "mean_ugm3": 9.733655932461613,
+      "max_ugm3": 19.139999389648438,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 16,
+      "valid_utc": "2026-07-15T16:00:00Z",
+      "valid_edt": "2026-07-15T12:00:00-04:00",
+      "image": "frames/rhode_island/016.png",
+      "mean_ugm3": 9.518905646919272,
+      "max_ugm3": 19.520000457763672,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 17,
+      "valid_utc": "2026-07-15T17:00:00Z",
+      "valid_edt": "2026-07-15T13:00:00-04:00",
+      "image": "frames/rhode_island/017.png",
+      "mean_ugm3": 10.431471560080766,
+      "max_ugm3": 26.100284576416016,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 18,
+      "valid_utc": "2026-07-15T18:00:00Z",
+      "valid_edt": "2026-07-15T14:00:00-04:00",
+      "image": "frames/rhode_island/018.png",
+      "mean_ugm3": 13.621396239845678,
+      "max_ugm3": 51.28999710083008,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 19,
+      "valid_utc": "2026-07-15T19:00:00Z",
+      "valid_edt": "2026-07-15T15:00:00-04:00",
+      "image": "frames/rhode_island/019.png",
+      "mean_ugm3": 18.06297633557185,
+      "max_ugm3": 68.99193572998047,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 20,
+      "valid_utc": "2026-07-15T20:00:00Z",
+      "valid_edt": "2026-07-15T16:00:00-04:00",
+      "image": "frames/rhode_island/020.png",
+      "mean_ugm3": 21.153069419618614,
+      "max_ugm3": 98.62022399902344,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 21,
+      "valid_utc": "2026-07-15T21:00:00Z",
+      "valid_edt": "2026-07-15T17:00:00-04:00",
+      "image": "frames/rhode_island/021.png",
+      "mean_ugm3": 22.49229391685279,
+      "max_ugm3": 109.04064178466797,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 22,
+      "valid_utc": "2026-07-15T22:00:00Z",
+      "valid_edt": "2026-07-15T18:00:00-04:00",
+      "image": "frames/rhode_island/022.png",
+      "mean_ugm3": 22.828410784362976,
+      "max_ugm3": 110.1235122680664,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 23,
+      "valid_utc": "2026-07-15T23:00:00Z",
+      "valid_edt": "2026-07-15T19:00:00-04:00",
+      "image": "frames/rhode_island/023.png",
+      "mean_ugm3": 22.661205353803307,
+      "max_ugm3": 109.8805923461914,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 24,
+      "valid_utc": "2026-07-16T00:00:00Z",
+      "valid_edt": "2026-07-15T20:00:00-04:00",
+      "image": "frames/rhode_island/024.png",
+      "mean_ugm3": 22.389612134868823,
+      "max_ugm3": 108.37999725341797,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 25,
+      "valid_utc": "2026-07-16T01:00:00Z",
+      "valid_edt": "2026-07-15T21:00:00-04:00",
+      "image": "frames/rhode_island/025.png",
+      "mean_ugm3": 21.77990567949488,
+      "max_ugm3": 96.72228240966797,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 26,
+      "valid_utc": "2026-07-16T02:00:00Z",
+      "valid_edt": "2026-07-15T22:00:00-04:00",
+      "image": "frames/rhode_island/026.png",
+      "mean_ugm3": 21.893750315270697,
+      "max_ugm3": 90.24015045166016,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 27,
+      "valid_utc": "2026-07-16T03:00:00Z",
+      "valid_edt": "2026-07-15T23:00:00-04:00",
+      "image": "frames/rhode_island/027.png",
+      "mean_ugm3": 23.64179071228074,
+      "max_ugm3": 134.88002014160156,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 28,
+      "valid_utc": "2026-07-16T04:00:00Z",
+      "valid_edt": "2026-07-16T00:00:00-04:00",
+      "image": "frames/rhode_island/028.png",
+      "mean_ugm3": 26.864895784688816,
+      "max_ugm3": 207.04998779296875,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 29,
+      "valid_utc": "2026-07-16T05:00:00Z",
+      "valid_edt": "2026-07-16T01:00:00-04:00",
+      "image": "frames/rhode_island/029.png",
+      "mean_ugm3": 32.102965621509966,
+      "max_ugm3": 314.0899963378906,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 30,
+      "valid_utc": "2026-07-16T06:00:00Z",
+      "valid_edt": "2026-07-16T02:00:00-04:00",
+      "image": "frames/rhode_island/030.png",
+      "mean_ugm3": 39.04903358085359,
+      "max_ugm3": 424.16009521484375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 31,
+      "valid_utc": "2026-07-16T07:00:00Z",
+      "valid_edt": "2026-07-16T03:00:00-04:00",
+      "image": "frames/rhode_island/031.png",
+      "mean_ugm3": 35.37821304534837,
+      "max_ugm3": 198.84036254882812,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 32,
+      "valid_utc": "2026-07-16T08:00:00Z",
+      "valid_edt": "2026-07-16T04:00:00-04:00",
+      "image": "frames/rhode_island/032.png",
+      "mean_ugm3": 38.9980929707371,
+      "max_ugm3": 239.80999755859375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 33,
+      "valid_utc": "2026-07-16T09:00:00Z",
+      "valid_edt": "2026-07-16T05:00:00-04:00",
+      "image": "frames/rhode_island/033.png",
+      "mean_ugm3": 43.33719581203561,
+      "max_ugm3": 274.7099914550781,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 34,
+      "valid_utc": "2026-07-16T10:00:00Z",
+      "valid_edt": "2026-07-16T06:00:00-04:00",
+      "image": "frames/rhode_island/034.png",
+      "mean_ugm3": 48.32394406731097,
+      "max_ugm3": 294.5819396972656,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 35,
+      "valid_utc": "2026-07-16T11:00:00Z",
+      "valid_edt": "2026-07-16T07:00:00-04:00",
+      "image": "frames/rhode_island/035.png",
+      "mean_ugm3": 54.61436028704123,
+      "max_ugm3": 309.0103759765625,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 36,
+      "valid_utc": "2026-07-16T12:00:00Z",
+      "valid_edt": "2026-07-16T08:00:00-04:00",
+      "image": "frames/rhode_island/036.png",
+      "mean_ugm3": 65.26676423299325,
+      "max_ugm3": 322.14019775390625,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 37,
+      "valid_utc": "2026-07-16T13:00:00Z",
+      "valid_edt": "2026-07-16T09:00:00-04:00",
+      "image": "frames/rhode_island/037.png",
+      "mean_ugm3": 80.34757891436074,
+      "max_ugm3": 483.5899963378906,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 38,
+      "valid_utc": "2026-07-16T14:00:00Z",
+      "valid_edt": "2026-07-16T10:00:00-04:00",
+      "image": "frames/rhode_island/038.png",
+      "mean_ugm3": 95.80143513150496,
+      "max_ugm3": 589.6900024414062,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 39,
+      "valid_utc": "2026-07-16T15:00:00Z",
+      "valid_edt": "2026-07-16T11:00:00-04:00",
+      "image": "frames/rhode_island/039.png",
+      "mean_ugm3": 107.16647523260829,
+      "max_ugm3": 568.9404296875,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 40,
+      "valid_utc": "2026-07-16T16:00:00Z",
+      "valid_edt": "2026-07-16T12:00:00-04:00",
+      "image": "frames/rhode_island/040.png",
+      "mean_ugm3": 109.31947426529835,
+      "max_ugm3": 539.2799682617188,
+      "valid_cells": 11772,
+      "peak": true
+    },
+    {
+      "index": 41,
+      "valid_utc": "2026-07-16T17:00:00Z",
+      "valid_edt": "2026-07-16T13:00:00-04:00",
+      "image": "frames/rhode_island/041.png",
+      "mean_ugm3": 108.4053393849053,
+      "max_ugm3": 522.5702514648438,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 42,
+      "valid_utc": "2026-07-16T18:00:00Z",
+      "valid_edt": "2026-07-16T14:00:00-04:00",
+      "image": "frames/rhode_island/042.png",
+      "mean_ugm3": 107.17844929115488,
+      "max_ugm3": 517.620849609375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 43,
+      "valid_utc": "2026-07-16T19:00:00Z",
+      "valid_edt": "2026-07-16T15:00:00-04:00",
+      "image": "frames/rhode_island/043.png",
+      "mean_ugm3": 106.08251265986533,
+      "max_ugm3": 512.841552734375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 44,
+      "valid_utc": "2026-07-16T20:00:00Z",
+      "valid_edt": "2026-07-16T16:00:00-04:00",
+      "image": "frames/rhode_island/044.png",
+      "mean_ugm3": 101.97250294134481,
+      "max_ugm3": 477.67010498046875,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 45,
+      "valid_utc": "2026-07-16T21:00:00Z",
+      "valid_edt": "2026-07-16T17:00:00-04:00",
+      "image": "frames/rhode_island/045.png",
+      "mean_ugm3": 94.02055955042533,
+      "max_ugm3": 420.35003662109375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 46,
+      "valid_utc": "2026-07-16T22:00:00Z",
+      "valid_edt": "2026-07-16T18:00:00-04:00",
+      "image": "frames/rhode_island/046.png",
+      "mean_ugm3": 84.82008309344876,
+      "max_ugm3": 387.3500061035156,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 47,
+      "valid_utc": "2026-07-16T23:00:00Z",
+      "valid_edt": "2026-07-16T19:00:00-04:00",
+      "image": "frames/rhode_island/047.png",
+      "mean_ugm3": 75.39367139938936,
+      "max_ugm3": 346.5,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 48,
+      "valid_utc": "2026-07-17T00:00:00Z",
+      "valid_edt": "2026-07-16T20:00:00-04:00",
+      "image": "frames/rhode_island/048.png",
+      "mean_ugm3": 62.2931961029049,
+      "max_ugm3": 330.09002685546875,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 49,
+      "valid_utc": "2026-07-17T01:00:00Z",
+      "valid_edt": "2026-07-16T21:00:00-04:00",
+      "image": "frames/rhode_island/049.png",
+      "mean_ugm3": 48.91335268201692,
+      "max_ugm3": 298.3218994140625,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 50,
+      "valid_utc": "2026-07-17T02:00:00Z",
+      "valid_edt": "2026-07-16T22:00:00-04:00",
+      "image": "frames/rhode_island/050.png",
+      "mean_ugm3": 39.45407977155427,
+      "max_ugm3": 258.2818908691406,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 51,
+      "valid_utc": "2026-07-17T03:00:00Z",
+      "valid_edt": "2026-07-16T23:00:00-04:00",
+      "image": "frames/rhode_island/051.png",
+      "mean_ugm3": 34.589955470856054,
+      "max_ugm3": 226.78565979003906,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 52,
+      "valid_utc": "2026-07-17T04:00:00Z",
+      "valid_edt": "2026-07-17T00:00:00-04:00",
+      "image": "frames/rhode_island/052.png",
+      "mean_ugm3": 32.17825333343207,
+      "max_ugm3": 208.0203857421875,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 53,
+      "valid_utc": "2026-07-17T05:00:00Z",
+      "valid_edt": "2026-07-17T01:00:00-04:00",
+      "image": "frames/rhode_island/053.png",
+      "mean_ugm3": 30.832214713258644,
+      "max_ugm3": 187.58999633789062,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 54,
+      "valid_utc": "2026-07-17T06:00:00Z",
+      "valid_edt": "2026-07-17T02:00:00-04:00",
+      "image": "frames/rhode_island/054.png",
+      "mean_ugm3": 30.27806941440346,
+      "max_ugm3": 167.28707885742188,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 55,
+      "valid_utc": "2026-07-17T07:00:00Z",
+      "valid_edt": "2026-07-17T03:00:00-04:00",
+      "image": "frames/rhode_island/055.png",
+      "mean_ugm3": 31.604560418636105,
+      "max_ugm3": 141.21873474121094,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 56,
+      "valid_utc": "2026-07-17T08:00:00Z",
+      "valid_edt": "2026-07-17T04:00:00-04:00",
+      "image": "frames/rhode_island/056.png",
+      "mean_ugm3": 29.502552404802266,
+      "max_ugm3": 128.29345703125,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 57,
+      "valid_utc": "2026-07-17T09:00:00Z",
+      "valid_edt": "2026-07-17T05:00:00-04:00",
+      "image": "frames/rhode_island/057.png",
+      "mean_ugm3": 27.234670292437986,
+      "max_ugm3": 121.75001525878906,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 58,
+      "valid_utc": "2026-07-17T10:00:00Z",
+      "valid_edt": "2026-07-17T06:00:00-04:00",
+      "image": "frames/rhode_island/058.png",
+      "mean_ugm3": 24.748105568906865,
+      "max_ugm3": 118.8700180053711,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 59,
+      "valid_utc": "2026-07-17T11:00:00Z",
+      "valid_edt": "2026-07-17T07:00:00-04:00",
+      "image": "frames/rhode_island/059.png",
+      "mean_ugm3": 22.269576035558956,
+      "max_ugm3": 115.82111358642578,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 60,
+      "valid_utc": "2026-07-17T12:00:00Z",
+      "valid_edt": "2026-07-17T08:00:00-04:00",
+      "image": "frames/rhode_island/060.png",
+      "mean_ugm3": 19.50172112838087,
+      "max_ugm3": 113.11048889160156,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 61,
+      "valid_utc": "2026-07-17T13:00:00Z",
+      "valid_edt": "2026-07-17T09:00:00-04:00",
+      "image": "frames/rhode_island/061.png",
+      "mean_ugm3": 16.36081648426845,
+      "max_ugm3": 110.55216217041016,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 62,
+      "valid_utc": "2026-07-17T14:00:00Z",
+      "valid_edt": "2026-07-17T10:00:00-04:00",
+      "image": "frames/rhode_island/062.png",
+      "mean_ugm3": 13.57276742525381,
+      "max_ugm3": 105.5931396484375,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 63,
+      "valid_utc": "2026-07-17T15:00:00Z",
+      "valid_edt": "2026-07-17T11:00:00-04:00",
+      "image": "frames/rhode_island/063.png",
+      "mean_ugm3": 11.201370497382582,
+      "max_ugm3": 86.25,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 64,
+      "valid_utc": "2026-07-17T16:00:00Z",
+      "valid_edt": "2026-07-17T12:00:00-04:00",
+      "image": "frames/rhode_island/064.png",
+      "mean_ugm3": 9.468039202752909,
+      "max_ugm3": 82.58000183105469,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 65,
+      "valid_utc": "2026-07-17T17:00:00Z",
+      "valid_edt": "2026-07-17T13:00:00-04:00",
+      "image": "frames/rhode_island/065.png",
+      "mean_ugm3": 8.20295744526763,
+      "max_ugm3": 69.18258666992188,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 66,
+      "valid_utc": "2026-07-17T18:00:00Z",
+      "valid_edt": "2026-07-17T14:00:00-04:00",
+      "image": "frames/rhode_island/066.png",
+      "mean_ugm3": 7.213919985458391,
+      "max_ugm3": 53.93073272705078,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 67,
+      "valid_utc": "2026-07-17T19:00:00Z",
+      "valid_edt": "2026-07-17T15:00:00-04:00",
+      "image": "frames/rhode_island/067.png",
+      "mean_ugm3": 6.450783765178289,
+      "max_ugm3": 50.759193420410156,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 68,
+      "valid_utc": "2026-07-17T20:00:00Z",
+      "valid_edt": "2026-07-17T16:00:00-04:00",
+      "image": "frames/rhode_island/068.png",
+      "mean_ugm3": 5.863794413839843,
+      "max_ugm3": 47.01921844482422,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 69,
+      "valid_utc": "2026-07-17T21:00:00Z",
+      "valid_edt": "2026-07-17T17:00:00-04:00",
+      "image": "frames/rhode_island/069.png",
+      "mean_ugm3": 5.502503062161385,
+      "max_ugm3": 44.0145149230957,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 70,
+      "valid_utc": "2026-07-17T22:00:00Z",
+      "valid_edt": "2026-07-17T18:00:00-04:00",
+      "image": "frames/rhode_island/070.png",
+      "mean_ugm3": 5.381398237768258,
+      "max_ugm3": 56.750511169433594,
+      "valid_cells": 11772,
+      "peak": false
+    },
+    {
+      "index": 71,
+      "valid_utc": "2026-07-17T23:00:00Z",
+      "valid_edt": "2026-07-17T19:00:00-04:00",
+      "image": "frames/rhode_island/071.png",
+      "mean_ugm3": 5.587548291120163,
+      "max_ugm3": 66.95999908447266,
+      "valid_cells": 11772,
+      "peak": false
+    }
+  ]
+}
