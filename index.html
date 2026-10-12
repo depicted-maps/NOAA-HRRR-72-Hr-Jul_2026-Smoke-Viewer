@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.1 Linked Regional Comparison</title>
+<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.6 Linked Regional Comparison</title>
 <style>
 :root{
   color-scheme:dark;
@@ -300,10 +300,19 @@ function otherMap(name){return name==='nat'?'ri':'nat';}
 function viewport(name,settings){
   const win=$(name==='nat'?'natWin':'riWin');
   const canvas=$(name==='nat'?'natCanvas':'riCanvas');
-  const v={name,win,canvas,zoom:1,x:0,y:0,maxZoom:settings.maxZoom,homeZoom:settings.homeZoom,focusX:settings.focusX,focusY:settings.focusY};
+  const v={name,win,canvas,zoom:1,x:0,y:0,minZoom:settings.minZoom,maxZoom:settings.maxZoom,homeZoom:settings.homeZoom,focusX:settings.focusX,focusY:settings.focusY};
   state.views[name]=v;
 
-  function clamp(){const w=win.clientWidth,h=win.clientHeight;v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));}
+  function clamp(){
+    const w=win.clientWidth,h=win.clientHeight;
+    if(v.zoom<=1){
+      v.x=w*(1-v.zoom)/2;
+      v.y=h*(1-v.zoom)/2;
+      return;
+    }
+    v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));
+    v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));
+  }
   function paint(){clamp();canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;}
   function copyToPeer(){
     if(!state.sync)return;
@@ -311,12 +320,18 @@ function viewport(name,settings){
     const sw=Math.max(1,win.clientWidth),sh=Math.max(1,win.clientHeight),tw=Math.max(1,p.win.clientWidth),th=Math.max(1,p.win.clientHeight);
     p.zoom=v.zoom;p.x=(v.x/sw)*tw;p.y=(v.y/sh)*th;
     const pw=p.win.clientWidth,ph=p.win.clientHeight;
-    p.x=Math.min(0,Math.max(pw*(1-p.zoom),p.x));p.y=Math.min(0,Math.max(ph*(1-p.zoom),p.y));
+    if(p.zoom<=1){
+      p.x=pw*(1-p.zoom)/2;
+      p.y=ph*(1-p.zoom)/2;
+    }else{
+      p.x=Math.min(0,Math.max(pw*(1-p.zoom),p.x));
+      p.y=Math.min(0,Math.max(ph*(1-p.zoom),p.y));
+    }
     p.canvas.style.transform=`translate(${p.x}px,${p.y}px) scale(${p.zoom})`;
   }
   function apply(syncPeer=true){paint();state.lastActive=name;if(syncPeer)copyToPeer();}
   function reset(){const w=win.clientWidth,h=win.clientHeight;v.zoom=v.homeZoom;v.x=w/2-v.focusX*w*v.zoom;v.y=h/2-v.focusY*h*v.zoom;apply(true);}
-  function zoom(f,cx,cy){const old=v.zoom;v.zoom=Math.min(v.maxZoom,Math.max(1,old*f));v.x=cx-(cx-v.x)*v.zoom/old;v.y=cy-(cy-v.y)*v.zoom/old;apply(true);}
+  function zoom(f,cx,cy){const old=v.zoom;v.zoom=Math.min(v.maxZoom,Math.max(v.minZoom,old*f));v.x=cx-(cx-v.x)*v.zoom/old;v.y=cy-(cy-v.y)*v.zoom/old;apply(true);}
 
   let drag=null;
   win.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,ox:v.x,oy:v.y};win.setPointerCapture(e.pointerId);win.classList.add('dragging');state.lastActive=name;});
@@ -440,8 +455,8 @@ document.addEventListener('fullscreenchange',()=>{
 window.addEventListener('resize',()=>requestAnimationFrame(()=>{for(const v of Object.values(state.views))v.paint();if(state.sync)syncFrom(state.lastActive);}));
 
 renderHourTicks();
-viewport('nat',{homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
-viewport('ri',{homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
+viewport('nat',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
+viewport('ri',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
 setSync(true);
 load();
 })();
