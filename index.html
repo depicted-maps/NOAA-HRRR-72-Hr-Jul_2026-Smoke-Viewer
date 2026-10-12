@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.0 Linked Regional Comparison</title>
+<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.1 Linked Regional Comparison</title>
 <style>
 :root{
   color-scheme:dark;
@@ -83,7 +83,7 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
 .syncButton{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);z-index:30;width:48px;height:48px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;background:#0b1c31;border:2px solid #9db5cd;box-shadow:0 0 0 3px #071526aa,0 4px 12px #0009;color:#eaf4ff}
 .syncButton:hover{background:#18314e}
 .syncButton[aria-pressed="true"]{border-color:#c7e7ff;box-shadow:0 0 0 3px #071526aa,0 0 14px #75bfff88}
-.syncButton svg{width:24px;height:24px;display:block}
+.syncButton svg{width:30px;height:30px;display:block;overflow:visible}
 .syncButton .unlinked{display:none}
 .syncButton[aria-pressed="false"] .linked{display:none}
 .syncButton[aria-pressed="false"] .unlinked{display:block}
@@ -236,8 +236,31 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
     </div>
 
     <button id="syncMaps" class="syncButton" type="button" aria-pressed="true" title="Maps linked: zoom and pan together" aria-label="Maps linked: zoom and pan together">
-      <svg class="linked" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5 14.5 9.5 M7.7 16.3l-1.1 1.1a3.5 3.5 0 0 1-5-5l3.2-3.2a3.5 3.5 0 0 1 5 0l.7.7 M16.3 7.7l1.1-1.1a3.5 3.5 0 0 1 5 5l-3.2 3.2a3.5 3.5 0 0 1-5 0l-.7-.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <svg class="unlinked" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5 14.5 9.5 M7.7 16.3l-1.1 1.1a3.5 3.5 0 0 1-5-5l2.1-2.1 M16.3 7.7l1.1-1.1a3.5 3.5 0 0 1 5 5l-2.1 2.1 M3 3l18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <!-- Linked state: two bold, horizontal interlocking links, matching the requested reference style. -->
+      <svg class="linked" viewBox="0 0 36 36" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15.2 12.2H10.4a7.3 7.3 0 0 0 0 14.6h7.2a7.3 7.3 0 0 0 5.8-2.9"/>
+          <path d="M20.8 23.8h4.8a7.3 7.3 0 0 0 0-14.6h-7.2a7.3 7.3 0 0 0-5.8 2.9"/>
+          <path d="M13.7 18h8.6"/>
+        </g>
+      </svg>
+      <!-- Unlinked state: separated/broken links with small disconnect rays, matching the requested reference style. -->
+      <svg class="unlinked" viewBox="0 0 36 36" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.2 21.8 10.6 25.4a6.1 6.1 0 0 1-8.6-8.6l4.5-4.5"/>
+          <path d="M21.8 14.2 25.4 10.6a6.1 6.1 0 0 1 8.6 8.6l-4.5 4.5"/>
+          <path d="M11.8 24.2 16 20"/>
+          <path d="M20 16 24.2 11.8"/>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+          <path d="M8.4 7.4 6.3 5.3"/>
+          <path d="M13.3 5.1V2.2"/>
+          <path d="M5.2 12.2H2.4"/>
+          <path d="M27.6 28.6 29.7 30.7"/>
+          <path d="M22.7 30.9v2.9"/>
+          <path d="M30.8 23.8h2.8"/>
+        </g>
+      </svg>
     </button>
   </div>
 
@@ -336,7 +359,7 @@ function show(i){
 }
 function step(){show((state.index+1)%72);}
 function toggle(){if(state.timer!==null){stop();return;}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
-async function getJSON(path){const r=await fetch(abs(path)+'?v=1070',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1071',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
 
 async function loadBoundaryImages(){
   // These existing PNG overlays are optional. They are only shown if the repository contains them.
