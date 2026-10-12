@@ -1,86 +1,191 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NOAA HRRR-Smoke — Historical Animation · July 15–17, 2026</title>
-<style>
-:root{color-scheme:dark;font-family:system-ui,Segoe UI,Arial,sans-serif;background:#0e1825;color:#eaf0f7}
-*{box-sizing:border-box}body{margin:0;padding:clamp(6px,1vw,16px)}main{width:100%;max-width:none;margin:0 auto}
-h1{font-size:clamp(21px,3.2vw,33px);margin:0 0 6px}p{line-height:1.45;color:#b9c8d8;text-align:justify;text-justify:inter-word}a{color:#90c6ff}
-.bar{display:flex;gap:9px;flex-wrap:wrap;align-items:end;margin:17px 0}.field{display:flex;flex-direction:column;gap:6px}
-select,button,input{font:inherit}select,button{background:#22334a;color:white;border:1px solid #4b6581;border-radius:7px;padding:9px 10px;min-height:42px}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
-.map{width:100%;background:#172437;aspect-ratio:16/9;position:relative;border:1px solid #3e536d;border-radius:9px;overflow:hidden;cursor:pointer}
-.map img{width:100%;height:100%;position:absolute;inset:0;object-fit:fill}.time-label{position:absolute;top:13px;left:13px;background:#101a29e8;padding:9px 13px;border-radius:5px;font-weight:600;max-width:calc(100% - 26px);font-size:clamp(12px,2vw,18px);z-index:3}
-.peak{position:absolute;right:12px;bottom:13px;background:#101a29e9;padding:9px 12px;border:1px solid #d6b8e7;border-radius:5px;font-weight:600;z-index:3;font-size:clamp(11px,1.4vw,16px)}
-.placeholder{display:grid;place-items:center;height:100%;padding:25px;color:#d4e2f1;text-align:center}
-.timeline{display:flex;gap:12px;align-items:center;margin-top:15px;flex-wrap:wrap}input[type=range]{flex:1;min-width:160px;accent-color:#70b9f9}
-.foot{margin-top:20px;border-top:1px solid #33485e;padding-top:10px}#status{min-height:25px;color:#c3d2e1}.small{font-size:13px}
-.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:11px 0;align-items:center}.legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#c9d5e2}.swatch{display:inline-block;width:18px;height:12px;border:1px solid #8699ad}
-.meta{display:flex;gap:12px;flex-wrap:wrap;color:#c7d7e9;font-size:13px}.map-hint{position:absolute;right:11px;top:11px;z-index:5;background:#101a29cb;color:#fff;border-radius:5px;font-size:12px;padding:6px 9px}
-label.checkbox{display:flex;align-items:center;gap:7px;padding-bottom:8px;white-space:nowrap;font-size:13px}input[type=checkbox]{width:19px;height:19px;accent-color:#70b9f9}
-</style>
-</head>
-<body><main>
-<h1>NOAA HRRR-Smoke — Historical Animation</h1>
-<p>July 15–17, 2026 · 72 consecutive hourly model analyses. Displays modeled near-surface smoke mass concentration at 8 m above ground (µg/m³), <strong>not EPA AQI and not monitored PM₂.₅</strong>. The map uses real archived NOAA HRRR-Smoke fields processed in ArcGIS Pro; missing frames are never fabricated.</p>
-<div class="bar">
-<label class="field" for="region">Map coverage<select id="region"><option value="rhode_island">Rhode Island</option><option value="national">Contiguous United States</option></select></label>
-<label class="checkbox"><input id="boundaries" type="checkbox" checked> Geographic outlines (if available)</label>
-<button id="load">Load historical frames</button><button id="play" disabled>▶ Play</button><button id="step" disabled>Next hour →</button>
-<label class="field" for="speed">Playback interval<select id="speed"><option value="1200">Slow — 1.2 seconds</option><option value="650" selected>Medium — 0.65 seconds</option><option value="350">Fast — 0.35 seconds</option></select></label>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Historical Smoke and Regional PM2.5 | v1.05.2 LAYOUT REFINEMENT</title><style>
+:root { color-scheme: dark; --bg:#071526; --panel:#10243b; --line:#3e5673; --text:#edf4fb; --sub:#c8d6e6; --control:#243a54; --controlLine:#6f88a3; --tip:#091723ee; font-family:Segoe UI,Arial,sans-serif; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text)}
+main{padding:14px clamp(8px,1.3vw,20px)}
+h1{margin:0 0 4px;font-size:clamp(21px,2.4vw,31px)}
+.sub{margin:0 0 12px;font-size:14px;color:var(--sub);line-height:1.35}
+.shell{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#10263f}
+.shellPad{padding:10px 12px}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+button,select{font:inherit;background:var(--control);color:white;border:1px solid var(--controlLine);padding:8px 12px;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.45;cursor:default}
+label.ctrl{display:flex;align-items:center;gap:6px;font-size:13px}
+.legendMeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:#dce7f3;margin-bottom:6px}
+.legendBox{position:relative;height:42px;border:1px solid #172537;background:linear-gradient(to right, #2db514 0.0000%, #2db514 3.1250%, #92d63f 3.1250%, #92d63f 6.2500%, #d4e51b 6.2500%, #d4e51b 9.3750%, #f0dc16 9.3750%, #f0dc16 12.5000%, #eca422 12.5000%, #eca422 15.6250%, #df6d15 15.6250%, #df6d15 18.7500%, #f11b22 18.7500%, #f11b22 21.8750%, #e6121f 21.8750%, #e6121f 25.0000%, #da081a 25.0000%, #da081a 28.1250%, #cf0514 28.1250%, #cf0514 31.2500%, #c8000f 31.2500%, #c8000f 37.5000%, #d56bdd 37.5000%, #d56bdd 43.7500%, #c75cd6 43.7500%, #c75cd6 50.0000%, #ba4ecf 50.0000%, #ba4ecf 56.2500%, #aa43c2 56.2500%, #aa43c2 62.5000%, #9941b5 62.5000%, #9941b5 68.7500%, #8353a4 68.7500%, #8353a4 75.0000%, #c08772 75.0000%, #c08772 81.2500%, #b76b4c 81.2500%, #b76b4c 87.5000%, #a95426 87.5000%, #a95426 93.7500%, #923500 93.7500%, #923500 100.0000%, #7b2200 100.0000%, #7b2200 100.0000%);overflow:hidden}
+.legendBox::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, #ffffff18 0%, #ffffff08 30%, #00000010 100%);pointer-events:none}
+.tickRow{position:absolute;inset:0}
+.label{position:absolute;top:7px;font-weight:700;font-size:clamp(12px,1vw,15px);color:#fff;text-shadow:0 1px 1px #000, 0 0 2px #000;transform:translateX(-50%);white-space:nowrap}
+.label.left{transform:none;left:4px !important}
+.label.right{transform:translateX(-100%);left:calc(100% - 4px) !important}
+.maps{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:10px;padding:10px}
+.panel{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0f2033}
+.panelHeader{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 10px;font-size:13px}
+.panelHeader strong{font-size:14px}
+.panelHeader span{color:var(--sub);font-size:11px}
+.mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#0f2033;overflow:hidden;touch-action:none;cursor:grab}
+.mapWindow.dragging{cursor:grabbing}
+.mapCanvas{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
+.mapCanvas img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
+.boundarySvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;shape-rendering:geometricPrecision}
+.boundarySvg path{vector-effect:non-scaling-stroke;fill:none}
+.mapTools{position:absolute;top:8px;right:8px;z-index:5;display:grid;gap:5px}
+.mapTools button{font-size:22px;line-height:20px;min-width:36px;min-height:34px;padding:2px;background:#13243be8}
+.mapTip{position:absolute;left:8px;bottom:8px;z-index:5;font-size:11px;background:var(--tip);padding:4px 7px;border-radius:4px;pointer-events:none}
+.card{position:absolute;left:10px;top:10px;z-index:5;padding:6px 8px;border-radius:4px;background:#d7e5b3ee;color:#1e2411;border:1px solid #344124;font-size:12px;font-weight:700;line-height:1.25;pointer-events:none;white-space:pre-line}
+.card.small{font-weight:600;max-width:245px}
+.north{position:absolute;left:10px;top:84px;z-index:5;padding:4px 6px;border-radius:4px;background:#13243be0;font-size:11px;pointer-events:none}
+.timeline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line)}
+.timeline input{flex:1;min-width:180px}
+.stats{display:flex;gap:18px;flex-wrap:wrap;padding:0 12px 12px;font-size:12px;color:#d4e0ed}
+#status{padding:10px 12px 12px;font-size:13px;color:#d6e3f2;min-height:22px}
+
+.chartPanel{padding:8px 9px 6px;border-bottom:1px solid var(--line);background:#0b1c31}
+.chartHeader{display:flex;justify-content:space-between;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:4px;font-size:12px}
+.chartHeader strong{font-size:13px}
+.chartMeta{color:var(--sub);font-size:10px}
+.chartSurface{position:relative;touch-action:pan-y;cursor:crosshair;border:1px solid #3b526e;border-radius:5px;background:#102035}
+#riChart{display:block;width:100%;height:175px;overflow:visible}
+#riChart .chart-grid{stroke:#8298ac;stroke-opacity:.18;stroke-width:1}
+#riChart .chart-axis{fill:#d0deec;font-size:11px}
+#riChart .chart-line-mean{fill:none;stroke:#74bbff;stroke-width:2.4;stroke-linecap:round}
+#riChart .chart-line-max{fill:none;stroke:#ffbf73;stroke-width:1.9;stroke-linecap:round}
+#riChart .chart-dot-mean{fill:#74bbff;stroke:#0c2139;stroke-width:.5}
+#riChart .chart-dot-max{fill:#ffbf73;stroke:#0c2139;stroke-width:.5}
+#riChart .chart-cursor{stroke:#fff;stroke-width:1.25;stroke-dasharray:4 3;pointer-events:none}
+#riChart .chart-selected{fill:#fff;stroke:#102035;stroke-width:1.6;pointer-events:none}
+#riChart .chart-hit{fill:transparent;cursor:crosshair}
+.chartReadout{margin:5px 1px 1px;font-size:11px;line-height:1.4;min-height:28px;color:#e6eef9}
+.chartKeys{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:#d7e4ee}
+.chartKey{display:inline-flex;gap:4px;align-items:center}
+.chartSwatch{width:13px;height:3px;display:inline-block}
+.note{margin:10px 0 0;color:var(--sub);font-size:12px;line-height:1.4}
+@media (max-width:900px){.maps{grid-template-columns:1fr}.legendBox{height:38px}.label{font-size:11px}}
+
+.maps{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+.aqmLegend{height:20px;border-radius:4px;background:linear-gradient(to right,#b5e1f5,#5ab4db,#1f77b4,#fed976,#fd8d3c,#e31a1c,#800026)}
+.info{background:#0b1c31;padding:10px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.55;min-height:83px}
+.info strong{color:#eef4fc}.warning{color:#ffd27e}.mapWindow{aspect-ratio:16/9}.mapCanvas img{object-fit:fill}
+.panelHeader{min-height:54px}.legendBlock{padding:9px 11px;border-bottom:1px solid var(--line)}
+.legendBlock small{display:block;margin:3px 0 5px;color:var(--sub)}
+@media(max-width:900px){.maps{grid-template-columns:1fr}}
+
+/* Reference layout: top legend and timeline, control band, wide-left dashboard. */
+main{max-width:none;padding:9px 12px}
+h1{font-size:clamp(18px,1.5vw,27px)}
+.sub{margin-bottom:9px;font-size:12px}
+.topBand{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,1fr);gap:8px;padding:7px 9px 4px}
+.topLegend,.topTimeline{border:1px solid var(--line);background:#0b1c31;border-radius:4px;padding:7px 9px}
+.topBand .legendMeta{font-size:10px;margin-bottom:5px}
+.topBand .legendBox{height:30px}
+.topBand .label{font-size:10px;top:5px}
+.topTimeline .timeline{display:flex;align-items:center;padding:2px 0 0;border:none;gap:9px}
+.topTimeline #clock{display:block;margin-top:7px;font-size:11px;color:#c8d6e6}
+.topTimeline .timeline input{min-width:90px;width:100%}
+.controls{padding:6px 10px;gap:7px;border-top:none}
+.controls button,.controls select{font-size:11px;padding:5px 8px}
+.maps{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:7px;padding:7px}
+.panelHeader{min-height:35px;padding:6px 8px}
+.panelHeader strong{font-size:13px}
+.panelHeader span{font-size:10px}
+.mapWindow{aspect-ratio:16/9}
+.rightStack{display:flex;flex-direction:column;min-width:0}
+.rightStack .mapWindow{aspect-ratio:16/9}
+.chartPlaceholder{height:170px;background:#0b1c31;border-bottom:1px solid var(--line);padding:9px 11px;color:#dce7f3;display:flex;flex-direction:column;gap:9px}
+.chartPlaceholder strong{font-size:12px}
+.chartBlank{flex:1;min-height:50px;border:1px dashed #425a73;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b1c5dd;text-align:center;padding:10px}
+.chartPlaceholder small{font-size:10px;color:var(--sub)}
+.rightStack .info{min-height:52px;padding:7px 9px;font-size:11px}
+.rightStack .legendBlock{padding:6px 9px}
+.rightStack .aqmLegend{height:17px}
+#status{padding:7px 10px;font-size:11px}
+@media(max-width:900px){.topBand{grid-template-columns:1fr}.maps{grid-template-columns:1fr}.chartPlaceholder{height:145px}}
+
+/* v1.05.3 presentation revisions; image-window aspect ratios unchanged */
+.topBand{grid-template-columns:minmax(0,1fr)}
+.topLegend{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:7px 9px;background:#0b1c31}
+.topLegend .legendMeta{font-size:11px;margin-bottom:5px}
+.topLegend .legendBox{height:30px}
+.topLegend .label{font-size:10px;top:5px}
+.mapTools button[data-action="reset"]{display:flex;align-items:center;justify-content:center}
+.mapTools button[data-action="reset"] svg{display:block;flex:none}
+.north{left:auto;top:auto;right:10px;bottom:10px;display:flex;align-items:center;justify-content:center;gap:3px;font-size:22px;line-height:1;font-weight:700;padding:4px 6px}
+.north span:last-child{font-size:22px;font-weight:600}
+.panelHeader strong{font-size:13px}
+.chartBlank{border:1px solid #425a73;background:#102035}
+@media(max-width:900px){.topBand{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>DEMO - NOAA Modeled Smoke and Air Quality, 15 JUL - 17 JUL 2026</h1>
+<section class="shell">
+<div class="topBand">
+
+<div class="topTimeline"><div class="legendMeta"><span>72-HOUR SYNCHRONIZED TIMELINE</span><span id="hourNo">0 / 72</span></div><div class="timeline"><label for="scrub">Hour</label><input id="scrub" type="range" min="0" max="71" value="0" disabled></div><span id="clock">Waiting for frames</span></div>
 </div>
-<div class="map" id="map" aria-label="Historical 72-hour smoke animation. Click to pause or play.">
-<img id="frame" alt="Archived NOAA HRRR-Smoke modeled mass concentration" hidden>
-<svg id="outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none"></svg>
-<div id="placeholder" class="placeholder">Loading historical frame inventory…</div>
-<div class="time-label" id="timeLabel">Waiting for historical data</div>
-<div class="map-hint">Click to pause / play</div>
-<div class="peak" id="peak" hidden>Peak RI mean: 188.04 µg/m³</div>
-</div>
-<div class="legend" id="legend" aria-label="Smoke concentration visualization legend"></div>
-<div class="timeline"><label for="scrub">Historical hour</label><input id="scrub" type="range" min="0" max="71" value="0" disabled><span id="position">0 / 72</span></div>
-<div class="meta"><span id="mean">RI statewide mean: —</span><span id="max">RI grid-cell maximum: —</span></div>
-<p id="status" role="status">Historical archive is separate from NOAA's continuously updated operational forecast service.</p>
-<div class="foot small">
-<p><strong>Interpretation:</strong> Each hour is a distinct NOAA HRRR-Smoke F00 analysis frame. The geographical extents and 1280×720 screen grid are held fixed for all hours within each view; colors have fixed concentration breaks. Frame images use nearest-cell sampling after projection into EPSG:3857. The color intervals are visualization classes, not EPA health categories. The Rhode Island mean shown here comes from the validated hourly zonal statistics table, not from colors in the displayed PNG.</p>
-<p><strong>Source:</strong> NOAA HRRR-Smoke historical public AWS archive, July 15–17, 2026. Processing and geographic verification: local ArcGIS Pro 72-hour event workflow, builder v1.02.0. Administration boundaries, when supplied, are independent outlines and are never a colored data mask. This demonstration is not an official NOAA publication.</p>
-</div>
-</main>
+<div class="controls"><button id="play" disabled>▶ Play</button><button id="step" disabled>Next hour</button>
+<label class="ctrl">Speed <select id="speed"><option value="1400">Slow</option><option value="750">Normal</option><option value="350" selected>Fast</option></select></label>
+<label class="ctrl"><input type="checkbox" id="boundaries" checked> Boundaries</label><button id="load">Reload frames</button></div>
+<div class="maps">
+<section class="panel"><header class="panelHeader"><strong>NOAA HRRR-Smoke (Modeled Mass Density, 8 m High), Northeast U.S.</strong><span>µg/m³</span></header>
+<div class="topLegend"><div class="legendMeta"><span>NOAA HRRR-Smoke | 8 m Mass Density (µg/m³)</span></div><div class="legendBox" aria-label="HRRR smoke concentration legend"><div class="tickRow"><span class="label left">0</span><span class="label center" style="left:12.5%">40</span><span class="label center" style="left:31.25%">100</span><span class="label center" style="left:62.5%">200</span><span class="label right">320</span></div></div></div>
+<div class="mapWindow" id="natWin"><div class="mapCanvas" id="natCanvas"><img id="natFrame" alt="HRRR smoke animation frame"><svg class="boundarySvg" id="natBoundary" viewBox="0 0 1280 720" preserveAspectRatio="none"></svg></div><div class="card small" id="natCard">Loading historical smoke data</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
+<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div><div class="mapTip">Drag · Pan, Wheel · Zoom, Home · Reset</div></div>
+</section>
+<section class="panel rightStack"><header class="panelHeader"><strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, Rhode Island Region</strong><span>µg/m³</span></header>
+<div class="chartPlaceholder" aria-label="Regional PM2.5 trend chart"><strong>72-Hour PM2.5 Trend</strong><div class="chartBlank" aria-hidden="true"></div></div>
+<div class="legendBlock"><small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small><div class="aqmLegend" aria-label="AQM PM2.5 color scale"></div></div>
+
+<div class="mapWindow" id="riWin"><div class="mapCanvas" id="riCanvas"><img id="riFrame" alt="Regional AQM PM2.5 animation frame"></div><div class="card small" id="riCard">NOAA AQM</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
+<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div><div class="mapTip">Drag · Pan, Wheel · Zoom, Home · Reset</div></div>
+</section></div>
+
+<div id="status" role="status">Starting viewer</div>
+</section></main>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const state={manifest:null,images:{},region:'rhode_island',idx:0,timer:null,token:0};
-const setStatus=s=>{$('status').textContent=s};
-const fmtUTC=s=>new Date(s).toLocaleString('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true})+' UTC';
-const fmtEDT=s=>new Date(s).toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true})+' EDT';
-function buildLegend(m){const host=$('legend');host.replaceChildren();const l=m.breaks;const items=[['< 5','transparent'], ...m.colors.map((c,i)=>[i<l.length-1?`${l[i]}–${l[i+1]}`:`≥ ${l[l.length-1]}`,c])];
- for(const [label,color] of items){const box=document.createElement('span');box.className='legend-item';const sw=document.createElement('span');sw.className='swatch';sw.style.background=color==='transparent'?'repeating-conic-gradient(#eee 0% 25%,#666 0% 50%) 0 / 8px 8px':color;box.append(sw,document.createTextNode(label));host.append(box);}host.append(document.createTextNode('µg/m³'));}
-function frameURL(index,region){return state.manifest.frames[index].frames[region];}
-function checkImage(url){return new Promise(resolve=>{const img=new Image();let done=false;const end=(success)=>{if(!done){done=true;resolve(success)}};img.onload=()=>end(img.naturalWidth===1280&&img.naturalHeight===720);img.onerror=()=>end(false);img.src=url;setTimeout(()=>end(false),20000)});}
+const state={smoke:null,aqm:null,index:0,timer:null,views:{}};
+function status(t){$('status').textContent=t;}
 function stop(){if(state.timer!==null){clearInterval(state.timer);state.timer=null;}$('play').textContent='▶ Play';}
-function present(i){if(!state.manifest)return;state.idx=(i+state.manifest.frames.length)%state.manifest.frames.length;const f=state.manifest.frames[state.idx];$('frame').src=frameURL(state.idx,state.region);$('frame').hidden=false;$('placeholder').hidden=true;$('timeLabel').textContent=`${fmtEDT(f.valid_utc)} · ${fmtUTC(f.valid_utc)}`;
- $('peak').hidden=!f.peak;$('peak').textContent=`PEAK RI statewide mean: ${f.ri_mean_ugm3.toFixed(2)} µg/m³`;
- $('mean').textContent=`RI statewide mean: ${f.ri_mean_ugm3.toFixed(2)} µg/m³`;$('max').textContent=`RI grid-cell maximum: ${f.ri_max_ugm3.toFixed(2)} µg/m³`;$('scrub').value=String(state.idx);$('position').textContent=`${state.idx+1} / ${state.manifest.frames.length}`;}
-function toggle(){if(state.timer!==null){stop();setStatus('Paused. Use Next Hour or timeline to inspect the real hourly results.');return;}
- if(!state.manifest)return;$('play').textContent='Ⅱ Pause';state.timer=setInterval(()=>present(state.idx+1),Number($('speed').value));setStatus('Playing the historical 72-hour NOAA HRRR-Smoke event.');}
-async function outlines(){const o=$('outline');o.replaceChildren();if(!$('boundaries').checked||!state.manifest)return;
- // Boundary geometry must be supplied as aligned GeoJSON/JSON generated by GIS,
- // not arbitrarily fetched/reprojected or sketched in the browser.
- const path=`outlines/${state.region}.json`;try{const res=await fetch(path);if(!res.ok){setStatus('Boundary overlay not packaged; concentration frames remain valid.');return;}
- const features=await res.json();if(!Array.isArray(features.paths))throw Error('Invalid overlay');const ns='http://www.w3.org/2000/svg';
- for(const d of features.paths){const p=document.createElementNS(ns,'path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke','#fff');p.setAttribute('stroke-width','1.15');p.setAttribute('vector-effect','non-scaling-stroke');p.setAttribute('stroke-opacity','.85');o.append(p);}}
- catch(e){setStatus('Boundary overlay unavailable; concentration imagery is unaffected.');}}
-async function load(){stop();const token=++state.token;$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;setStatus('Reading the local historical frame inventory…');
- try{const res=await fetch('frames.json',{cache:'no-store'});if(!res.ok)throw Error('frames.json unavailable (HTTP '+res.status+')');const m=await res.json();
- if(!Array.isArray(m.frames)||m.frames.length!==72||m.width!==1280||m.height!==720||m.peak_index<0||m.peak_index>=72)throw Error('Invalid 72-hour manifest');
- state.manifest=m;buildLegend(m);await outlines();state.region=$('region').value;const first=frameURL(0,state.region);
- if(!await checkImage(first))throw Error('First frame is missing or incorrect size: '+first);
- if(token!==state.token)return;present(0);$('play').disabled=false;$('step').disabled=false;$('scrub').disabled=false;setStatus('Ready: 72 indexed historical hours. Playback starts after loading.');toggle();
- }catch(e){setStatus('Unable to load historical animation: '+e.message+'. Upload frames.json and both frames folders to GitHub Pages. Local file:// browsing may block fetch.');$('timeLabel').textContent='Data unavailable';}
- finally{if(token===state.token)$('load').disabled=false;}}
-$('load').addEventListener('click',load);$('play').addEventListener('click',toggle);$('step').addEventListener('click',()=>{stop();present(state.idx+1)});$('scrub').addEventListener('input',e=>{stop();present(Number(e.target.value))});
-$('speed').addEventListener('change',()=>{if(state.timer!==null){stop();toggle()}});$('region').addEventListener('change',()=>{state.region=$('region').value;present(state.idx);outlines()});$('boundaries').addEventListener('change',outlines);$('map').addEventListener('click',toggle);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});load();
+function abs(path){return new URL(path,new URL('./',document.baseURI)).href;}
+function fmt(iso){const dt=new Date(iso); const local=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).format(dt); const utc=String(dt.getUTCHours()).padStart(2,'0')+':00 UTC';return `${local} (${utc})`;}
+function viewport(name,settings){
+ const win=$(name==='nat'?'natWin':'riWin'),canvas=$(name==='nat'?'natCanvas':'riCanvas');
+ const v={zoom:1,x:0,y:0,maxZoom:settings.maxZoom,homeZoom:settings.homeZoom,focusX:settings.focusX,focusY:settings.focusY};state.views[name]=v;
+ function apply(){const w=win.clientWidth,h=win.clientHeight;v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;}
+ function reset(){const w=win.clientWidth,h=win.clientHeight;v.zoom=v.homeZoom;v.x=w/2-v.focusX*w*v.zoom;v.y=h/2-v.focusY*h*v.zoom;apply();}
+ function zoom(f,cx,cy){const old=v.zoom;v.zoom=Math.min(v.maxZoom,Math.max(1,old*f));v.x=cx-(cx-v.x)*v.zoom/old;v.y=cy-(cy-v.y)*v.zoom/old;apply();}
+ let drag=null,moved=false;
+ win.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,ox:v.x,oy:v.y};moved=false;win.setPointerCapture(e.pointerId);win.classList.add('dragging');});
+ win.addEventListener('pointermove',e=>{if(!drag)return;if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>4)moved=true;v.x=drag.ox+e.clientX-drag.x;v.y=drag.oy+e.clientY-drag.y;apply();});
+ function end(e){if(!drag)return;drag=null;win.classList.remove('dragging');if(name==='ri'&&!moved) identify(e,v,win);}
+ win.addEventListener('pointerup',end);win.addEventListener('pointercancel',()=>{drag=null;win.classList.remove('dragging');});
+ win.addEventListener('wheel',e=>{e.preventDefault();const r=win.getBoundingClientRect();zoom(e.deltaY<0?1.18:1/1.18,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+ v.in=()=>zoom(1.4,win.clientWidth/2,win.clientHeight/2);v.out=()=>zoom(1/1.4,win.clientWidth/2,win.clientHeight/2);v.reset=reset;v.overview=()=>{v.zoom=1;v.x=v.y=0;apply();};reset();
+ }
+function identify(e,v,win){
+ $('identify').textContent='Native grid click identification is pending export of numerical cell values and verified State, County, Municipality polygons. The displayed image cannot supply an authoritative PM2.5 value.';
+}
+function validAQM(m){if(!m||m.version!=='1.05.0'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.05.0');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time or image missing');return m;}
+function show(i){state.index=i;const s=state.smoke.frames[i];$('natFrame').src=abs(s.frames.national);$('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
+ $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
+ if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}`;}
+ else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM';}
+}
+function step(){show((state.index+1)%72)}
+function toggle(){if(state.timer!==null){stop();return}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1050',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+async function load(){stop();$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;status('Loading certified historical assets');
+ try{const m=await getJSON('frames.json');if(!m||m.version!=='1.04.1'||m.frames?.length!==72)throw Error('Original HRRR frames.json not found or not v1.04.1');state.smoke=m;
+ try{const r=await fetch(abs('overlays/national_boundaries.svg'));if(r.ok){const d=new DOMParser().parseFromString(await r.text(),'image/svg+xml');$('natBoundary').replaceChildren(...Array.from(d.documentElement.children).map(n=>document.importNode(n,true)));}}catch(e){console.warn('Smoke vector overlay unavailable',e)}
+ try{state.aqm=validAQM(await getJSON('aqm/frames.json'));}catch(e){state.aqm=null;console.warn('AQM pending',e)}
+ $('play').disabled=false;$('step').disabled=false;$('scrub').disabled=false;show(Number.isInteger(m.peak_index)?m.peak_index:0);
+ status(state.aqm?'Both synchronized 72-hour image sequences loaded.':'Historical imagery loaded.');
+ }catch(e){status('Viewer loading failed: '+e.message);console.error(e)}finally{$('load').disabled=false;}}
+$('play').addEventListener('click',toggle);$('step').addEventListener('click',()=>{stop();if(state.smoke)step()});$('scrub').addEventListener('input',e=>{stop();if(state.smoke)show(+e.target.value)});$('speed').addEventListener('change',()=>{if(state.timer!==null){stop();toggle();}});$('load').addEventListener('click',load);
+$('boundaries').addEventListener('change',e=>{$('natBoundary').style.display=e.target.checked?'':'none';});
+document.querySelectorAll('[data-map][data-action]').forEach(b=>b.addEventListener('click',()=>state.views[b.dataset.map][b.dataset.action]()));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+viewport('nat',{homeZoom:1,focusX:.2975681889886124,focusY:.5068665028456119,maxZoom:5});
+viewport('ri',{homeZoom:2.6,focusX:.51,focusY:.5,maxZoom:5});load();
 })();
-</script>
-</body></html>
+</script></body></html>
