@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.06.1 Cycle-Aware AQM</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.06.2 Equal Footprint</title><style>
 :root { color-scheme: dark; --bg:#071526; --panel:#10243b; --line:#3e5673; --text:#edf4fb; --sub:#c8d6e6; --control:#243a54; --controlLine:#6f88a3; --tip:#091723ee; font-family:Segoe UI,Arial,sans-serif; }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text)}
@@ -158,6 +158,27 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 .chartPlaceholder:fullscreen .chartHeading strong{font-size:clamp(20px,2.5vw,32px)}
 .chartPlaceholder:fullscreen .chartBlank{flex:1;min-height:0}
 .chartPlaceholder:fullscreen .chartFullscreen{width:40px;height:40px}
+
+/* v1.06.2 footprint correction:
+   - equal National / RI panel widths
+   - identical 16:9 map-window geometry
+   - no chart/boundary/sync changes in this revision */
+.maps{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  align-items:start;
+}
+.maps > .panel{
+  min-width:0;
+  width:100%;
+}
+#natWin,#riWin{
+  width:100%;
+  aspect-ratio:16/9 !important;
+}
+@media(max-width:900px){
+  .maps{grid-template-columns:1fr !important}
+}
+
 </style></head><body><main>
 <h1>DEMO - NOAA Modeled Smoke and Air Quality, 15 JUL - 17 JUL 2026</h1>
 <section class="shell">
@@ -210,7 +231,7 @@ function identify(e,v,win){
  const el=$('identify');
  if(el) el.textContent='Native grid click identification is pending export of numerical cell values and verified State, County, Municipality polygons. The displayed image cannot supply an authoritative PM2.5 value.';
 }
-function validAQM(m){if(!m||m.version!=='1.06.1'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.06.1');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||!f.source_cycle||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time, image, or source cycle missing');return m;}
+function validAQM(m){if(!m||m.version!=='1.06.2'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.06.2');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||!f.source_cycle||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time, image, or source cycle missing');return m;}
 function setAQMCycle(frame){
  const el=$('riCycleLabel');
  if(!el||!frame)return;
@@ -225,13 +246,13 @@ function show(i){state.index=i;const s=state.smoke.frames[i];$('natFrame').src=a
 }
 function step(){show((state.index+1)%72)}
 function toggle(){if(state.timer!==null){stop();return}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
-async function getJSON(path){const r=await fetch(abs(path)+'?v=1061',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1062',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
 async function load(){stop();$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;status('Loading certified historical assets');
  try{const m=await getJSON('frames.json');if(!m||m.version!=='1.04.1'||m.frames?.length!==72)throw Error('Original HRRR frames.json not found or not v1.04.1');state.smoke=m;
  try{const r=await fetch(abs('overlays/national_boundaries.svg'));if(r.ok){const d=new DOMParser().parseFromString(await r.text(),'image/svg+xml');$('natBoundary').replaceChildren(...Array.from(d.documentElement.children).map(n=>document.importNode(n,true)));}}catch(e){console.warn('Smoke vector overlay unavailable',e)}
  try{state.aqm=validAQM(await getJSON('aqm/frames.json'));}catch(e){state.aqm=null;console.warn('AQM pending',e)}
  $('play').disabled=false;$('step').disabled=false;$('scrub').disabled=false;show(Number.isInteger(m.peak_index)?m.peak_index:0);
- status(state.aqm?'Both synchronized 72-hour image sequences loaded.':'Historical imagery loaded.');
+ status(state.aqm?'Both synchronized 72-hour image sequences loaded; RI AQM uses the certified HRRR-matched footprint.':'Historical imagery loaded.');
  }catch(e){status('Viewer loading failed: '+e.message);console.error(e)}finally{$('load').disabled=false;}}
 $('play').addEventListener('click',toggle);$('step').addEventListener('click',()=>{stop();if(state.smoke)step()});$('scrub').addEventListener('input',e=>{stop();if(state.smoke)show(+e.target.value)});$('speed').addEventListener('change',()=>{if(state.timer!==null){stop();toggle();}});$('load').addEventListener('click',load);
 $('boundaries').addEventListener('change',e=>{$('natBoundary').style.display=e.target.checked?'':'none';});
@@ -325,6 +346,6 @@ function alignLeftNorthToRight(){
 window.addEventListener('resize',alignLeftNorthToRight);
 requestAnimationFrame(alignLeftNorthToRight);
 viewport('nat',{homeZoom:1,focusX:.2975681889886124,focusY:.5068665028456119,maxZoom:5});
-viewport('ri',{homeZoom:2.6,focusX:.51,focusY:.5,maxZoom:5});load();
+viewport('ri',{homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});load();
 })();
 </script></body></html>
