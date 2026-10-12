@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.05.5 Timeline Refined</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.06.1 Cycle-Aware AQM</title><style>
 :root { color-scheme: dark; --bg:#071526; --panel:#10243b; --line:#3e5673; --text:#edf4fb; --sub:#c8d6e6; --control:#243a54; --controlLine:#6f88a3; --tip:#091723ee; font-family:Segoe UI,Arial,sans-serif; }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text)}
@@ -23,6 +23,8 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:13px}
 .panelHeader{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 10px;font-size:13px}
 .panelHeader strong{font-size:14px}
 .panelHeader span{color:var(--sub);font-size:11px}
+#riCycleLabel{color:var(--sub);font-weight:600}
+#riCycleLabel.cycleUpdate{color:#ffd27e;font-weight:800}
 .mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#0f2033;overflow:hidden;touch-action:none;cursor:grab}
 .mapWindow.dragging{cursor:grabbing}
 .mapCanvas{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
@@ -63,7 +65,17 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:13px}
 @media (max-width:900px){.maps{grid-template-columns:1fr}.legendBox{height:38px}.label{font-size:11px}}
 
 .maps{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
-.aqmLegend{height:20px;border-radius:4px;background:linear-gradient(to right,#b5e1f5,#5ab4db,#1f77b4,#fed976,#fd8d3c,#e31a1c,#800026)}
+.aqmLegend{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:46px;border:1px solid #516981;border-radius:4px;overflow:hidden}
+.aqmBand{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;padding:3px 2px;text-align:center;font-size:8px;line-height:1.08;font-weight:700}
+.aqmBand span{display:block;font-size:7px;font-weight:600;margin-top:2px;white-space:nowrap}
+.aqmGood{background:#00E400;color:#061406}
+.aqmModerate{background:#FFFF00;color:#171700}
+.aqmUSG{background:#FF7E00;color:#171006}
+.aqmUnhealthy{background:#FF0000;color:#fff;text-shadow:0 1px 1px #600}
+.aqmVeryUnhealthy{background:#8F3F97;color:#fff;text-shadow:0 1px 1px #321636}
+.aqmHazardous{background:#7E0023;color:#fff;text-shadow:0 1px 1px #2e000d}
+.aqmLegendNote{margin-top:5px;color:var(--sub);font-size:9px;line-height:1.25}
+.aqmCycleNote{margin-top:4px;color:#b9cde0;font-size:9px;line-height:1.25}
 .info{background:#0b1c31;padding:10px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.55;min-height:83px}
 .info strong{color:#eef4fc}.warning{color:#ffd27e}.mapWindow{aspect-ratio:16/9}.mapCanvas img{object-fit:fill}
 .panelHeader{min-height:54px}.legendBlock{padding:9px 11px;border-bottom:1px solid var(--line)}
@@ -97,7 +109,7 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 .chartPlaceholder small{font-size:10px;color:var(--sub)}
 .rightStack .info{min-height:52px;padding:7px 9px;font-size:11px}
 .rightStack .legendBlock{padding:6px 9px}
-.rightStack .aqmLegend{height:17px}
+.rightStack .aqmLegend{height:46px}
 #status{padding:7px 10px;font-size:11px}
 @media(max-width:900px){.topBand{grid-template-columns:1fr}.maps{grid-template-columns:1fr}.chartPlaceholder{height:145px}}
 
@@ -129,6 +141,23 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 .topTimeline .dateTicks .tick{top:5px;color:#b9cde0;font-size:clamp(8px,.65vw,10px)}
 .topTimeline .timeTicks .tick::after{content:'';position:absolute;left:50%;top:15px;height:5px;border-left:1px solid #6c88a7;opacity:.65}
 @media(max-width:750px){.topTimeline .tick{font-size:8px}.topTimeline .dateTicks .tick{font-size:7px}}
+
+/* v1.05.8: native map-only fullscreen, without altering the normal map boxes. */
+.mapTools button[data-fullscreen]{display:flex;align-items:center;justify-content:center}
+.mapTools button[data-fullscreen] svg{display:block;flex:none}
+.mapWindow:fullscreen{width:100vw;height:100vh;aspect-ratio:auto;background:#071526;border:0;border-radius:0}
+.mapWindow:fullscreen .mapCanvas img{object-fit:contain}
+.mapWindow:fullscreen .mapTools{top:14px;right:14px}
+.mapWindow:fullscreen .north{right:14px;bottom:18px}
+/* v1.05.9: independent full-screen regional trend panel */
+.chartPlaceholder{position:relative}
+.chartHeading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chartFullscreen{display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;height:32px;padding:4px!important;background:#13243be8;color:#edf4fb;border:1px solid #6f88a3;border-radius:6px;cursor:pointer}
+.chartFullscreen svg{display:block;width:22px;height:22px}
+.chartPlaceholder:fullscreen{width:100vw;height:100vh;max-height:none;padding:22px 28px;background:#0b1c31;border:0;gap:20px}
+.chartPlaceholder:fullscreen .chartHeading strong{font-size:clamp(20px,2.5vw,32px)}
+.chartPlaceholder:fullscreen .chartBlank{flex:1;min-height:0}
+.chartPlaceholder:fullscreen .chartFullscreen{width:40px;height:40px}
 </style></head><body><main>
 <h1>DEMO - NOAA Modeled Smoke and Air Quality, 15 JUL - 17 JUL 2026</h1>
 <section class="shell">
@@ -143,14 +172,14 @@ h1{font-size:clamp(18px,1.5vw,27px)}
 <section class="panel"><header class="panelHeader"><strong>NOAA HRRR-Smoke (Modeled Mass Density, 8 m High), Northeast U.S.</strong><span>µg/m³</span></header>
 <div class="topLegend"><div class="legendMeta"><span>NOAA HRRR-Smoke | 8 m Mass Density (µg/m³)</span></div><div class="legendBox" aria-label="HRRR smoke concentration legend"><div class="tickRow"><span class="label left">0</span><span class="label center" style="left:12.5%">40</span><span class="label center" style="left:31.25%">100</span><span class="label center" style="left:62.5%">200</span><span class="label right">320</span></div></div></div>
 <div class="mapWindow" id="natWin"><div class="mapCanvas" id="natCanvas"><img id="natFrame" alt="HRRR smoke animation frame"><svg class="boundarySvg" id="natBoundary" viewBox="0 0 1280 720" preserveAspectRatio="none"></svg></div><div class="card small" id="natCard">Loading historical smoke data</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div></div>
+<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button><button type="button" data-fullscreen="nat" title="Expand Northeast smoke map to full screen" aria-label="Expand Northeast smoke map to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
 </section>
-<section class="panel rightStack"><header class="panelHeader"><strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, Rhode Island Region</strong><span>µg/m³</span></header>
-<div class="chartPlaceholder" aria-label="Regional PM2.5 trend chart"><strong>72-Hour PM2.5 Trend</strong><div class="chartBlank" aria-hidden="true"></div></div>
-<div class="legendBlock"><small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small><div class="aqmLegend" aria-label="AQM PM2.5 color scale"></div></div>
+<section class="panel rightStack"><header class="panelHeader"><strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, Rhode Island Region</strong><span><span id="riCycleLabel">AQM cycle pending</span> • µg/m³</span></header>
+<div class="chartPlaceholder" id="riTrendPanel" aria-label="Regional PM2.5 trend chart"><div class="chartHeading"><strong>72-Hour PM2.5 Trend</strong><button type="button" id="trendFullscreen" class="chartFullscreen" title="Expand Rhode Island trend graph to full screen" aria-label="Expand Rhode Island trend graph to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="chartBlank" aria-hidden="true"></div></div>
+<div class="legendBlock"><small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small><div class="aqmLegend" aria-label="NOAA/NWS PM2.5 hazard-color convention using EPA concentration reference thresholds"><div class="aqmBand aqmGood" title="Good: 0.0–9.0 µg/m³">Good<span>0–9.0</span></div><div class="aqmBand aqmModerate" title="Moderate: 9.1–35.4 µg/m³">Moderate<span>9.1–35.4</span></div><div class="aqmBand aqmUSG" title="Unhealthy for Sensitive Groups: 35.5–55.4 µg/m³">USG<span>35.5–55.4</span></div><div class="aqmBand aqmUnhealthy" title="Unhealthy: 55.5–125.4 µg/m³">Unhealthy<span>55.5–125.4</span></div><div class="aqmBand aqmVeryUnhealthy" title="Very Unhealthy: 125.5–225.4 µg/m³">Very Unhealthy<span>125.5–225.4</span></div><div class="aqmBand aqmHazardous" title="Hazardous: 225.5 µg/m³ and above">Hazardous<span>225.5+</span></div></div><div class="aqmLegendNote">NOAA/NWS hazard-color convention • EPA PM2.5 concentration reference thresholds (24-hour basis). Hourly modeled AQM concentration is not an AQI value.</div><div class="aqmCycleNote">Historical sequence uses the governed newest-selected NOAA AQM forecast cycle. Cycle-update frames are marked; no temporal blending or smoothing is applied across cycle changes.</div></div>
 
 <div class="mapWindow" id="riWin"><div class="mapCanvas" id="riCanvas"><img id="riFrame" alt="Regional AQM PM2.5 animation frame"></div><div class="card small" id="riCard">NOAA AQM</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button></div></div>
+<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button><button type="button" data-fullscreen="ri" title="Expand Rhode Island PM2.5 map to full screen" aria-label="Expand Rhode Island PM2.5 map to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
 </section></div>
 
 <div id="status" role="status">Starting viewer</div>
@@ -178,17 +207,25 @@ function viewport(name,settings){
  v.in=()=>zoom(1.4,win.clientWidth/2,win.clientHeight/2);v.out=()=>zoom(1/1.4,win.clientWidth/2,win.clientHeight/2);v.reset=reset;v.overview=()=>{v.zoom=1;v.x=v.y=0;apply();};reset();
  }
 function identify(e,v,win){
- $('identify').textContent='Native grid click identification is pending export of numerical cell values and verified State, County, Municipality polygons. The displayed image cannot supply an authoritative PM2.5 value.';
+ const el=$('identify');
+ if(el) el.textContent='Native grid click identification is pending export of numerical cell values and verified State, County, Municipality polygons. The displayed image cannot supply an authoritative PM2.5 value.';
 }
-function validAQM(m){if(!m||m.version!=='1.05.0'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.05.0');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time or image missing');return m;}
+function validAQM(m){if(!m||m.version!=='1.06.1'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.06.1');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||!f.source_cycle||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time, image, or source cycle missing');return m;}
+function setAQMCycle(frame){
+ const el=$('riCycleLabel');
+ if(!el||!frame)return;
+ const cycle=String(frame.source_cycle||'').replace('T',' ').replace(':00:00Z','Z');
+ el.textContent=`Cycle ${cycle}${frame.source_cycle_update?' • UPDATE':''}`;
+ el.classList.toggle('cycleUpdate',Boolean(frame.source_cycle_update));
+}
 function show(i){state.index=i;const s=state.smoke.frames[i];$('natFrame').src=abs(s.frames.national);$('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
  $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
- if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}`;}
- else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM';}
+ if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
+ else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM';const el=$('riCycleLabel');if(el){el.textContent='AQM cycle unavailable';el.classList.remove('cycleUpdate');}}
 }
 function step(){show((state.index+1)%72)}
 function toggle(){if(state.timer!==null){stop();return}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
-async function getJSON(path){const r=await fetch(abs(path)+'?v=1050',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1061',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
 async function load(){stop();$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;status('Loading certified historical assets');
  try{const m=await getJSON('frames.json');if(!m||m.version!=='1.04.1'||m.frames?.length!==72)throw Error('Original HRRR frames.json not found or not v1.04.1');state.smoke=m;
  try{const r=await fetch(abs('overlays/national_boundaries.svg'));if(r.ok){const d=new DOMParser().parseFromString(await r.text(),'image/svg+xml');$('natBoundary').replaceChildren(...Array.from(d.documentElement.children).map(n=>document.importNode(n,true)));}}catch(e){console.warn('Smoke vector overlay unavailable',e)}
@@ -200,6 +237,59 @@ $('play').addEventListener('click',toggle);$('step').addEventListener('click',()
 $('boundaries').addEventListener('change',e=>{$('natBoundary').style.display=e.target.checked?'':'none';});
 document.querySelectorAll('[data-map][data-action]').forEach(b=>b.addEventListener('click',()=>state.views[b.dataset.map][b.dataset.action]()));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+
+// Rhode Island trend graph has its own native fullscreen control.
+const trendPanel=$('riTrendPanel');
+const trendFullButton=$('trendFullscreen');
+trendFullButton.addEventListener('click',async()=>{
+ try{
+  if(document.fullscreenElement===trendPanel) await document.exitFullscreen();
+  else {
+   if(document.fullscreenElement) await document.exitFullscreen();
+   await trendPanel.requestFullscreen();
+  }
+ }catch(err){console.error('Trend graph fullscreen failed:',err);status('Graph full screen unavailable: '+err.message);}
+});
+document.addEventListener('fullscreenchange',()=>{
+ const isExpanded=document.fullscreenElement===trendPanel;
+ trendFullButton.setAttribute('aria-pressed',String(isExpanded));
+ trendFullButton.title=isExpanded?'Exit graph full screen (Esc)':'Expand Rhode Island trend graph to full screen';
+ trendFullButton.setAttribute('aria-label',trendFullButton.title);
+});
+
+// Fullscreen is independent for each map and does not reset its current hour.
+// The browser Escape key exits native fullscreen automatically.
+const fullMapWindows={nat:$('natWin'),ri:$('riWin')};
+const fullscreenButtons=Array.from(document.querySelectorAll('[data-fullscreen]'));
+fullscreenButtons.forEach(button=>button.addEventListener('click',async()=>{
+ const win=fullMapWindows[button.dataset.fullscreen];
+ try{
+   if(document.fullscreenElement===win){await document.exitFullscreen();}
+   else if(document.fullscreenElement){await document.exitFullscreen();await win.requestFullscreen();}
+   else{await win.requestFullscreen();}
+ }catch(err){console.error('Map fullscreen failed:',err);status('Full screen unavailable: '+err.message);}
+}));
+document.addEventListener('fullscreenchange',()=>{
+ for(const button of fullscreenButtons){
+  const expanded=document.fullscreenElement===fullMapWindows[button.dataset.fullscreen];
+  button.setAttribute('aria-pressed',String(expanded));
+  button.title=expanded?'Exit full screen (Esc)':'Expand map to full screen';
+  button.setAttribute('aria-label',button.title);
+ }
+ // Keep overlay geography proportionate to raster images when letterboxed.
+ $('natBoundary').setAttribute('preserveAspectRatio',document.fullscreenElement===$('natWin')?'xMidYMid meet':'none');
+ // Keep existing zoom and position, but clamp to the current viewport boundaries.
+ for(const key of Object.keys(fullMapWindows)){
+  const v=state.views[key];if(!v)continue;
+  const win=fullMapWindows[key];
+  v.x=Math.max(win.clientWidth*(1-v.zoom),Math.min(0,v.x));
+  v.y=Math.max(win.clientHeight*(1-v.zoom),Math.min(0,v.y));
+  const canvas=$(key==='nat'?'natCanvas':'riCanvas');
+  canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;
+ }
+ requestAnimationFrame(alignLeftNorthToRight);
+});
+
 
 function renderHourTicks(){
  const top=$('timeTicks'),bottom=$('dateTicks');
