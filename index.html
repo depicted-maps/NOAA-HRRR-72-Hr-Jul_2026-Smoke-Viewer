@@ -370,7 +370,7 @@ function show(i){
   $('natFrame').src=abs(smokePath);
   $('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
   $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
-  if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
+  if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs('aqm/'+a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
   else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM unavailable';const el=$('riCycleLabel');el.textContent='AQM cycle unavailable';el.classList.remove('cycleUpdate');}
   updateChartSelection(i);
 }
