@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.8 Linked Comparison + Permanent Boundary Diagnostics</title>
+<title>DEMO NOAA Modeled Smoke and Air Quality | Lambert v1.00.3 White Vector Boundaries</title>
 <style>
 :root{
   color-scheme:dark;
@@ -68,11 +68,15 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
 .aqmBand span{display:block;font-size:7px;font-weight:600;margin-top:2px;white-space:nowrap}
 .aqmGood{background:#00E400;color:#061406}.aqmModerate{background:#FFFF00;color:#171700}.aqmUSG{background:#FF7E00;color:#171006}.aqmUnhealthy{background:#FF0000;color:#fff}.aqmVeryUnhealthy{background:#8F3F97;color:#fff}.aqmHazardous{background:#7E0023;color:#fff}
 
-.mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#0f2033;overflow:hidden;touch-action:none;cursor:grab}
+.mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#10263f;overflow:hidden;touch-action:none;cursor:grab}
 .mapWindow.dragging{cursor:grabbing}
 .mapCanvas{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
 .mapCanvas img.frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
 .boundaryOverlay{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none;z-index:2}
+/* The vector SVGs are ABSOLUTE SIBLINGS to the zoomed PNG canvas.
+   The user-visible map region stays transparent and boundaries redraw at screen resolution. */
+.boundaryOverlay{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:2;overflow:hidden;shape-rendering:geometricPrecision}
+.boundaryOverlay path{fill:none;stroke:#000000;stroke-width:.8px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision}
 .boundaryStatus{font-size:11px;color:#dce7f3;border:1px solid #58708b;border-radius:5px;padding:5px 8px;background:#13243b}
 .boundaryStatus.error{color:#ffd08b;border-color:#a4783d}
 .mapTools{position:absolute;top:8px;right:8px;z-index:8;display:grid;gap:5px}
@@ -113,7 +117,7 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
 
 #status{padding:7px 10px;font-size:11px;color:#d6e3f2;border-top:1px solid var(--line)}
 .mapWindow:fullscreen{width:100vw;height:100vh;aspect-ratio:auto;background:#071526;border:0;border-radius:0}
-.mapWindow:fullscreen .mapCanvas img.frame,.mapWindow:fullscreen .boundaryOverlay{object-fit:contain}
+.mapWindow:fullscreen .mapCanvas img.frame{object-fit:fill}
 .mapWindow:fullscreen .mapTools{top:14px;right:14px}.mapWindow:fullscreen .north{right:14px;bottom:18px}
 .chartPanel:fullscreen{width:100vw;height:100vh;margin:0;border:0;border-radius:0;padding:22px 28px;background:var(--panel2)}
 .chartPanel:fullscreen .chartSurface{height:calc(100vh - 110px)}
@@ -177,13 +181,13 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
               <span class="label right">320</span>
             </div>
           </div>
-          <small>Regional HRRR frame is used so both viewers can share the same comparison footprint.</small>
+          <small>Native HRRR imagery. The HRRR concentration band below 5 µg/m³ is displayed in green for visual reference; this is not an EPA AQI category.</small>
         </div>
         <div class="mapWindow" id="natWin">
           <div class="mapCanvas" id="natCanvas">
             <img class="frame" id="natFrame" alt="HRRR smoke Rhode Island regional animation frame">
-            <img class="boundaryOverlay" id="natWorldBoundary" alt="" aria-hidden="true"><img class="boundaryOverlay" id="natBoundary" alt="" aria-hidden="true">
           </div>
+          <svg class="boundaryOverlay" id="natWorldBoundary" aria-hidden="true"></svg><svg class="boundaryOverlay" id="natBoundary" aria-hidden="true"></svg>
           <div class="card" id="natCard">Loading historical smoke data</div>
           <div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
           <div class="mapTools">
@@ -219,8 +223,8 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
         <div class="mapWindow" id="riWin">
           <div class="mapCanvas" id="riCanvas">
             <img class="frame" id="riFrame" alt="Regional AQM PM2.5 animation frame">
-            <img class="boundaryOverlay" id="riWorldBoundary" alt="" aria-hidden="true"><img class="boundaryOverlay" id="riBoundary" alt="" aria-hidden="true">
           </div>
+          <svg class="boundaryOverlay" id="riWorldBoundary" aria-hidden="true"></svg><svg class="boundaryOverlay" id="riBoundary" aria-hidden="true"></svg>
           <div class="card" id="riCard">NOAA AQM</div>
           <div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
           <div class="mapTools">
@@ -299,6 +303,15 @@ function abs(path){return new URL(path,new URL('./',document.baseURI)).href;}
 function fmt(iso){const dt=new Date(iso);const local=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).format(dt);const utc=String(dt.getUTCHours()).padStart(2,'0')+':00 UTC';return `${local} (${utc})`;}
 function otherMap(name){return name==='nat'?'ri':'nat';}
 
+function paintBoundaryViewport(v){
+  if(!v||!v.win)return;
+  const w=Math.max(1,v.win.clientWidth),h=Math.max(1,v.win.clientHeight),z=Math.max(.0001,v.zoom);
+  const viewBox=[(-v.x/w/z*1280),(-v.y/h/z*720),(1280/z),(720/z)].map(n=>n.toFixed(6)).join(' ');
+  for(const id of (v.name==='nat'?['natWorldBoundary','natBoundary']:['riWorldBoundary','riBoundary'])){
+    const svg=$(id);if(svg)svg.setAttribute('viewBox',viewBox);
+  }
+}
+
 function viewport(name,settings){
   const win=$(name==='nat'?'natWin':'riWin');
   const canvas=$(name==='nat'?'natCanvas':'riCanvas');
@@ -315,7 +328,7 @@ function viewport(name,settings){
     v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));
     v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));
   }
-  function paint(){clamp();canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;}
+  function paint(){clamp();canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;paintBoundaryViewport(v);}
   function copyToPeer(){
     if(!state.sync)return;
     const p=state.views[otherMap(name)];if(!p)return;
@@ -329,7 +342,7 @@ function viewport(name,settings){
       p.x=Math.min(0,Math.max(pw*(1-p.zoom),p.x));
       p.y=Math.min(0,Math.max(ph*(1-p.zoom),p.y));
     }
-    p.canvas.style.transform=`translate(${p.x}px,${p.y}px) scale(${p.zoom})`;
+    p.canvas.style.transform=`translate(${p.x}px,${p.y}px) scale(${p.zoom})`;paintBoundaryViewport(p);
   }
   function apply(syncPeer=true){paint();state.lastActive=name;if(syncPeer)copyToPeer();}
   function reset(){const w=win.clientWidth,h=win.clientHeight;v.zoom=v.homeZoom;v.x=w/2-v.focusX*w*v.zoom;v.y=h/2-v.focusY*h*v.zoom;apply(true);}
@@ -370,7 +383,7 @@ function show(i){
   $('natFrame').src=abs(smokePath);
   $('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
   $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
-  if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
+  if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs('aqm/'+a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
   else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM unavailable';const el=$('riCycleLabel');el.textContent='AQM cycle unavailable';el.classList.remove('cycleUpdate');}
   updateChartSelection(i);
 }
@@ -379,8 +392,6 @@ function toggle(){if(state.timer!==null){stop();return;}state.timer=setInterval(
 async function getJSON(path){const r=await fetch(abs(path)+'?v=1077',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
 
 async function loadBoundaryImages(){
-  // Both SVGs are REQUIRED independent georeferenced assets, not generated by this HTML.
-  // Do not silently substitute an RI-only PNG on the national comparison footprint.
   const assets=[
     {path:'overlays/permanent_world.svg',ids:['natWorldBoundary','riWorldBoundary']},
     {path:'overlays/permanent_state.svg',ids:['natBoundary','riBoundary']}
@@ -391,23 +402,29 @@ async function loadBoundaryImages(){
       const response=await fetch(abs(asset.path),{cache:'no-store'});
       if(!response.ok)throw Error('HTTP '+response.status);
       const xml=await response.text();
-      if(!/<svg(?:\s|>)/i.test(xml))throw Error('response is not an SVG');
-      // Decode once before putting it into either map; a 200 response alone is insufficient.
-      await new Promise((resolve,reject)=>{
-        const probe=new Image();
-        probe.onload=resolve;
-        probe.onerror=()=>reject(Error('SVG image could not be decoded'));
-        probe.src=abs(asset.path)+'?v=1078';
-      });
-      for(const id of asset.ids){$(id).src=abs(asset.path)+'?v=1078';$(id).style.display='';}
+      const source=new DOMParser().parseFromString(xml,'image/svg+xml').documentElement;
+      if(source.localName!=='svg'||!source.querySelector('path'))throw Error('invalid vector geometry');
+      for(const id of asset.ids){
+        const placeholder=$(id),svg=source.cloneNode(true);
+        svg.id=id;svg.classList.add('boundaryOverlay');svg.setAttribute('aria-hidden','true');
+        svg.setAttribute('preserveAspectRatio','none');
+        for(const path of svg.querySelectorAll('path')){
+          path.setAttribute('stroke','#000000');path.setAttribute('stroke-width','0.8');
+          path.setAttribute('stroke-opacity','1');path.setAttribute('fill','none');
+          path.setAttribute('vector-effect','non-scaling-stroke');
+          path.setAttribute('stroke-linejoin','round');path.setAttribute('stroke-linecap','round');
+        }
+        placeholder.replaceWith(svg);
+        paintBoundaryViewport(state.views[id.startsWith('nat')?'nat':'ri']);
+      }
     }catch(e){
       problems.push(asset.path+' ('+e.message+')');
-      for(const id of asset.ids){$(id).removeAttribute('src');$(id).style.display='none';}
+      for(const id of asset.ids){const svg=$(id);if(svg)svg.style.display='none';}
     }
   }
   const el=$('boundaryStatus');
   el.classList.toggle('error',problems.length>0);
-  el.textContent=problems.length?'Boundaries unavailable: '+problems.join('; '):'World + state boundary assets loaded';
+  el.textContent=problems.length?'Boundaries unavailable: '+problems.join('; '):'Black vector coastlines loaded';
   return problems;
 }
 
@@ -480,8 +497,8 @@ document.addEventListener('fullscreenchange',()=>{
 window.addEventListener('resize',()=>requestAnimationFrame(()=>{for(const v of Object.values(state.views))v.paint();if(state.sync)syncFrom(state.lastActive);}));
 
 renderHourTicks();
-viewport('nat',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
-viewport('ri',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
+viewport('nat',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:128});
+viewport('ri',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:128});
 setSync(true);
 load();
 })();
