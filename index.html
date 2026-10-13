@@ -76,7 +76,7 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
 /* The vector SVGs are ABSOLUTE SIBLINGS to the zoomed PNG canvas.
    The user-visible map region stays transparent and boundaries redraw at screen resolution. */
 .boundaryOverlay{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:2;overflow:hidden;shape-rendering:geometricPrecision}
-.boundaryOverlay path{fill:none;stroke:#fff;stroke-width:.8px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision}
+.boundaryOverlay path{fill:none;stroke:#000000;stroke-width:.8px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision}
 .boundaryStatus{font-size:11px;color:#dce7f3;border:1px solid #58708b;border-radius:5px;padding:5px 8px;background:#13243b}
 .boundaryStatus.error{color:#ffd08b;border-color:#a4783d}
 .mapTools{position:absolute;top:8px;right:8px;z-index:8;display:grid;gap:5px}
@@ -181,7 +181,7 @@ label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
               <span class="label right">320</span>
             </div>
           </div>
-          <small>Native HRRR imagery. Smoke below 5 µg/m³ appears transparent over the blue background.</small>
+          <small>Native HRRR imagery. The HRRR concentration band below 5 µg/m³ is displayed in green for visual reference; this is not an EPA AQI category.</small>
         </div>
         <div class="mapWindow" id="natWin">
           <div class="mapCanvas" id="natCanvas">
@@ -409,7 +409,7 @@ async function loadBoundaryImages(){
         svg.id=id;svg.classList.add('boundaryOverlay');svg.setAttribute('aria-hidden','true');
         svg.setAttribute('preserveAspectRatio','none');
         for(const path of svg.querySelectorAll('path')){
-          path.setAttribute('stroke','#ffffff');path.setAttribute('stroke-width','0.8');
+          path.setAttribute('stroke','#000000');path.setAttribute('stroke-width','0.8');
           path.setAttribute('stroke-opacity','1');path.setAttribute('fill','none');
           path.setAttribute('vector-effect','non-scaling-stroke');
           path.setAttribute('stroke-linejoin','round');path.setAttribute('stroke-linecap','round');
@@ -424,7 +424,7 @@ async function loadBoundaryImages(){
   }
   const el=$('boundaryStatus');
   el.classList.toggle('error',problems.length>0);
-  el.textContent=problems.length?'Boundaries unavailable: '+problems.join('; '):'White vector coastlines loaded';
+  el.textContent=problems.length?'Boundaries unavailable: '+problems.join('; '):'Black vector coastlines loaded';
   return problems;
 }
 
