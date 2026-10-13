@@ -1,24 +1,22 @@
 {
   "version": "1.06.2",
-  "render_build": "1.10.1",
-  "model": "NOAA AQMv7 raw 1-hour average PM2.5 concentration, national HRRR-aligned display",
-  "units": "µg/m³",
+  "render_version": "1.08.0",
+  "model": "NOAA AQMv7 raw 1-hour average PM2.5 concentration, HRRR national footprint display",
+  "units": "\u00b5g/m\u00b3",
   "display_not_aqi": true,
   "hours": 72,
   "start_utc": "2026-07-15T00:00:00Z",
-  "authoritative_source_gdb": "C:\\GIS\\DEMO_72_Hr_Jul_2026_Smoke_National_AQM_Rasters_Jul_2026.gdb",
   "display_geometry": {
-    "crs": "EPSG:3857",
-    "width_pixels": 1280,
-    "height_pixels": 720,
-    "extent_3857": {
-      "xmin": -13914936.349,
-      "ymin": 2700000.0,
-      "xmax": -7349936.349,
-      "ymax": 6392812.5
-    },
-    "governed_reference": "Exact HRRR national viewer alpha footprint",
-    "alpha_reference": "C:\\Data\\Map\\DEMO_HRRR_72Hr_Smoke_Event_Jul_2026\\Animation\\National_Frames_v1_01_0\\000.png"
+    "crs": "CUSTOM_HRRR_LAMBERT_WKT",
+    "extent_lambert": [
+      -3050440.14252193,
+      -1715886.1525566636,
+      3049399.85747807,
+      1715273.8474433364
+    ],
+    "width": 1280,
+    "height": 720,
+    "wkt_file": "../NOAA_HRRR_Authoritative_Lambert.wkt"
   },
   "source_selection_policy": "Governed newest-selected NOAA AQM forecast cycle; no temporal blending, smoothing, interpolation, or alternate-cycle substitution.",
   "source_cycle_ranges": [
@@ -88,11 +86,16 @@
         "high_ugm3": null,
         "color": "#7E0023"
       }
-    ],
-    "source_nodata_display_policy": {
-      "is_pm25_class": false,
-      "rgb": "#0F2033",
-      "meaning": "Authoritative AQM source NoData displayed with the viewer map background RGB while retaining the exact HRRR alpha footprint."
+    ]
+  },
+  "qa": {
+    "footprint": {
+      "status": "PASS_EXACT_HRRR_ALPHA_FOOTPRINT",
+      "alpha_mismatch_pixels_all_frames": 0,
+      "mask_source": "C:\\Data\\Map\\DEMO_HRRR_72Hr_Smoke_Event_Jul_2026\\Animation\\National_Frames_v1_01_0\\000.png",
+      "mask_method": "GOVERNED_HRRR_PNG_ALPHA",
+      "visible_pixels": 673265,
+      "transparent_pixels": 248335
     }
   },
   "frames": [
@@ -101,865 +104,722 @@
       "frame_number": 1,
       "valid_utc": "2026-07-15T00:00:00Z",
       "valid_edt": "2026-07-14T20:00:00-04:00",
-      "image": "aqm/frames/national/000.png",
-      "image_sha256": "9396f6a25e8851ff75f2598d8a4b70bbaa6e228518f241251cbabbec3b81dd49",
-      "source_raster": "AQM_PM25_HRRR_20260715_00UTC_ugm3",
+      "image": "frames/national/000.png",
+      "image_sha256": "ff50d1b806e092c86357515f1df6ba1f63d80c0771617be4b3e26d9bfc5250ff",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 1,
       "frame_number": 2,
       "valid_utc": "2026-07-15T01:00:00Z",
       "valid_edt": "2026-07-14T21:00:00-04:00",
-      "image": "aqm/frames/national/001.png",
-      "image_sha256": "fedbdc6a9fe6f33b4870dc864933d2c048e3ec3658d2cd8d66070cf93d255847",
-      "source_raster": "AQM_PM25_HRRR_20260715_01UTC_ugm3",
+      "image": "frames/national/001.png",
+      "image_sha256": "20e406d68ec8dceff37d90b6f5971ad482becd8bebba83b32b73146644679967",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 2,
       "frame_number": 3,
       "valid_utc": "2026-07-15T02:00:00Z",
       "valid_edt": "2026-07-14T22:00:00-04:00",
-      "image": "aqm/frames/national/002.png",
-      "image_sha256": "9c02ce5173fb5889a331beb0cd86bf527c3d3f3fa408351c7f7211a97124fb30",
-      "source_raster": "AQM_PM25_HRRR_20260715_02UTC_ugm3",
+      "image": "frames/national/002.png",
+      "image_sha256": "b9ca58ab4647e3b2b1b71db28fb74b09ea7b18eacf60bf1da833723be158c0bb",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 3,
       "frame_number": 4,
       "valid_utc": "2026-07-15T03:00:00Z",
       "valid_edt": "2026-07-14T23:00:00-04:00",
-      "image": "aqm/frames/national/003.png",
-      "image_sha256": "732c13e2876158bdac2a13bb1a8f4b748dd7c7723ab52889eb2642bf4dc8fb80",
-      "source_raster": "AQM_PM25_HRRR_20260715_03UTC_ugm3",
+      "image": "frames/national/003.png",
+      "image_sha256": "776ebdc12a90f7267ce251113a2c48c1f29ebdb79d7b0f226e3055ae9439400e",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 4,
       "frame_number": 5,
       "valid_utc": "2026-07-15T04:00:00Z",
       "valid_edt": "2026-07-15T00:00:00-04:00",
-      "image": "aqm/frames/national/004.png",
-      "image_sha256": "7bf6b7d5a7a7fde47d5d1e0c7c62a115a702c13bbd7dfca3cacaa0522f538bcf",
-      "source_raster": "AQM_PM25_HRRR_20260715_04UTC_ugm3",
+      "image": "frames/national/004.png",
+      "image_sha256": "925b849e9da2f677300b59bf89ce50d8673e629722839b9c215984604c56945f",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 5,
       "frame_number": 6,
       "valid_utc": "2026-07-15T05:00:00Z",
       "valid_edt": "2026-07-15T01:00:00-04:00",
-      "image": "aqm/frames/national/005.png",
-      "image_sha256": "81b1124f6ef160ae6c3e72f41b83b9be75174b8385835282de95a92d7ebc9deb",
-      "source_raster": "AQM_PM25_HRRR_20260715_05UTC_ugm3",
+      "image": "frames/national/005.png",
+      "image_sha256": "2b6652a2ca359826b7887905548914a93e845f8e0f74e6863fc26fb8a929932a",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 6,
       "frame_number": 7,
       "valid_utc": "2026-07-15T06:00:00Z",
       "valid_edt": "2026-07-15T02:00:00-04:00",
-      "image": "aqm/frames/national/006.png",
-      "image_sha256": "f66e635781d990776fb89936fe636bdf3a97764ecb7463abfd5e21c0ea3b1883",
-      "source_raster": "AQM_PM25_HRRR_20260715_06UTC_ugm3",
+      "image": "frames/national/006.png",
+      "image_sha256": "07f32a340d6c694c3c8aa8c378daa62b7b20b45926817ac03b414741cce6fc2c",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 7,
       "frame_number": 8,
       "valid_utc": "2026-07-15T07:00:00Z",
       "valid_edt": "2026-07-15T03:00:00-04:00",
-      "image": "aqm/frames/national/007.png",
-      "image_sha256": "d2eb53fc843847d5282ee3ced3347c5b732d073f9b23c285fc5034517619bb0b",
-      "source_raster": "AQM_PM25_HRRR_20260715_07UTC_ugm3",
+      "image": "frames/national/007.png",
+      "image_sha256": "c766c14090de7d56383eb8c4032000192cd6de26e0278b1c80d0fe09dff0cd8e",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": true,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": true
     },
     {
       "index": 8,
       "frame_number": 9,
       "valid_utc": "2026-07-15T08:00:00Z",
       "valid_edt": "2026-07-15T04:00:00-04:00",
-      "image": "aqm/frames/national/008.png",
-      "image_sha256": "dfda5ebff8e6fb09e72a08b2169da53d4ee58bcf4c1e0f1b969cc87cf5971a1e",
-      "source_raster": "AQM_PM25_HRRR_20260715_08UTC_ugm3",
+      "image": "frames/national/008.png",
+      "image_sha256": "69127d8d4f0b192196e6a93e755daa55abc4f9e4018393249632872a45673dc9",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 9,
       "frame_number": 10,
       "valid_utc": "2026-07-15T09:00:00Z",
       "valid_edt": "2026-07-15T05:00:00-04:00",
-      "image": "aqm/frames/national/009.png",
-      "image_sha256": "0ff74ad8ef369d37b3052ad299d7e6e9413969bf8f2fa905ed15dd7603434e37",
-      "source_raster": "AQM_PM25_HRRR_20260715_09UTC_ugm3",
+      "image": "frames/national/009.png",
+      "image_sha256": "50417441da02f7ff9e5a5bcbf9b64d5cc1598f5768c50397043fa6f24023fcef",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 10,
       "frame_number": 11,
       "valid_utc": "2026-07-15T10:00:00Z",
       "valid_edt": "2026-07-15T06:00:00-04:00",
-      "image": "aqm/frames/national/010.png",
-      "image_sha256": "9e3049e4560b6fee242d3599d9cba54cd62b95bfbf0b67ca0faff09f4f262019",
-      "source_raster": "AQM_PM25_HRRR_20260715_10UTC_ugm3",
+      "image": "frames/national/010.png",
+      "image_sha256": "7a2ec52009aa74d8d894baf33a3644d74fdb7e22533ce346eed1105f60e1ed44",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 11,
       "frame_number": 12,
       "valid_utc": "2026-07-15T11:00:00Z",
       "valid_edt": "2026-07-15T07:00:00-04:00",
-      "image": "aqm/frames/national/011.png",
-      "image_sha256": "76384b38a9bea44f8cc60b75a4106be98c193898d40aed3765f70c9fece9bc1b",
-      "source_raster": "AQM_PM25_HRRR_20260715_11UTC_ugm3",
+      "image": "frames/national/011.png",
+      "image_sha256": "3ea4e0a618f22c6e486267ca3ce4a23fc57f3981ae605795f200a286a265fe07",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 12,
       "frame_number": 13,
       "valid_utc": "2026-07-15T12:00:00Z",
       "valid_edt": "2026-07-15T08:00:00-04:00",
-      "image": "aqm/frames/national/012.png",
-      "image_sha256": "e1087bddf848f06242982d18ac17f5cf305abd76d40fd43880883ad7467c8ab2",
-      "source_raster": "AQM_PM25_HRRR_20260715_12UTC_ugm3",
+      "image": "frames/national/012.png",
+      "image_sha256": "49a10deab706cb2e0115e2520a1bc88f9b2010d946318e2e7ea540c459766f9b",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 13,
       "frame_number": 14,
       "valid_utc": "2026-07-15T13:00:00Z",
       "valid_edt": "2026-07-15T09:00:00-04:00",
-      "image": "aqm/frames/national/013.png",
-      "image_sha256": "dfa9bd07d3c6f0698e3a635b5717fad0cf9c39590a403d4b33e24430cb9715aa",
-      "source_raster": "AQM_PM25_HRRR_20260715_13UTC_ugm3",
+      "image": "frames/national/013.png",
+      "image_sha256": "f4b9c8b752750623389f9bb7d0f6d91901ab5eb48923e30b825cca9078d2983c",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 14,
       "frame_number": 15,
       "valid_utc": "2026-07-15T14:00:00Z",
       "valid_edt": "2026-07-15T10:00:00-04:00",
-      "image": "aqm/frames/national/014.png",
-      "image_sha256": "153400c5da9133b3aeaea154c746a83fbcb1169dcf966dc58d1de53192825d87",
-      "source_raster": "AQM_PM25_HRRR_20260715_14UTC_ugm3",
+      "image": "frames/national/014.png",
+      "image_sha256": "9aa1134dc70c8860287ea080886075afcb247351a6be3eb05effb563209aa11d",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 15,
       "frame_number": 16,
       "valid_utc": "2026-07-15T15:00:00Z",
       "valid_edt": "2026-07-15T11:00:00-04:00",
-      "image": "aqm/frames/national/015.png",
-      "image_sha256": "a53623067270a4d6256b39bf27bd1e90ca6fea752697715443c7e7672de1b5ea",
-      "source_raster": "AQM_PM25_HRRR_20260715_15UTC_ugm3",
+      "image": "frames/national/015.png",
+      "image_sha256": "a44a3d9454384581dfec3c3b78a2f765927220327d19f36abc92dcac31b0602b",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 16,
       "frame_number": 17,
       "valid_utc": "2026-07-15T16:00:00Z",
       "valid_edt": "2026-07-15T12:00:00-04:00",
-      "image": "aqm/frames/national/016.png",
-      "image_sha256": "c9a403ba94c8e6a402dbf1fd1752d58a1a895ebacc1353c364a63abc98259dd5",
-      "source_raster": "AQM_PM25_HRRR_20260715_16UTC_ugm3",
+      "image": "frames/national/016.png",
+      "image_sha256": "ee35587c151a866ef2749db5cfaec53281a6cba4aeba30c61d1b2eed999d8d5b",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 17,
       "frame_number": 18,
       "valid_utc": "2026-07-15T17:00:00Z",
       "valid_edt": "2026-07-15T13:00:00-04:00",
-      "image": "aqm/frames/national/017.png",
-      "image_sha256": "d5560f2293036b4f26e6d5c82a5e7776e9e3e2a0aebc8b6a8b14e0fbcff5f97a",
-      "source_raster": "AQM_PM25_HRRR_20260715_17UTC_ugm3",
+      "image": "frames/national/017.png",
+      "image_sha256": "aad1ccd8a1f54b7cfb5a393d99eb0da46685ee641868de443718a1123beb7186",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 18,
       "frame_number": 19,
       "valid_utc": "2026-07-15T18:00:00Z",
       "valid_edt": "2026-07-15T14:00:00-04:00",
-      "image": "aqm/frames/national/018.png",
-      "image_sha256": "30302802bd13f8b5fda0a7072ae71a90763d67e7f5d82b78fa02602ec91b85ad",
-      "source_raster": "AQM_PM25_HRRR_20260715_18UTC_ugm3",
+      "image": "frames/national/018.png",
+      "image_sha256": "ade18d5891a8eb10f936903113e6cc6d24183467b2f33ed5883ec2fc8226342c",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 19,
       "frame_number": 20,
       "valid_utc": "2026-07-15T19:00:00Z",
       "valid_edt": "2026-07-15T15:00:00-04:00",
-      "image": "aqm/frames/national/019.png",
-      "image_sha256": "45cea69dec59181e64bd0c145dcbec31aba9d342add3f57848a8202e26056a97",
-      "source_raster": "AQM_PM25_HRRR_20260715_19UTC_ugm3",
+      "image": "frames/national/019.png",
+      "image_sha256": "b4868e292aa13f320671ba52fe3706e5d4a3627c4ba4746122cb6b8de2b03463",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 20,
       "frame_number": 21,
       "valid_utc": "2026-07-15T20:00:00Z",
       "valid_edt": "2026-07-15T16:00:00-04:00",
-      "image": "aqm/frames/national/020.png",
-      "image_sha256": "bfca6cf17f1b8c7f95ca2173dcbf0dcc6fc59b2c967cc0604e2c76c7c4239b55",
-      "source_raster": "AQM_PM25_HRRR_20260715_20UTC_ugm3",
+      "image": "frames/national/020.png",
+      "image_sha256": "2d837dd7d800132f2078649ba0b6931c1d87992224e1bf627b50024af2b1de59",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 21,
       "frame_number": 22,
       "valid_utc": "2026-07-15T21:00:00Z",
       "valid_edt": "2026-07-15T17:00:00-04:00",
-      "image": "aqm/frames/national/021.png",
-      "image_sha256": "75d69698e82bb4091f9804386634566682338738e671e91ba838fd7c3a307703",
-      "source_raster": "AQM_PM25_HRRR_20260715_21UTC_ugm3",
+      "image": "frames/national/021.png",
+      "image_sha256": "a29b5130b38b632ec9776161e19d209dce11ee8682646241726f7ff41af79b0b",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 22,
       "frame_number": 23,
       "valid_utc": "2026-07-15T22:00:00Z",
       "valid_edt": "2026-07-15T18:00:00-04:00",
-      "image": "aqm/frames/national/022.png",
-      "image_sha256": "3d7db3fa506f79106ae9706c2fe0b62fd6408253053bd13b42d586ce10cf3297",
-      "source_raster": "AQM_PM25_HRRR_20260715_22UTC_ugm3",
+      "image": "frames/national/022.png",
+      "image_sha256": "38d73c8cef9f6ed6c3d0416202f876496905679d1d8a9ef7573a58e26a7d9544",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 23,
       "frame_number": 24,
       "valid_utc": "2026-07-15T23:00:00Z",
       "valid_edt": "2026-07-15T19:00:00-04:00",
-      "image": "aqm/frames/national/023.png",
-      "image_sha256": "8a9262e0a288580520b3fbc8ead87fc382ca80dae4b5d232012f5b2f90b6257e",
-      "source_raster": "AQM_PM25_HRRR_20260715_23UTC_ugm3",
+      "image": "frames/national/023.png",
+      "image_sha256": "d1b2d5dea6c812624e83d6194869dbefc845434dc73ee844388b15e46b3fe914",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 24,
       "frame_number": 25,
       "valid_utc": "2026-07-16T00:00:00Z",
       "valid_edt": "2026-07-15T20:00:00-04:00",
-      "image": "aqm/frames/national/024.png",
-      "image_sha256": "e9025ed70ccf2360bf382e5b16e93af61a4b00c5bb28da7ce5261ef012323bed",
-      "source_raster": "AQM_PM25_HRRR_20260716_00UTC_ugm3",
+      "image": "frames/national/024.png",
+      "image_sha256": "66080e5bd7f1ec1cc21e2919347420c7d8acd1bd5cafacba0fae3009e1e18e51",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 25,
       "frame_number": 26,
       "valid_utc": "2026-07-16T01:00:00Z",
       "valid_edt": "2026-07-15T21:00:00-04:00",
-      "image": "aqm/frames/national/025.png",
-      "image_sha256": "79940d518261c372e2588f28fb60c4eb48e379c84f49a9e111b0ccb530dda29b",
-      "source_raster": "AQM_PM25_HRRR_20260716_01UTC_ugm3",
+      "image": "frames/national/025.png",
+      "image_sha256": "e55c0c3790c528e041c365a238e97e49ec535e26a418934be06c1faf9db15bf7",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 26,
       "frame_number": 27,
       "valid_utc": "2026-07-16T02:00:00Z",
       "valid_edt": "2026-07-15T22:00:00-04:00",
-      "image": "aqm/frames/national/026.png",
-      "image_sha256": "0b6f796cdded4efd6cc830ec07e861d825b6592754bdb758084b51ebc0c60eed",
-      "source_raster": "AQM_PM25_HRRR_20260716_02UTC_ugm3",
+      "image": "frames/national/026.png",
+      "image_sha256": "29e2c49e57372611c630fffd807341fe0777889699ad2368225b1b597f0617db",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 27,
       "frame_number": 28,
       "valid_utc": "2026-07-16T03:00:00Z",
       "valid_edt": "2026-07-15T23:00:00-04:00",
-      "image": "aqm/frames/national/027.png",
-      "image_sha256": "61c1a2e61f83b886e405af152947dabe0a52316ef29c125be9b74770660ce0f8",
-      "source_raster": "AQM_PM25_HRRR_20260716_03UTC_ugm3",
+      "image": "frames/national/027.png",
+      "image_sha256": "c6cdcb363dcdfa36efc55206bb6137d510aa114234c8976a285b95dd1cfde1a2",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 28,
       "frame_number": 29,
       "valid_utc": "2026-07-16T04:00:00Z",
       "valid_edt": "2026-07-16T00:00:00-04:00",
-      "image": "aqm/frames/national/028.png",
-      "image_sha256": "3481fb4244dc8c2c3041725eb2bf99838392f72a2cbbb9d3f55b4cbddcf7734a",
-      "source_raster": "AQM_PM25_HRRR_20260716_04UTC_ugm3",
+      "image": "frames/national/028.png",
+      "image_sha256": "b201a60b128c3f781024cff1e5039667c3b27026e80c0b55f43ca5e503778534",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 29,
       "frame_number": 30,
       "valid_utc": "2026-07-16T05:00:00Z",
       "valid_edt": "2026-07-16T01:00:00-04:00",
-      "image": "aqm/frames/national/029.png",
-      "image_sha256": "e1761f6f961b47b6b7f3173d73052ef53e7bcc7e957bba3f33226cbb199c7d8c",
-      "source_raster": "AQM_PM25_HRRR_20260716_05UTC_ugm3",
+      "image": "frames/national/029.png",
+      "image_sha256": "a4ddc757a88b5e361e0830bc9845025bef294f55d33a44bfbfe21471da173f43",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 30,
       "frame_number": 31,
       "valid_utc": "2026-07-16T06:00:00Z",
       "valid_edt": "2026-07-16T02:00:00-04:00",
-      "image": "aqm/frames/national/030.png",
-      "image_sha256": "c4a606e68550489d5bca3ba021e91b5e45cb24a9df3063d49ad1725ebca7a668",
-      "source_raster": "AQM_PM25_HRRR_20260716_06UTC_ugm3",
+      "image": "frames/national/030.png",
+      "image_sha256": "c629c4f11feeab90f35544aa63de72990c7f9c10a2d81fef0f0ed0f9b5132308",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 31,
       "frame_number": 32,
       "valid_utc": "2026-07-16T07:00:00Z",
       "valid_edt": "2026-07-16T03:00:00-04:00",
-      "image": "aqm/frames/national/031.png",
-      "image_sha256": "a775deaa3eddc13b9540dc92b94f0293759aa06bae624414198ef068f079a2cc",
-      "source_raster": "AQM_PM25_HRRR_20260716_07UTC_ugm3",
+      "image": "frames/national/031.png",
+      "image_sha256": "f80197d0be515542b189a7ec6f6c471838eddb9fd95f78c3fa9006d2d0e84b98",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": true,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": true
     },
     {
       "index": 32,
       "frame_number": 33,
       "valid_utc": "2026-07-16T08:00:00Z",
       "valid_edt": "2026-07-16T04:00:00-04:00",
-      "image": "aqm/frames/national/032.png",
-      "image_sha256": "83d32ae5448d1e40e5ab1dd6566d764a669912ec2909ba2a08ce244dea8ed2fb",
-      "source_raster": "AQM_PM25_HRRR_20260716_08UTC_ugm3",
+      "image": "frames/national/032.png",
+      "image_sha256": "bb2631f719a70a0f09bb3a222bb0cf8215c030441c051c1945aa21d032200d44",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 33,
       "frame_number": 34,
       "valid_utc": "2026-07-16T09:00:00Z",
       "valid_edt": "2026-07-16T05:00:00-04:00",
-      "image": "aqm/frames/national/033.png",
-      "image_sha256": "54a2f77e61bc470d8d9867f223a77956869803fc4f1d44b10fee3db344ddd4ed",
-      "source_raster": "AQM_PM25_HRRR_20260716_09UTC_ugm3",
+      "image": "frames/national/033.png",
+      "image_sha256": "6d0e264e0b3cff2f46f0744ab375fcd32606d9b7611be5b8ab97e835816af76d",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 34,
       "frame_number": 35,
       "valid_utc": "2026-07-16T10:00:00Z",
       "valid_edt": "2026-07-16T06:00:00-04:00",
-      "image": "aqm/frames/national/034.png",
-      "image_sha256": "c7f5c1c46094c8abe296ae99bb2249fd360fd747c49ee4c3b1138d50964a6b79",
-      "source_raster": "AQM_PM25_HRRR_20260716_10UTC_ugm3",
+      "image": "frames/national/034.png",
+      "image_sha256": "a56b6c0e3b0627feadc34aed2b89a0dd22c786a858f7045f1bcef33e8585d573",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 35,
       "frame_number": 36,
       "valid_utc": "2026-07-16T11:00:00Z",
       "valid_edt": "2026-07-16T07:00:00-04:00",
-      "image": "aqm/frames/national/035.png",
-      "image_sha256": "dd4fa41c9763df204986310a65b09a5026f0420f70e797159f5cfa65bc8e01d2",
-      "source_raster": "AQM_PM25_HRRR_20260716_11UTC_ugm3",
+      "image": "frames/national/035.png",
+      "image_sha256": "b0d43649b3a22a66796903d27e85681962a02d26cf5fd6dde3869e9468fa752e",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 36,
       "frame_number": 37,
       "valid_utc": "2026-07-16T12:00:00Z",
       "valid_edt": "2026-07-16T08:00:00-04:00",
-      "image": "aqm/frames/national/036.png",
-      "image_sha256": "8a8306c7d926d53fbb6bb7b1c60941a6038e07bd4f03d378f6874c8ad4a83eb6",
-      "source_raster": "AQM_PM25_HRRR_20260716_12UTC_ugm3",
+      "image": "frames/national/036.png",
+      "image_sha256": "be9410dd04b0422d6856d992e051f6f214d53f60d2838b33504f194709dfe474",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 37,
       "frame_number": 38,
       "valid_utc": "2026-07-16T13:00:00Z",
       "valid_edt": "2026-07-16T09:00:00-04:00",
-      "image": "aqm/frames/national/037.png",
-      "image_sha256": "05a11f04ee6b153caf720866743555bf197e100faa50eddc9549948e79b5d29a",
-      "source_raster": "AQM_PM25_HRRR_20260716_13UTC_ugm3",
+      "image": "frames/national/037.png",
+      "image_sha256": "09ffaaa602d1c03d2efa978b5c521cedca506ad18b7921e3e280306c551c92b3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 38,
       "frame_number": 39,
       "valid_utc": "2026-07-16T14:00:00Z",
       "valid_edt": "2026-07-16T10:00:00-04:00",
-      "image": "aqm/frames/national/038.png",
-      "image_sha256": "a13cd71f1b306b573d1b97aedd8dee03f86a299756d49385e905c012b8d0e204",
-      "source_raster": "AQM_PM25_HRRR_20260716_14UTC_ugm3",
+      "image": "frames/national/038.png",
+      "image_sha256": "f72b0c5502001102f1f6c34da01dd80f94b3559e39841eff18dafa0035d0cfef",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 39,
       "frame_number": 40,
       "valid_utc": "2026-07-16T15:00:00Z",
       "valid_edt": "2026-07-16T11:00:00-04:00",
-      "image": "aqm/frames/national/039.png",
-      "image_sha256": "35379cd9a8aa615188aa3d151b6e3428d3ac15e15aa3229a7aed3f76b30822cb",
-      "source_raster": "AQM_PM25_HRRR_20260716_15UTC_ugm3",
+      "image": "frames/national/039.png",
+      "image_sha256": "361971b13f4cddafa0bb9d62e0c3d5f9ecd87ed19d195f8468f9a0a2ff1bcc01",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 40,
       "frame_number": 41,
       "valid_utc": "2026-07-16T16:00:00Z",
       "valid_edt": "2026-07-16T12:00:00-04:00",
-      "image": "aqm/frames/national/040.png",
-      "image_sha256": "79ef0a2e02fb67ebe1525ab3ece087bf14908929b6553e7e3498fa19b13e875f",
-      "source_raster": "AQM_PM25_HRRR_20260716_16UTC_ugm3",
+      "image": "frames/national/040.png",
+      "image_sha256": "fc88fa35040e7e48a3d85beb2c452dcbdecc583467336206680f7ae71964d3da",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 41,
       "frame_number": 42,
       "valid_utc": "2026-07-16T17:00:00Z",
       "valid_edt": "2026-07-16T13:00:00-04:00",
-      "image": "aqm/frames/national/041.png",
-      "image_sha256": "26bc6a79286f8fb57c65006417039beb1b4eadba3fd8a7969f5416c80ad6fc61",
-      "source_raster": "AQM_PM25_HRRR_20260716_17UTC_ugm3",
+      "image": "frames/national/041.png",
+      "image_sha256": "033daf5dcfe209f104cea6719f2157bc3f427f566cdc0f77a2d40bab4c5ff82c",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 42,
       "frame_number": 43,
       "valid_utc": "2026-07-16T18:00:00Z",
       "valid_edt": "2026-07-16T14:00:00-04:00",
-      "image": "aqm/frames/national/042.png",
-      "image_sha256": "d6044f470fa9acebecdf3fb99aca0795b62a54af60ee29eda731038b4a01d9e7",
-      "source_raster": "AQM_PM25_HRRR_20260716_18UTC_ugm3",
+      "image": "frames/national/042.png",
+      "image_sha256": "5c94157a477d64e508167ba8327ce673ba1119a6e96b163a8eb9d6cac40696cc",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 43,
       "frame_number": 44,
       "valid_utc": "2026-07-16T19:00:00Z",
       "valid_edt": "2026-07-16T15:00:00-04:00",
-      "image": "aqm/frames/national/043.png",
-      "image_sha256": "0cf2856ab2206dff79ef4070b0098b721579fbeeafff3c0e013931e3166051f6",
-      "source_raster": "AQM_PM25_HRRR_20260716_19UTC_ugm3",
+      "image": "frames/national/043.png",
+      "image_sha256": "6ea8611e28550e2a8cd7e5f62690a155131bbc7096c31f31ad70324a1f91df12",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 44,
       "frame_number": 45,
       "valid_utc": "2026-07-16T20:00:00Z",
       "valid_edt": "2026-07-16T16:00:00-04:00",
-      "image": "aqm/frames/national/044.png",
-      "image_sha256": "610bab71453ece0cd515d3034f74c2f88aa4b67135d4762e9fa876cfa4bd7aed",
-      "source_raster": "AQM_PM25_HRRR_20260716_20UTC_ugm3",
+      "image": "frames/national/044.png",
+      "image_sha256": "ee9d6b20ad0b876bd0dfbdcb0870af2e6ef2db9068965de9dea704743120d4ea",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 45,
       "frame_number": 46,
       "valid_utc": "2026-07-16T21:00:00Z",
       "valid_edt": "2026-07-16T17:00:00-04:00",
-      "image": "aqm/frames/national/045.png",
-      "image_sha256": "6c7e1fe855c774de89caac37cc46ebfb18dea4e59717ba1fe1f8af14e2b785cd",
-      "source_raster": "AQM_PM25_HRRR_20260716_21UTC_ugm3",
+      "image": "frames/national/045.png",
+      "image_sha256": "0173ae3b4c5ed8884bf6b68ea95c5373e8cc7168ff63015aba8c409bfb2e479e",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 46,
       "frame_number": 47,
       "valid_utc": "2026-07-16T22:00:00Z",
       "valid_edt": "2026-07-16T18:00:00-04:00",
-      "image": "aqm/frames/national/046.png",
-      "image_sha256": "70ba0d8083e19a1970aa230d2bf218f48626fed353f8148f58500772c17e47c8",
-      "source_raster": "AQM_PM25_HRRR_20260716_22UTC_ugm3",
+      "image": "frames/national/046.png",
+      "image_sha256": "d7feebf8d381a2a36a29bcd1bc14d6c708e09501858e1010e57531c07c63f5c0",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 47,
       "frame_number": 48,
       "valid_utc": "2026-07-16T23:00:00Z",
       "valid_edt": "2026-07-16T19:00:00-04:00",
-      "image": "aqm/frames/national/047.png",
-      "image_sha256": "3916cecaf819fd76be6f8d7f9245ce755515e488871a5b290d1ba0f0b8a02881",
-      "source_raster": "AQM_PM25_HRRR_20260716_23UTC_ugm3",
+      "image": "frames/national/047.png",
+      "image_sha256": "fb6be2b6429b7c899799afb87d32114390c4663be933cebd8863500a35602ade",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 48,
       "frame_number": 49,
       "valid_utc": "2026-07-17T00:00:00Z",
       "valid_edt": "2026-07-16T20:00:00-04:00",
-      "image": "aqm/frames/national/048.png",
-      "image_sha256": "8010b01d146e14093690d455c726da1858af193fc2373f6020f58bde45aa6ba1",
-      "source_raster": "AQM_PM25_HRRR_20260717_00UTC_ugm3",
+      "image": "frames/national/048.png",
+      "image_sha256": "92d79477dc60c0601338c1cf1498b80a601aa6041220d141674a3aaf343b6e90",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 49,
       "frame_number": 50,
       "valid_utc": "2026-07-17T01:00:00Z",
       "valid_edt": "2026-07-16T21:00:00-04:00",
-      "image": "aqm/frames/national/049.png",
-      "image_sha256": "4a4a33bd434f1e8b436672e8ee9ead04f01b4900eef3c9258f8044e5695fe068",
-      "source_raster": "AQM_PM25_HRRR_20260717_01UTC_ugm3",
+      "image": "frames/national/049.png",
+      "image_sha256": "41ba7344781a7a65f51a2464e3d635ae8f33e51bc0a69e854e02808f80d60bfb",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 50,
       "frame_number": 51,
       "valid_utc": "2026-07-17T02:00:00Z",
       "valid_edt": "2026-07-16T22:00:00-04:00",
-      "image": "aqm/frames/national/050.png",
-      "image_sha256": "4961fddd25de0f969f528f95d882c32fefe2f26f0e40d00bde910d47ce599753",
-      "source_raster": "AQM_PM25_HRRR_20260717_02UTC_ugm3",
+      "image": "frames/national/050.png",
+      "image_sha256": "55b9347d30f9fba8c51b5e10b1d70541c866173cef7f3f65bfae86db0c862f9d",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 51,
       "frame_number": 52,
       "valid_utc": "2026-07-17T03:00:00Z",
       "valid_edt": "2026-07-16T23:00:00-04:00",
-      "image": "aqm/frames/national/051.png",
-      "image_sha256": "1ff5499e8a515aa2b3452b0ecdde0609445e66e0f131db3343fa73243596b16b",
-      "source_raster": "AQM_PM25_HRRR_20260717_03UTC_ugm3",
+      "image": "frames/national/051.png",
+      "image_sha256": "5b97b57760e69953f2a14786034c79bfe0741b92df9e795cb01bdc7a2edbe3a9",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 52,
       "frame_number": 53,
       "valid_utc": "2026-07-17T04:00:00Z",
       "valid_edt": "2026-07-17T00:00:00-04:00",
-      "image": "aqm/frames/national/052.png",
-      "image_sha256": "30ea8e8edbec9df507fc585ea7e07d66ce1638ab386dbc61d42a9ad5b29c88d0",
-      "source_raster": "AQM_PM25_HRRR_20260717_04UTC_ugm3",
+      "image": "frames/national/052.png",
+      "image_sha256": "dc7b46b9ed5c9c489ba009cb1e4e71bf3c758941c7a45aada3460047f898521f",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 53,
       "frame_number": 54,
       "valid_utc": "2026-07-17T05:00:00Z",
       "valid_edt": "2026-07-17T01:00:00-04:00",
-      "image": "aqm/frames/national/053.png",
-      "image_sha256": "5f863eb538519f8517fcd903310eb34e9ab20ae4d8e175492ea274ea871298a7",
-      "source_raster": "AQM_PM25_HRRR_20260717_05UTC_ugm3",
+      "image": "frames/national/053.png",
+      "image_sha256": "9013cf84a0989131b622b70112b12ce66ad8d93b25ca78b8ba1b580d0f9b8ff6",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 54,
       "frame_number": 55,
       "valid_utc": "2026-07-17T06:00:00Z",
       "valid_edt": "2026-07-17T02:00:00-04:00",
-      "image": "aqm/frames/national/054.png",
-      "image_sha256": "8fb2e11c40f1bc270ee83672bb226d33a88c859116fcc537b9e49bd67a5941db",
-      "source_raster": "AQM_PM25_HRRR_20260717_06UTC_ugm3",
+      "image": "frames/national/054.png",
+      "image_sha256": "c9aac169e2ff52bcbaf2f29e620519d1e79a6af3cdfdeff73945e85513a2892d",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 55,
       "frame_number": 56,
       "valid_utc": "2026-07-17T07:00:00Z",
       "valid_edt": "2026-07-17T03:00:00-04:00",
-      "image": "aqm/frames/national/055.png",
-      "image_sha256": "ef7393cc844b6c44cb1f86ba334dcfbdd79d02c52c6046a5e2709c4369b93b5b",
-      "source_raster": "AQM_PM25_HRRR_20260717_07UTC_ugm3",
+      "image": "frames/national/055.png",
+      "image_sha256": "8e1086379a31f43b7a86818837da6e8c1e460341bdedb2bb6141c652d4c09481",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": true,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": true
     },
     {
       "index": 56,
       "frame_number": 57,
       "valid_utc": "2026-07-17T08:00:00Z",
       "valid_edt": "2026-07-17T04:00:00-04:00",
-      "image": "aqm/frames/national/056.png",
-      "image_sha256": "fb02791601671667303d4cdbe1c9fa11a4a566b560e35699fad568059127a7d3",
-      "source_raster": "AQM_PM25_HRRR_20260717_08UTC_ugm3",
+      "image": "frames/national/056.png",
+      "image_sha256": "6203b092bc70e3cdf31c9ae8be13a07348ca2568f4e75aaef9b5f83e452268d6",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 57,
       "frame_number": 58,
       "valid_utc": "2026-07-17T09:00:00Z",
       "valid_edt": "2026-07-17T05:00:00-04:00",
-      "image": "aqm/frames/national/057.png",
-      "image_sha256": "728fb3354ae55e190610cc01e8bdb53fb01efdd6de680f44fbe856d8f52954e0",
-      "source_raster": "AQM_PM25_HRRR_20260717_09UTC_ugm3",
+      "image": "frames/national/057.png",
+      "image_sha256": "ee50fc3a214df8f11132dc41f7571180f01b8644e7beceeaeb226c3dd490e374",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 58,
       "frame_number": 59,
       "valid_utc": "2026-07-17T10:00:00Z",
       "valid_edt": "2026-07-17T06:00:00-04:00",
-      "image": "aqm/frames/national/058.png",
-      "image_sha256": "6561c92fbcbbaa0db13c0cd053affe44722c802b0e93dd6b31142aa30c3dbda2",
-      "source_raster": "AQM_PM25_HRRR_20260717_10UTC_ugm3",
+      "image": "frames/national/058.png",
+      "image_sha256": "6a51afedf1fcd8022d368d0ff8e30f6ee19f66514474328e690ced3495c73b50",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 59,
       "frame_number": 60,
       "valid_utc": "2026-07-17T11:00:00Z",
       "valid_edt": "2026-07-17T07:00:00-04:00",
-      "image": "aqm/frames/national/059.png",
-      "image_sha256": "a7d7190b53a61cde7129cb47c7c640dcf8acf6a57a23b9c3d14045859bbccf9f",
-      "source_raster": "AQM_PM25_HRRR_20260717_11UTC_ugm3",
+      "image": "frames/national/059.png",
+      "image_sha256": "b04070a8bb613b4ed52938273f208189b9eeda25e98b460b4b1db9f407ea57a9",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 60,
       "frame_number": 61,
       "valid_utc": "2026-07-17T12:00:00Z",
       "valid_edt": "2026-07-17T08:00:00-04:00",
-      "image": "aqm/frames/national/060.png",
-      "image_sha256": "c55d7b5f6e559093e2533f9a9db454690a04189f3671e60a15dea7b3604a02bc",
-      "source_raster": "AQM_PM25_HRRR_20260717_12UTC_ugm3",
+      "image": "frames/national/060.png",
+      "image_sha256": "e09c2536bcdb5b1d1c25b95b861dbb2f44984c13ac2ee8023c574f38d44d962b",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 61,
       "frame_number": 62,
       "valid_utc": "2026-07-17T13:00:00Z",
       "valid_edt": "2026-07-17T09:00:00-04:00",
-      "image": "aqm/frames/national/061.png",
-      "image_sha256": "14c74f924aacb5b673d3e56c86dc08ef83de5fc3080c9c35d75ed9b5f9c56c00",
-      "source_raster": "AQM_PM25_HRRR_20260717_13UTC_ugm3",
+      "image": "frames/national/061.png",
+      "image_sha256": "ef1d7d0a0065a9b267caa6c0242d2bb03038896a8b322a68dcbf666ff92c75d5",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 62,
       "frame_number": 63,
       "valid_utc": "2026-07-17T14:00:00Z",
       "valid_edt": "2026-07-17T10:00:00-04:00",
-      "image": "aqm/frames/national/062.png",
-      "image_sha256": "8298f5a85c620acd58a45bdad915ad17c91a0508ed7ea286bb0b60efb494da61",
-      "source_raster": "AQM_PM25_HRRR_20260717_14UTC_ugm3",
+      "image": "frames/national/062.png",
+      "image_sha256": "7220aa4cfaf0b243082923d3dd5d175c8f9dd26dc28bfa73f0803787fde92b64",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 63,
       "frame_number": 64,
       "valid_utc": "2026-07-17T15:00:00Z",
       "valid_edt": "2026-07-17T11:00:00-04:00",
-      "image": "aqm/frames/national/063.png",
-      "image_sha256": "c278af8c0e693927738f5771771da8b779c5a864afb4250a492d7c2a8e25f7c2",
-      "source_raster": "AQM_PM25_HRRR_20260717_15UTC_ugm3",
+      "image": "frames/national/063.png",
+      "image_sha256": "d7a1e6ef5709650843166792024d09ec2e0c532c92d21c5377796a4f0caa1056",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 64,
       "frame_number": 65,
       "valid_utc": "2026-07-17T16:00:00Z",
       "valid_edt": "2026-07-17T12:00:00-04:00",
-      "image": "aqm/frames/national/064.png",
-      "image_sha256": "c66eacdb9056ca8a88d07bc1a77deb8a12850e780b78cdb301c6da0438c45cea",
-      "source_raster": "AQM_PM25_HRRR_20260717_16UTC_ugm3",
+      "image": "frames/national/064.png",
+      "image_sha256": "b923646879a8e45d29db502d02bdbc9d2575b3413315314d889a2eef808665c4",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 65,
       "frame_number": 66,
       "valid_utc": "2026-07-17T17:00:00Z",
       "valid_edt": "2026-07-17T13:00:00-04:00",
-      "image": "aqm/frames/national/065.png",
-      "image_sha256": "4ff51d215538ac72e915a7840683d935e5e0469ad25c2cad8a8957b143c3b520",
-      "source_raster": "AQM_PM25_HRRR_20260717_17UTC_ugm3",
+      "image": "frames/national/065.png",
+      "image_sha256": "ea8a2a808225d45d5647e2b63cae1653dbb2fb47855a00fe7001e5593b3a1a7b",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 66,
       "frame_number": 67,
       "valid_utc": "2026-07-17T18:00:00Z",
       "valid_edt": "2026-07-17T14:00:00-04:00",
-      "image": "aqm/frames/national/066.png",
-      "image_sha256": "8e1af5721a8de0b1082a4169bb2926cdb404b849fba9617e6e91551a7795b922",
-      "source_raster": "AQM_PM25_HRRR_20260717_18UTC_ugm3",
+      "image": "frames/national/066.png",
+      "image_sha256": "31533bfd605147e1a8809369fc0a50f8120d8b228c16e0680ed801653d9b7eb4",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 67,
       "frame_number": 68,
       "valid_utc": "2026-07-17T19:00:00Z",
       "valid_edt": "2026-07-17T15:00:00-04:00",
-      "image": "aqm/frames/national/067.png",
-      "image_sha256": "53a326a584561fbfdcfde3e10bc2f95dc7a46e96699f66836ca2fee59d625aec",
-      "source_raster": "AQM_PM25_HRRR_20260717_19UTC_ugm3",
+      "image": "frames/national/067.png",
+      "image_sha256": "4fef4d1d902a439abce4cb0f301fc92c0ab040e72238b75beeb2d1daed760474",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 68,
       "frame_number": 69,
       "valid_utc": "2026-07-17T20:00:00Z",
       "valid_edt": "2026-07-17T16:00:00-04:00",
-      "image": "aqm/frames/national/068.png",
-      "image_sha256": "e204080034c82dbe992b807bfba118116dd2a1bb7f5d59b68e52ddfe98f602d3",
-      "source_raster": "AQM_PM25_HRRR_20260717_20UTC_ugm3",
+      "image": "frames/national/068.png",
+      "image_sha256": "a9c90b33629789ab93092ed136785a3fb8bec5be5dd9d57670f321bbd632db5b",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 69,
       "frame_number": 70,
       "valid_utc": "2026-07-17T21:00:00Z",
       "valid_edt": "2026-07-17T17:00:00-04:00",
-      "image": "aqm/frames/national/069.png",
-      "image_sha256": "f15572f73684c4aa07c8a18615e899823893edb9ac531347e9a6849aaa730712",
-      "source_raster": "AQM_PM25_HRRR_20260717_21UTC_ugm3",
+      "image": "frames/national/069.png",
+      "image_sha256": "1adb87f2327dd3345efdc4b2ae8ffca1910bd96cc07c60102b602c1620349935",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 70,
       "frame_number": 71,
       "valid_utc": "2026-07-17T22:00:00Z",
       "valid_edt": "2026-07-17T18:00:00-04:00",
-      "image": "aqm/frames/national/070.png",
-      "image_sha256": "5b8e71b4856bb95e7139ea8f25792e2943b5343ca657f8a360328d0a4319a6dd",
-      "source_raster": "AQM_PM25_HRRR_20260717_22UTC_ugm3",
+      "image": "frames/national/070.png",
+      "image_sha256": "582e83e74dbbd4c9f4cbc733738418416b38b3ab13d1997919e45d460850e68f",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     },
     {
       "index": 71,
       "frame_number": 72,
       "valid_utc": "2026-07-17T23:00:00Z",
       "valid_edt": "2026-07-17T19:00:00-04:00",
-      "image": "aqm/frames/national/071.png",
-      "image_sha256": "ee7a4c8faa9809d1edefe576c40f5b5463aa7bdd621609a2a9a65599cbc6b98b",
-      "source_raster": "AQM_PM25_HRRR_20260717_23UTC_ugm3",
+      "image": "frames/national/071.png",
+      "image_sha256": "b4c546a46334467c1a6851e67fa572171df04a927f7eced0c121a795fdb7e4d3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false,
-      "source_nodata_display_pixels": 8692
+      "source_cycle_update": false
     }
   ],
-  "deployment_path_policy": "AQM image paths are repository-root-relative because the current root-level index.html resolves frame.image with document.baseURI."
+  "national_render_version": "1.00.2",
+  "national_uses_native_lambert": true
 }
