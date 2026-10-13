@@ -2,16 +2,16 @@
   "version": "1.04.1",
   "model": "NOAA HRRR-Smoke MASSDEN, 8 m above ground, analysis (F00)",
   "display_not_aqi": true,
-  "units": "µg/m³",
+  "units": "\u00b5g/m\u00b3",
   "width": 1280,
   "height": 720,
-  "extent_crs": "EPSG:3857",
+  "extent_crs": "CUSTOM_HRRR_LAMBERT_WKT",
   "extents": {
     "national": [
-      -13914936.349,
-      2700000.0,
-      -7349936.349,
-      6392812.5
+      -3050440.14252193,
+      -1715886.1525566636,
+      3049399.85747807,
+      1715273.8474433364
     ],
     "rhode_island": [
       -8145000.0,
@@ -904,5 +904,9 @@
         "rhode_island": "frames/rhode_island/071.png"
       }
     }
-  ]
+  ],
+  "lambert_wkt_file": "NOAA_HRRR_Authoritative_Lambert.wkt",
+  "national_render_version": "1.00.2",
+  "national_uses_native_lambert": true,
+  "legacy_rhode_island_extent_crs": "EPSG:3857"
 }
