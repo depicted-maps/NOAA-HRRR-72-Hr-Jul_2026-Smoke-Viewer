@@ -1,363 +1,490 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DEMO NOAA Modeled Smoke and Air Quality | v1.06.3 Permanent Boundaries</title><style>
-:root { color-scheme: dark; --bg:#071526; --panel:#10243b; --line:#3e5673; --text:#edf4fb; --sub:#c8d6e6; --control:#243a54; --controlLine:#6f88a3; --tip:#091723ee; font-family:Segoe UI,Arial,sans-serif; }
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEMO NOAA Modeled Smoke and Air Quality | v1.07.8 Linked Comparison + Permanent Boundary Diagnostics</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#071526;
+  --panel:#10243b;
+  --panel2:#0b1c31;
+  --line:#3e5673;
+  --text:#edf4fb;
+  --sub:#c8d6e6;
+  --control:#243a54;
+  --controlLine:#6f88a3;
+  --tip:#091723ee;
+  font-family:Segoe UI,Arial,sans-serif;
+}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text)}
-main{padding:14px clamp(8px,1.3vw,20px)}
-h1{margin:0 0 4px;font-size:clamp(21px,2.4vw,31px)}
-.sub{margin:0 0 12px;font-size:14px;color:var(--sub);line-height:1.35}
+main{max-width:none;padding:9px 12px}
+h1{margin:0 0 6px;font-size:clamp(18px,1.5vw,27px)}
 .shell{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#10263f}
-.shellPad{padding:10px 12px}
-.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-button,select{font:inherit;background:var(--control);color:white;border:1px solid var(--controlLine);padding:8px 12px;border-radius:6px;cursor:pointer}
+button,select{font:inherit;background:var(--control);color:#fff;border:1px solid var(--controlLine);padding:6px 9px;border-radius:6px;cursor:pointer}
 button:disabled{opacity:.45;cursor:default}
-label.ctrl{display:flex;align-items:center;gap:6px;font-size:13px}
-.legendMeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:#dce7f3;margin-bottom:6px}
-.legendBox{position:relative;height:42px;border:1px solid #172537;background:linear-gradient(to right, #2db514 0.0000%, #2db514 3.1250%, #92d63f 3.1250%, #92d63f 6.2500%, #d4e51b 6.2500%, #d4e51b 9.3750%, #f0dc16 9.3750%, #f0dc16 12.5000%, #eca422 12.5000%, #eca422 15.6250%, #df6d15 15.6250%, #df6d15 18.7500%, #f11b22 18.7500%, #f11b22 21.8750%, #e6121f 21.8750%, #e6121f 25.0000%, #da081a 25.0000%, #da081a 28.1250%, #cf0514 28.1250%, #cf0514 31.2500%, #c8000f 31.2500%, #c8000f 37.5000%, #d56bdd 37.5000%, #d56bdd 43.7500%, #c75cd6 43.7500%, #c75cd6 50.0000%, #ba4ecf 50.0000%, #ba4ecf 56.2500%, #aa43c2 56.2500%, #aa43c2 62.5000%, #9941b5 62.5000%, #9941b5 68.7500%, #8353a4 68.7500%, #8353a4 75.0000%, #c08772 75.0000%, #c08772 81.2500%, #b76b4c 81.2500%, #b76b4c 87.5000%, #a95426 87.5000%, #a95426 93.7500%, #923500 93.7500%, #923500 100.0000%, #7b2200 100.0000%, #7b2200 100.0000%);overflow:hidden}
-.legendBox::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, #ffffff18 0%, #ffffff08 30%, #00000010 100%);pointer-events:none}
-.tickRow{position:absolute;inset:0}
-.label{position:absolute;top:7px;font-weight:700;font-size:clamp(12px,1vw,15px);color:#fff;text-shadow:0 1px 1px #000, 0 0 2px #000;transform:translateX(-50%);white-space:nowrap}
-.label.left{transform:none;left:4px !important}
-.label.right{transform:translateX(-100%);left:calc(100% - 4px) !important}
-.maps{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:10px;padding:10px}
-.panel{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0f2033}
-.panelHeader{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 10px;font-size:13px}
-.panelHeader strong{font-size:14px}
-.panelHeader span{color:var(--sub);font-size:11px}
+
+/* Timeline */
+.topTimeline{border-bottom:1px solid var(--line);background:var(--panel2);padding:7px 9px 5px}
+.legendMeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:10px;color:#dce7f3;margin-bottom:5px}
+.timeline{display:flex;align-items:center;gap:9px}
+.timeline label{font-size:11px}
+.hourAxis{position:relative;flex:1;min-width:0;padding-top:19px;padding-bottom:25px}
+#scrub{display:block;width:100%;min-width:0;margin:0;position:relative;z-index:2;accent-color:#88b8e8}
+.timeTicks,.dateTicks{position:absolute;left:7px;right:7px;height:19px;pointer-events:none;white-space:nowrap}
+.timeTicks{top:0}.dateTicks{bottom:0}
+.tick{position:absolute;transform:translateX(-50%);font-size:clamp(8px,.72vw,11px);color:#eaf4ff;text-align:center;line-height:1.1;font-variant-numeric:tabular-nums}
+.timeTicks .tick{bottom:0;font-weight:600}
+.dateTicks .tick{top:5px;color:#b9cde0;font-size:clamp(8px,.65vw,10px)}
+.timeTicks .tick::after{content:"";position:absolute;left:50%;top:15px;height:5px;border-left:1px solid #6c88a7;opacity:.65}
+#clock{display:block;margin-top:5px;font-size:10px;color:#c8d6e6}
+
+.controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:6px 10px;border-bottom:1px solid var(--line)}
+.controls button,.controls select{font-size:11px;padding:5px 8px}
+label.ctrl{display:flex;align-items:center;gap:6px;font-size:11px}
+
+/* Two equal viewers */
+.mapsWrap{position:relative;padding:7px}
+.maps{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start}
+.panel{min-width:0;width:100%;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0f2033}
+.panelHeader{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:flex-start;min-height:43px;padding:7px 9px}
+.panelHeader strong{font-size:clamp(13px,1vw,17px);line-height:1.2}
+.panelHeader span{color:var(--sub);font-size:10px}
 #riCycleLabel{color:var(--sub);font-weight:600}
 #riCycleLabel.cycleUpdate{color:#ffd27e;font-weight:800}
-.mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#0f2033;overflow:hidden;touch-action:none;cursor:grab}
-.mapWindow.dragging{cursor:grabbing}
-.mapCanvas{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
-.mapCanvas img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
-.boundarySvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;shape-rendering:geometricPrecision}
-.boundarySvg path{vector-effect:non-scaling-stroke;fill:none}
-.permanentBoundaryOverlay{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:fill;
-  pointer-events:none;
-  user-select:none;
-  z-index:2;
-}
-#natFrame,#riFrame{z-index:1}
-.boundaryStatus{font-size:11px;color:#d8e5f2;padding:5px 8px;border:1px solid #506984;border-radius:5px;background:#13243b}
-.mapTools{position:absolute;top:8px;right:8px;z-index:5;display:grid;gap:5px}
-.mapTools button{font-size:22px;line-height:20px;min-width:36px;min-height:34px;padding:2px;background:#13243be8}
-.mapTip{position:absolute;left:8px;bottom:8px;z-index:5;font-size:11px;background:var(--tip);padding:4px 7px;border-radius:4px;pointer-events:none}
-.card{position:absolute;left:10px;top:10px;z-index:5;padding:6px 8px;border-radius:4px;background:#d7e5b3ee;color:#1e2411;border:1px solid #344124;font-size:12px;font-weight:700;line-height:1.25;pointer-events:none;white-space:pre-line}
-.card.small{font-weight:600;max-width:245px}
-.north{position:absolute;left:10px;top:84px;z-index:5;padding:4px 6px;border-radius:4px;background:#13243be0;font-size:11px;pointer-events:none}
-.timeline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line)}
-.timeline input{flex:1;min-width:180px}
-.stats{display:flex;gap:18px;flex-wrap:wrap;padding:0 12px 12px;font-size:12px;color:#d4e0ed}
-#status{padding:10px 12px 12px;font-size:13px;color:#d6e3f2;min-height:22px}
 
-.chartPanel{padding:8px 9px 6px;border-bottom:1px solid var(--line);background:#0b1c31}
-.chartHeader{display:flex;justify-content:space-between;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:4px;font-size:12px}
-.chartHeader strong{font-size:13px}
-.chartMeta{color:var(--sub);font-size:10px}
-.chartSurface{position:relative;touch-action:pan-y;cursor:crosshair;border:1px solid #3b526e;border-radius:5px;background:#102035}
-#riChart{display:block;width:100%;height:175px;overflow:visible}
-#riChart .chart-grid{stroke:#8298ac;stroke-opacity:.18;stroke-width:1}
-#riChart .chart-axis{fill:#d0deec;font-size:11px}
-#riChart .chart-line-mean{fill:none;stroke:#74bbff;stroke-width:2.4;stroke-linecap:round}
-#riChart .chart-line-max{fill:none;stroke:#ffbf73;stroke-width:1.9;stroke-linecap:round}
-#riChart .chart-dot-mean{fill:#74bbff;stroke:#0c2139;stroke-width:.5}
-#riChart .chart-dot-max{fill:#ffbf73;stroke:#0c2139;stroke-width:.5}
-#riChart .chart-cursor{stroke:#fff;stroke-width:1.25;stroke-dasharray:4 3;pointer-events:none}
-#riChart .chart-selected{fill:#fff;stroke:#102035;stroke-width:1.6;pointer-events:none}
-#riChart .chart-hit{fill:transparent;cursor:crosshair}
-.chartReadout{margin:5px 1px 1px;font-size:11px;line-height:1.4;min-height:28px;color:#e6eef9}
-.chartKeys{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;color:#d7e4ee}
-.chartKey{display:inline-flex;gap:4px;align-items:center}
-.chartSwatch{width:13px;height:3px;display:inline-block}
-.note{margin:10px 0 0;color:var(--sub);font-size:12px;line-height:1.4}
-@media (max-width:900px){.maps{grid-template-columns:1fr}.legendBox{height:38px}.label{font-size:11px}}
+.legendBlock{height:88px;padding:7px 9px;border-top:1px solid #243d59;border-bottom:1px solid var(--line);background:var(--panel2)}
+.legendBlock small{display:block;margin:1px 0 5px;color:var(--sub);font-size:9px;line-height:1.2}
+.legendBox{position:relative;height:30px;border:1px solid #172537;background:linear-gradient(to right,#2db514 0%,#2db514 3.125%,#92d63f 3.125%,#92d63f 6.25%,#d4e51b 6.25%,#d4e51b 9.375%,#f0dc16 9.375%,#f0dc16 12.5%,#eca422 12.5%,#eca422 15.625%,#df6d15 15.625%,#df6d15 18.75%,#f11b22 18.75%,#f11b22 21.875%,#e6121f 21.875%,#e6121f 25%,#da081a 25%,#da081a 28.125%,#cf0514 28.125%,#cf0514 31.25%,#c8000f 31.25%,#c8000f 37.5%,#d56bdd 37.5%,#d56bdd 43.75%,#c75cd6 43.75%,#c75cd6 50%,#ba4ecf 50%,#ba4ecf 56.25%,#aa43c2 56.25%,#aa43c2 62.5%,#9941b5 62.5%,#9941b5 68.75%,#8353a4 68.75%,#8353a4 75%,#c08772 75%,#c08772 81.25%,#b76b4c 81.25%,#b76b4c 87.5%,#a95426 87.5%,#a95426 93.75%,#923500 93.75%,#923500 100%);overflow:hidden}
+.legendBox::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,#ffffff18 0%,#ffffff08 30%,#00000010 100%);pointer-events:none}
+.tickRow{position:absolute;inset:0}
+.label{position:absolute;top:5px;font-weight:700;font-size:10px;color:#fff;text-shadow:0 1px 1px #000,0 0 2px #000;transform:translateX(-50%);white-space:nowrap}
+.label.left{transform:none;left:4px!important}.label.right{transform:translateX(-100%);left:calc(100% - 4px)!important}
 
-.maps{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
 .aqmLegend{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:46px;border:1px solid #516981;border-radius:4px;overflow:hidden}
 .aqmBand{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;padding:3px 2px;text-align:center;font-size:8px;line-height:1.08;font-weight:700}
 .aqmBand span{display:block;font-size:7px;font-weight:600;margin-top:2px;white-space:nowrap}
-.aqmGood{background:#00E400;color:#061406}
-.aqmModerate{background:#FFFF00;color:#171700}
-.aqmUSG{background:#FF7E00;color:#171006}
-.aqmUnhealthy{background:#FF0000;color:#fff;text-shadow:0 1px 1px #600}
-.aqmVeryUnhealthy{background:#8F3F97;color:#fff;text-shadow:0 1px 1px #321636}
-.aqmHazardous{background:#7E0023;color:#fff;text-shadow:0 1px 1px #2e000d}
-.aqmLegendNote{margin-top:5px;color:var(--sub);font-size:9px;line-height:1.25}
-.aqmCycleNote{margin-top:4px;color:#b9cde0;font-size:9px;line-height:1.25}
-.info{background:#0b1c31;padding:10px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.55;min-height:83px}
-.info strong{color:#eef4fc}.warning{color:#ffd27e}.mapWindow{aspect-ratio:16/9}.mapCanvas img{object-fit:fill}
-.panelHeader{min-height:54px}.legendBlock{padding:9px 11px;border-bottom:1px solid var(--line)}
-.legendBlock small{display:block;margin:3px 0 5px;color:var(--sub)}
-@media(max-width:900px){.maps{grid-template-columns:1fr}}
+.aqmGood{background:#00E400;color:#061406}.aqmModerate{background:#FFFF00;color:#171700}.aqmUSG{background:#FF7E00;color:#171006}.aqmUnhealthy{background:#FF0000;color:#fff}.aqmVeryUnhealthy{background:#8F3F97;color:#fff}.aqmHazardous{background:#7E0023;color:#fff}
 
-/* Reference layout: top legend and timeline, control band, wide-left dashboard. */
-main{max-width:none;padding:9px 12px}
-h1{font-size:clamp(18px,1.5vw,27px)}
-.sub{margin-bottom:9px;font-size:12px}
-.topBand{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,1fr);gap:8px;padding:7px 9px 4px}
-.topLegend,.topTimeline{border:1px solid var(--line);background:#0b1c31;border-radius:4px;padding:7px 9px}
-.topBand .legendMeta{font-size:10px;margin-bottom:5px}
-.topBand .legendBox{height:30px}
-.topBand .label{font-size:10px;top:5px}
-.topTimeline .timeline{display:flex;align-items:center;padding:2px 0 0;border:none;gap:9px}
-.topTimeline #clock{display:block;margin-top:7px;font-size:11px;color:#c8d6e6}
-.topTimeline .timeline input{min-width:90px;width:100%}
-.controls{padding:6px 10px;gap:7px;border-top:none}
-.controls button,.controls select{font-size:11px;padding:5px 8px}
-.maps{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:7px;padding:7px}
-.panelHeader{min-height:35px;padding:6px 8px}
-.panelHeader strong{font-size:13px}
-.panelHeader span{font-size:10px}
-.mapWindow{aspect-ratio:16/9}
-.rightStack{display:flex;flex-direction:column;min-width:0}
-.rightStack .mapWindow{aspect-ratio:16/9}
-.chartPlaceholder{height:170px;background:#0b1c31;border-bottom:1px solid var(--line);padding:9px 11px;color:#dce7f3;display:flex;flex-direction:column;gap:9px}
-.chartPlaceholder strong{font-size:12px}
-.chartBlank{flex:1;min-height:50px;border:1px dashed #425a73;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#b1c5dd;text-align:center;padding:10px}
-.chartPlaceholder small{font-size:10px;color:var(--sub)}
-.rightStack .info{min-height:52px;padding:7px 9px;font-size:11px}
-.rightStack .legendBlock{padding:6px 9px}
-.rightStack .aqmLegend{height:46px}
-#status{padding:7px 10px;font-size:11px}
-@media(max-width:900px){.topBand{grid-template-columns:1fr}.maps{grid-template-columns:1fr}.chartPlaceholder{height:145px}}
-
-/* v1.05.4 presentation revisions; image-window aspect ratios unchanged */
-.topBand{grid-template-columns:minmax(0,1fr)}
-.topLegend{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:7px 9px;background:#0b1c31}
-.topLegend .legendMeta{font-size:11px;margin-bottom:5px}
-.topLegend .legendBox{height:30px}
-.topLegend .label{font-size:10px;top:5px}
-.mapTools button[data-action="reset"]{display:flex;align-items:center;justify-content:center}
-.mapTools button[data-action="reset"] svg{display:block;flex:none}
-.north{left:auto;top:auto;right:10px;bottom:18px;display:flex;align-items:center;justify-content:center;gap:3px;font-size:22px;line-height:1;font-weight:700;padding:4px 6px}
+.mapWindow{position:relative;width:100%;aspect-ratio:16/9;background:#0f2033;overflow:hidden;touch-action:none;cursor:grab}
+.mapWindow.dragging{cursor:grabbing}
+.mapCanvas{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
+.mapCanvas img.frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
+.boundaryOverlay{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none;z-index:2}
+.boundaryStatus{font-size:11px;color:#dce7f3;border:1px solid #58708b;border-radius:5px;padding:5px 8px;background:#13243b}
+.boundaryStatus.error{color:#ffd08b;border-color:#a4783d}
+.mapTools{position:absolute;top:8px;right:8px;z-index:8;display:grid;gap:5px}
+.mapTools button{font-size:22px;line-height:20px;min-width:36px;min-height:34px;padding:2px;background:#13243be8}
+.card{position:absolute;left:10px;top:10px;z-index:7;padding:6px 8px;border-radius:4px;background:#d7e5b3ee;color:#1e2411;border:1px solid #344124;font-size:12px;font-weight:600;line-height:1.25;pointer-events:none;white-space:pre-line;max-width:245px}
+.north{position:absolute;right:10px;bottom:16px;z-index:7;display:flex;align-items:center;justify-content:center;gap:3px;font-size:22px;line-height:1;font-weight:700;padding:4px 6px;border-radius:4px;background:#13243be0;pointer-events:none}
 .north span:last-child{font-size:22px;font-weight:600}
-.panelHeader strong{font-size:13px}
-.chartBlank{border:1px solid #425a73;background:#102035}
-@media(max-width:900px){.topBand{grid-template-columns:1fr}}
 
-/* v1.05.7: product headings only, preserving global heading and map dimensions. */
-.panelHeader strong{font-size:18px;line-height:1.2}
-/* v1.05.5: exact hourly timeline labels, Eastern Daylight Time (EDT). */
-.topTimeline .timeline{align-items:center}
-.topTimeline .hourAxis{position:relative;flex:1;min-width:0;padding-top:19px;padding-bottom:25px}
-.topTimeline .hourAxis #scrub{display:block;width:100%;min-width:0;margin:0;position:relative;z-index:2;accent-color:#88b8e8}
-.topTimeline .timeTicks,.topTimeline .dateTicks{position:absolute;left:7px;right:7px;height:19px;pointer-events:none;white-space:nowrap}
-.topTimeline .timeTicks{top:0}
-.topTimeline .dateTicks{bottom:0}
-.topTimeline .tick{position:absolute;transform:translateX(-50%);font-size:clamp(8px,.72vw,11px);color:#eaf4ff;text-align:center;line-height:1.1;font-variant-numeric:tabular-nums}
-.topTimeline .timeTicks .tick{bottom:0;font-weight:600}
-.topTimeline .dateTicks .tick{top:5px;color:#b9cde0;font-size:clamp(8px,.65vw,10px)}
-.topTimeline .timeTicks .tick::after{content:'';position:absolute;left:50%;top:15px;height:5px;border-left:1px solid #6c88a7;opacity:.65}
-@media(max-width:750px){.topTimeline .tick{font-size:8px}.topTimeline .dateTicks .tick{font-size:7px}}
+/* Seam sync control */
+.syncButton{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);z-index:30;width:48px;height:48px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;background:#0b1c31;border:2px solid #9db5cd;box-shadow:0 0 0 3px #071526aa,0 4px 12px #0009;color:#eaf4ff}
+.syncButton:hover{background:#18314e}
+.syncButton[aria-pressed="true"]{border-color:#c7e7ff;box-shadow:0 0 0 3px #071526aa,0 0 14px #75bfff88}
+.syncButton svg{width:30px;height:30px;display:block;overflow:visible}
+.syncButton .unlinked{display:none}
+.syncButton[aria-pressed="false"] .linked{display:none}
+.syncButton[aria-pressed="false"] .unlinked{display:block}
 
-/* v1.05.8: native map-only fullscreen, without altering the normal map boxes. */
-.mapTools button[data-fullscreen]{display:flex;align-items:center;justify-content:center}
-.mapTools button[data-fullscreen] svg{display:block;flex:none}
+/* Full-width chart */
+.chartPanel{margin:0 7px 7px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:9px 11px 8px}
+.chartHeader{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.chartHeader strong{font-size:13px}.chartMeta{font-size:10px;color:var(--sub)}
+.chartTools{display:flex;align-items:center;gap:7px}
+.chartFullscreen{display:inline-flex;align-items:center;justify-content:center;width:34px;height:32px;padding:4px!important;background:#13243be8}
+.chartFullscreen svg{width:22px;height:22px}
+.chartSurface{position:relative;border:1px solid #3b526e;border-radius:5px;background:#102035;overflow:hidden;cursor:crosshair}
+#trendChart{display:block;width:100%;height:230px}
+#trendChart .grid{stroke:#8298ac;stroke-opacity:.18;stroke-width:1}
+#trendChart .axis{fill:#d0deec;font-size:10px}
+#trendChart .meanLine{fill:none;stroke:#74bbff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#trendChart .maxLine{fill:none;stroke:#ffbf73;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#trendChart .cursor{stroke:#fff;stroke-width:1.25;stroke-dasharray:4 3;pointer-events:none}
+#trendChart .selMean{fill:#74bbff;stroke:#fff;stroke-width:1.4;pointer-events:none}
+#trendChart .selMax{fill:#ffbf73;stroke:#fff;stroke-width:1.4;pointer-events:none}
+#trendChart .hit{fill:transparent;cursor:crosshair}
+.chartFooter{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:10px;color:#d7e4ee}
+.chartKeys{display:flex;gap:12px;flex-wrap:wrap}.chartKey{display:inline-flex;gap:5px;align-items:center}.swatch{width:14px;height:3px;display:inline-block}.swatch.mean{background:#74bbff}.swatch.max{background:#ffbf73}
+#chartReadout{font-variant-numeric:tabular-nums}
+
+#status{padding:7px 10px;font-size:11px;color:#d6e3f2;border-top:1px solid var(--line)}
 .mapWindow:fullscreen{width:100vw;height:100vh;aspect-ratio:auto;background:#071526;border:0;border-radius:0}
-.mapWindow:fullscreen .mapCanvas img{object-fit:contain}
-.mapWindow:fullscreen .mapTools{top:14px;right:14px}
-.mapWindow:fullscreen .north{right:14px;bottom:18px}
-/* v1.05.9: independent full-screen regional trend panel */
-.chartPlaceholder{position:relative}
-.chartHeading{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.chartFullscreen{display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;height:32px;padding:4px!important;background:#13243be8;color:#edf4fb;border:1px solid #6f88a3;border-radius:6px;cursor:pointer}
-.chartFullscreen svg{display:block;width:22px;height:22px}
-.chartPlaceholder:fullscreen{width:100vw;height:100vh;max-height:none;padding:22px 28px;background:#0b1c31;border:0;gap:20px}
-.chartPlaceholder:fullscreen .chartHeading strong{font-size:clamp(20px,2.5vw,32px)}
-.chartPlaceholder:fullscreen .chartBlank{flex:1;min-height:0}
-.chartPlaceholder:fullscreen .chartFullscreen{width:40px;height:40px}
+.mapWindow:fullscreen .mapCanvas img.frame,.mapWindow:fullscreen .boundaryOverlay{object-fit:contain}
+.mapWindow:fullscreen .mapTools{top:14px;right:14px}.mapWindow:fullscreen .north{right:14px;bottom:18px}
+.chartPanel:fullscreen{width:100vw;height:100vh;margin:0;border:0;border-radius:0;padding:22px 28px;background:var(--panel2)}
+.chartPanel:fullscreen .chartSurface{height:calc(100vh - 110px)}
+.chartPanel:fullscreen #trendChart{height:100%}
 
-/* v1.06.2 footprint correction:
-   - equal National / RI panel widths
-   - identical 16:9 map-window geometry
-   - no chart/boundary/sync changes in this revision */
-.maps{
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-  align-items:start;
-}
-.maps > .panel{
-  min-width:0;
-  width:100%;
-}
-#natWin,#riWin{
-  width:100%;
-  aspect-ratio:16/9 !important;
-}
 @media(max-width:900px){
-  .maps{grid-template-columns:1fr !important}
+  .maps{grid-template-columns:1fr}
+  .syncButton{position:sticky;left:auto;top:auto;transform:none;margin:-2px auto 8px}
+  .legendBlock{height:auto;min-height:82px}
+  #trendChart{height:200px}
 }
-
-</style></head><body><main>
+@media(max-width:750px){.tick{font-size:8px}.dateTicks .tick{font-size:7px}}
+</style>
+</head>
+<body>
+<main>
 <h1>DEMO - NOAA Modeled Smoke and Air Quality, 15 JUL - 17 JUL 2026</h1>
 <section class="shell">
-<div class="topBand">
+  <div class="topTimeline">
+    <div class="legendMeta"><span>72-HOUR SHARED TIMELINE</span><span id="hourNo">0 / 72</span></div>
+    <div class="timeline">
+      <label for="scrub">Hour</label>
+      <div class="hourAxis">
+        <div id="timeTicks" class="timeTicks" aria-hidden="true"></div>
+        <input id="scrub" type="range" min="0" max="71" value="0" disabled aria-label="72-hour synchronized timeline">
+        <div id="dateTicks" class="dateTicks" aria-hidden="true"></div>
+      </div>
+    </div>
+    <span id="clock">Waiting for frames</span>
+  </div>
 
-<div class="topTimeline"><div class="legendMeta"><span>72-HOUR SYNCHRONIZED TIMELINE</span><span id="hourNo">0 / 72</span></div><div class="timeline"><label for="scrub">Hour</label><div class="hourAxis"><div id="timeTicks" class="timeTicks" aria-hidden="true"></div><input id="scrub" type="range" min="0" max="71" value="0" disabled aria-label="72-hour synchronized timeline"><div id="dateTicks" class="dateTicks" aria-hidden="true"></div></div></div><span id="clock">Waiting for frames</span></div>
-</div>
-<div class="controls"><button id="play" disabled>▶ Play</button><button id="step" disabled>Next hour</button>
-<label class="ctrl">Speed <select id="speed"><option value="1400">Slow</option><option value="750">Normal</option><option value="350" selected>Fast</option></select></label>
-<span class="boundaryStatus" title="World and Rhode Island State boundaries are permanently displayed on both maps.">World + State boundaries: Permanent</span><button id="load">Reload frames</button></div>
-<div class="maps">
-<section class="panel"><header class="panelHeader"><strong>NOAA HRRR-Smoke (Modeled Mass Density, 8 m High), National Footprint</strong><span>µg/m³</span></header>
-<div class="topLegend"><div class="legendMeta"><span>NOAA HRRR-Smoke | 8 m Mass Density (µg/m³)</span></div><div class="legendBox" aria-label="HRRR smoke concentration legend"><div class="tickRow"><span class="label left">0</span><span class="label center" style="left:12.5%">40</span><span class="label center" style="left:31.25%">100</span><span class="label center" style="left:62.5%">200</span><span class="label right">320</span></div></div></div>
-<div class="mapWindow" id="natWin"><div class="mapCanvas" id="natCanvas"><img id="natFrame" alt="HRRR smoke animation frame"><img class="permanentBoundaryOverlay" src="overlays/permanent_world.svg" alt="" aria-hidden="true"><img class="permanentBoundaryOverlay" src="overlays/permanent_state.svg" alt="" aria-hidden="true"></div><div class="card small" id="natCard">Loading historical smoke data</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="nat" data-action="in">+</button><button data-map="nat" data-action="out">−</button><button data-map="nat" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button><button type="button" data-fullscreen="nat" title="Expand Northeast smoke map to full screen" aria-label="Expand Northeast smoke map to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+  <div class="controls">
+    <button id="play" disabled>▶ Play</button>
+    <button id="step" disabled>Next hour</button>
+    <label class="ctrl">Speed
+      <select id="speed">
+        <option value="1400">Slow</option>
+        <option value="750">Normal</option>
+        <option value="350" selected>Fast</option>
+      </select>
+    </label>
+    <span id="boundaryStatus" class="boundaryStatus" role="status">Checking permanent boundary assets…</span>
+    <button id="load">Reload frames</button>
+  </div>
+
+  <div class="mapsWrap">
+    <div class="maps">
+      <section class="panel">
+        <header class="panelHeader">
+          <strong>NOAA HRRR-Smoke (Modeled Mass Density, 8 m High), Rhode Island Region</strong>
+          <span>µg/m³</span>
+        </header>
+        <div class="legendBlock">
+          <small>NOAA HRRR-Smoke | 8 m Mass Density (µg/m³)</small>
+          <div class="legendBox" aria-label="HRRR smoke concentration legend">
+            <div class="tickRow">
+              <span class="label left">0</span>
+              <span class="label" style="left:12.5%">40</span>
+              <span class="label" style="left:31.25%">100</span>
+              <span class="label" style="left:62.5%">200</span>
+              <span class="label right">320</span>
+            </div>
+          </div>
+          <small>Regional HRRR frame is used so both viewers can share the same comparison footprint.</small>
+        </div>
+        <div class="mapWindow" id="natWin">
+          <div class="mapCanvas" id="natCanvas">
+            <img class="frame" id="natFrame" alt="HRRR smoke Rhode Island regional animation frame">
+            <img class="boundaryOverlay" id="natWorldBoundary" alt="" aria-hidden="true"><img class="boundaryOverlay" id="natBoundary" alt="" aria-hidden="true">
+          </div>
+          <div class="card" id="natCard">Loading historical smoke data</div>
+          <div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
+          <div class="mapTools">
+            <button data-map="nat" data-action="in" title="Zoom in">+</button>
+            <button data-map="nat" data-action="out" title="Zoom out">−</button>
+            <button data-map="nat" data-action="reset" title="Reset map view" aria-label="Reset HRRR map view">
+              <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            </button>
+            <button type="button" data-fullscreen="nat" title="Expand HRRR map to full screen" aria-label="Expand HRRR map to full screen" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <header class="panelHeader">
+          <strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, Rhode Island Region</strong>
+          <span><span id="riCycleLabel">AQM cycle pending</span> • µg/m³</span>
+        </header>
+        <div class="legendBlock">
+          <small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small>
+          <div class="aqmLegend" aria-label="NOAA/NWS PM2.5 hazard-color convention using EPA concentration reference thresholds">
+            <div class="aqmBand aqmGood" title="Good: 0.0–9.0 µg/m³">Good<span>0–9.0</span></div>
+            <div class="aqmBand aqmModerate" title="Moderate: 9.1–35.4 µg/m³">Moderate<span>9.1–35.4</span></div>
+            <div class="aqmBand aqmUSG" title="Unhealthy for Sensitive Groups: 35.5–55.4 µg/m³">USG<span>35.5–55.4</span></div>
+            <div class="aqmBand aqmUnhealthy" title="Unhealthy: 55.5–125.4 µg/m³">Unhealthy<span>55.5–125.4</span></div>
+            <div class="aqmBand aqmVeryUnhealthy" title="Very Unhealthy: 125.5–225.4 µg/m³">Very Unhealthy<span>125.5–225.4</span></div>
+            <div class="aqmBand aqmHazardous" title="Hazardous: 225.5 µg/m³ and above">Hazardous<span>225.5+</span></div>
+          </div>
+          <small>Hourly modeled AQM concentration is not an EPA AQI value.</small>
+        </div>
+        <div class="mapWindow" id="riWin">
+          <div class="mapCanvas" id="riCanvas">
+            <img class="frame" id="riFrame" alt="Regional AQM PM2.5 animation frame">
+            <img class="boundaryOverlay" id="riWorldBoundary" alt="" aria-hidden="true"><img class="boundaryOverlay" id="riBoundary" alt="" aria-hidden="true">
+          </div>
+          <div class="card" id="riCard">NOAA AQM</div>
+          <div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
+          <div class="mapTools">
+            <button data-map="ri" data-action="in" title="Zoom in">+</button>
+            <button data-map="ri" data-action="out" title="Zoom out">−</button>
+            <button data-map="ri" data-action="reset" title="Reset map view" aria-label="Reset AQM map view">
+              <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            </button>
+            <button type="button" data-fullscreen="ri" title="Expand AQM map to full screen" aria-label="Expand AQM map to full screen" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <button id="syncMaps" class="syncButton" type="button" aria-pressed="true" title="Maps linked: zoom and pan together" aria-label="Maps linked: zoom and pan together">
+      <!-- Linked state: two bold, horizontal interlocking links, matching the requested reference style. -->
+      <svg class="linked" viewBox="0 0 36 36" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15.2 12.2H10.4a7.3 7.3 0 0 0 0 14.6h7.2a7.3 7.3 0 0 0 5.8-2.9"/>
+          <path d="M20.8 23.8h4.8a7.3 7.3 0 0 0 0-14.6h-7.2a7.3 7.3 0 0 0-5.8 2.9"/>
+          <path d="M13.7 18h8.6"/>
+        </g>
+      </svg>
+      <!-- Unlinked state: separated/broken links with small disconnect rays, matching the requested reference style. -->
+      <svg class="unlinked" viewBox="0 0 36 36" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.2 21.8 10.6 25.4a6.1 6.1 0 0 1-8.6-8.6l4.5-4.5"/>
+          <path d="M21.8 14.2 25.4 10.6a6.1 6.1 0 0 1 8.6 8.6l-4.5 4.5"/>
+          <path d="M11.8 24.2 16 20"/>
+          <path d="M20 16 24.2 11.8"/>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+          <path d="M8.4 7.4 6.3 5.3"/>
+          <path d="M13.3 5.1V2.2"/>
+          <path d="M5.2 12.2H2.4"/>
+          <path d="M27.6 28.6 29.7 30.7"/>
+          <path d="M22.7 30.9v2.9"/>
+          <path d="M30.8 23.8h2.8"/>
+        </g>
+      </svg>
+    </button>
+  </div>
+
+  <section class="chartPanel" id="trendPanel" aria-label="72-hour regional HRRR smoke statistics chart">
+    <div class="chartHeader">
+      <div>
+        <strong>72-Hour Rhode Island Regional HRRR-Smoke Statistics</strong>
+        <div class="chartMeta">Regional mean and regional maximum from the governed HRRR frame manifest. This chart does not represent AQM PM2.5 or EPA AQI.</div>
+      </div>
+      <div class="chartTools">
+        <button type="button" id="trendFullscreen" class="chartFullscreen" title="Expand 72-hour graph to full screen" aria-label="Expand 72-hour graph to full screen" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="chartSurface"><svg id="trendChart" viewBox="0 0 1600 230" preserveAspectRatio="none" role="img" aria-label="72-hour HRRR Rhode Island regional mean and maximum smoke mass density"></svg></div>
+    <div class="chartFooter">
+      <div class="chartKeys"><span class="chartKey"><span class="swatch mean"></span>Regional mean</span><span class="chartKey"><span class="swatch max"></span>Regional maximum</span></div>
+      <div id="chartReadout">Waiting for HRRR statistics</div>
+    </div>
+  </section>
+
+  <div id="status" role="status">Starting viewer</div>
 </section>
-<section class="panel rightStack"><header class="panelHeader"><strong>NOAA AQM (1-Hour Avg) PM2.5 Concentration, National Footprint</strong><span><span id="riCycleLabel">AQM cycle pending</span> • µg/m³</span></header>
-<div class="chartPlaceholder" id="riTrendPanel" aria-label="Regional PM2.5 trend chart"><div class="chartHeading"><strong>72-Hour PM2.5 Trend</strong><button type="button" id="trendFullscreen" class="chartFullscreen" title="Expand Rhode Island trend graph to full screen" aria-label="Expand Rhode Island trend graph to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="chartBlank" aria-hidden="true"></div></div>
-<div class="legendBlock"><small>NOAA AQM | 1-Hour Average PM2.5 Concentration (µg/m³)</small><div class="aqmLegend" aria-label="NOAA/NWS PM2.5 hazard-color convention using EPA concentration reference thresholds"><div class="aqmBand aqmGood" title="Good: 0.0–9.0 µg/m³">Good<span>0–9.0</span></div><div class="aqmBand aqmModerate" title="Moderate: 9.1–35.4 µg/m³">Moderate<span>9.1–35.4</span></div><div class="aqmBand aqmUSG" title="Unhealthy for Sensitive Groups: 35.5–55.4 µg/m³">USG<span>35.5–55.4</span></div><div class="aqmBand aqmUnhealthy" title="Unhealthy: 55.5–125.4 µg/m³">Unhealthy<span>55.5–125.4</span></div><div class="aqmBand aqmVeryUnhealthy" title="Very Unhealthy: 125.5–225.4 µg/m³">Very Unhealthy<span>125.5–225.4</span></div><div class="aqmBand aqmHazardous" title="Hazardous: 225.5 µg/m³ and above">Hazardous<span>225.5+</span></div></div><div class="aqmLegendNote">NOAA/NWS hazard-color convention • EPA PM2.5 concentration reference thresholds (24-hour basis). Hourly modeled AQM concentration is not an AQI value.</div><div class="aqmCycleNote">Historical sequence uses the governed newest-selected NOAA AQM forecast cycle. Cycle-update frames are marked; no temporal blending or smoothing is applied across cycle changes.</div></div>
-
-<div class="mapWindow" id="riWin"><div class="mapCanvas" id="riCanvas"><img id="riFrame" alt="National AQM PM2.5 animation frame"><img class="permanentBoundaryOverlay" src="overlays/permanent_world.svg" alt="" aria-hidden="true"><img class="permanentBoundaryOverlay" src="overlays/permanent_state.svg" alt="" aria-hidden="true"></div><div class="card small" id="riCard">NOAA AQM</div><div class="north" aria-label="North"><span>N</span><span aria-hidden="true">↑</span></div>
-<div class="mapTools"><button data-map="ri" data-action="in">+</button><button data-map="ri" data-action="out">−</button><button data-map="ri" data-action="reset"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M2.5 11.5 L12 3.2 L21.5 11.5 M5 10.7 V20 H19 V10.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg></button><button type="button" data-fullscreen="ri" title="Expand Rhode Island PM2.5 map to full screen" aria-label="Expand Rhode Island PM2.5 map to full screen" aria-pressed="false"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false"><path d="M8 3H3v5 M16 3h5v5 M3 16v5h5 M21 16v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
-</section></div>
-
-<div id="status" role="status">Starting viewer</div>
-</section></main>
+</main>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const state={smoke:null,aqm:null,index:0,timer:null,views:{}};
+const state={smoke:null,aqm:null,index:0,timer:null,views:{},sync:true,lastActive:'nat'};
+const SVGNS='http://www.w3.org/2000/svg';
 function status(t){$('status').textContent=t;}
 function stop(){if(state.timer!==null){clearInterval(state.timer);state.timer=null;}$('play').textContent='▶ Play';}
 function abs(path){return new URL(path,new URL('./',document.baseURI)).href;}
-function fmt(iso){const dt=new Date(iso); const local=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).format(dt); const utc=String(dt.getUTCHours()).padStart(2,'0')+':00 UTC';return `${local} (${utc})`;}
+function fmt(iso){const dt=new Date(iso);const local=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).format(dt);const utc=String(dt.getUTCHours()).padStart(2,'0')+':00 UTC';return `${local} (${utc})`;}
+function otherMap(name){return name==='nat'?'ri':'nat';}
+
 function viewport(name,settings){
- const win=$(name==='nat'?'natWin':'riWin'),canvas=$(name==='nat'?'natCanvas':'riCanvas');
- const v={zoom:1,x:0,y:0,maxZoom:settings.maxZoom,homeZoom:settings.homeZoom,focusX:settings.focusX,focusY:settings.focusY};state.views[name]=v;
- function apply(){const w=win.clientWidth,h=win.clientHeight;v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;}
- function reset(){const w=win.clientWidth,h=win.clientHeight;v.zoom=v.homeZoom;v.x=w/2-v.focusX*w*v.zoom;v.y=h/2-v.focusY*h*v.zoom;apply();}
- function zoom(f,cx,cy){const old=v.zoom;v.zoom=Math.min(v.maxZoom,Math.max(1,old*f));v.x=cx-(cx-v.x)*v.zoom/old;v.y=cy-(cy-v.y)*v.zoom/old;apply();}
- let drag=null,moved=false;
- win.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,ox:v.x,oy:v.y};moved=false;win.setPointerCapture(e.pointerId);win.classList.add('dragging');});
- win.addEventListener('pointermove',e=>{if(!drag)return;if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>4)moved=true;v.x=drag.ox+e.clientX-drag.x;v.y=drag.oy+e.clientY-drag.y;apply();});
- function end(e){if(!drag)return;drag=null;win.classList.remove('dragging');if(name==='ri'&&!moved) identify(e,v,win);}
- win.addEventListener('pointerup',end);win.addEventListener('pointercancel',()=>{drag=null;win.classList.remove('dragging');});
- win.addEventListener('wheel',e=>{e.preventDefault();const r=win.getBoundingClientRect();zoom(e.deltaY<0?1.18:1/1.18,e.clientX-r.left,e.clientY-r.top);},{passive:false});
- v.in=()=>zoom(1.4,win.clientWidth/2,win.clientHeight/2);v.out=()=>zoom(1/1.4,win.clientWidth/2,win.clientHeight/2);v.reset=reset;v.overview=()=>{v.zoom=1;v.x=v.y=0;apply();};reset();
- }
-function identify(e,v,win){
- const el=$('identify');
- if(el) el.textContent='Native grid click identification is pending export of numerical cell values and verified State, County, Municipality polygons. The displayed image cannot supply an authoritative PM2.5 value.';
-}
-function validAQM(m){if(!m||m.version!=='1.06.2'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.06.2');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||!f.source_cycle||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time, image, or source cycle missing');return m;}
-function setAQMCycle(frame){
- const el=$('riCycleLabel');
- if(!el||!frame)return;
- const cycle=String(frame.source_cycle||'').replace('T',' ').replace(':00:00Z','Z');
- el.textContent=`Cycle ${cycle}${frame.source_cycle_update?' • UPDATE':''}`;
- el.classList.toggle('cycleUpdate',Boolean(frame.source_cycle_update));
-}
-function show(i){state.index=i;const s=state.smoke.frames[i];$('natFrame').src=abs(s.frames.national);$('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
- $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
- if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
- else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM';const el=$('riCycleLabel');if(el){el.textContent='AQM cycle unavailable';el.classList.remove('cycleUpdate');}}
-}
-function step(){show((state.index+1)%72)}
-function toggle(){if(state.timer!==null){stop();return}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
-async function getJSON(path){const r=await fetch(abs(path)+'?v=1062',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
-async function load(){stop();$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;status('Loading certified historical assets');
- try{const m=await getJSON('frames.json');if(!m||m.version!=='1.04.1'||m.frames?.length!==72)throw Error('Original HRRR frames.json not found or not v1.04.1');state.smoke=m;
- try{state.aqm=validAQM(await getJSON('aqm/frames.json'));}catch(e){state.aqm=null;console.warn('AQM pending',e)}
- $('play').disabled=false;$('step').disabled=false;$('scrub').disabled=false;show(Number.isInteger(m.peak_index)?m.peak_index:0);
- status(state.aqm?'Both synchronized 72-hour national image sequences loaded; permanent World + State boundaries are displayed on both panes.':'Historical imagery loaded.');
- }catch(e){status('Viewer loading failed: '+e.message);console.error(e)}finally{$('load').disabled=false;}}
-$('play').addEventListener('click',toggle);$('step').addEventListener('click',()=>{stop();if(state.smoke)step()});$('scrub').addEventListener('input',e=>{stop();if(state.smoke)show(+e.target.value)});$('speed').addEventListener('change',()=>{if(state.timer!==null){stop();toggle();}});$('load').addEventListener('click',load);
-document.querySelectorAll('[data-map][data-action]').forEach(b=>b.addEventListener('click',()=>state.views[b.dataset.map][b.dataset.action]()));
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+  const win=$(name==='nat'?'natWin':'riWin');
+  const canvas=$(name==='nat'?'natCanvas':'riCanvas');
+  const v={name,win,canvas,zoom:1,x:0,y:0,minZoom:settings.minZoom,maxZoom:settings.maxZoom,homeZoom:settings.homeZoom,focusX:settings.focusX,focusY:settings.focusY};
+  state.views[name]=v;
 
-// Rhode Island trend graph has its own native fullscreen control.
-const trendPanel=$('riTrendPanel');
-const trendFullButton=$('trendFullscreen');
-trendFullButton.addEventListener('click',async()=>{
- try{
-  if(document.fullscreenElement===trendPanel) await document.exitFullscreen();
-  else {
-   if(document.fullscreenElement) await document.exitFullscreen();
-   await trendPanel.requestFullscreen();
+  function clamp(){
+    const w=win.clientWidth,h=win.clientHeight;
+    if(v.zoom<=1){
+      v.x=w*(1-v.zoom)/2;
+      v.y=h*(1-v.zoom)/2;
+      return;
+    }
+    v.x=Math.min(0,Math.max(w*(1-v.zoom),v.x));
+    v.y=Math.min(0,Math.max(h*(1-v.zoom),v.y));
   }
- }catch(err){console.error('Trend graph fullscreen failed:',err);status('Graph full screen unavailable: '+err.message);}
-});
-document.addEventListener('fullscreenchange',()=>{
- const isExpanded=document.fullscreenElement===trendPanel;
- trendFullButton.setAttribute('aria-pressed',String(isExpanded));
- trendFullButton.title=isExpanded?'Exit graph full screen (Esc)':'Expand Rhode Island trend graph to full screen';
- trendFullButton.setAttribute('aria-label',trendFullButton.title);
-});
+  function paint(){clamp();canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;}
+  function copyToPeer(){
+    if(!state.sync)return;
+    const p=state.views[otherMap(name)];if(!p)return;
+    const sw=Math.max(1,win.clientWidth),sh=Math.max(1,win.clientHeight),tw=Math.max(1,p.win.clientWidth),th=Math.max(1,p.win.clientHeight);
+    p.zoom=v.zoom;p.x=(v.x/sw)*tw;p.y=(v.y/sh)*th;
+    const pw=p.win.clientWidth,ph=p.win.clientHeight;
+    if(p.zoom<=1){
+      p.x=pw*(1-p.zoom)/2;
+      p.y=ph*(1-p.zoom)/2;
+    }else{
+      p.x=Math.min(0,Math.max(pw*(1-p.zoom),p.x));
+      p.y=Math.min(0,Math.max(ph*(1-p.zoom),p.y));
+    }
+    p.canvas.style.transform=`translate(${p.x}px,${p.y}px) scale(${p.zoom})`;
+  }
+  function apply(syncPeer=true){paint();state.lastActive=name;if(syncPeer)copyToPeer();}
+  function reset(){const w=win.clientWidth,h=win.clientHeight;v.zoom=v.homeZoom;v.x=w/2-v.focusX*w*v.zoom;v.y=h/2-v.focusY*h*v.zoom;apply(true);}
+  function zoom(f,cx,cy){const old=v.zoom;v.zoom=Math.min(v.maxZoom,Math.max(v.minZoom,old*f));v.x=cx-(cx-v.x)*v.zoom/old;v.y=cy-(cy-v.y)*v.zoom/old;apply(true);}
 
-// Fullscreen is independent for each map and does not reset its current hour.
-// The browser Escape key exits native fullscreen automatically.
-const fullMapWindows={nat:$('natWin'),ri:$('riWin')};
-const fullscreenButtons=Array.from(document.querySelectorAll('[data-fullscreen]'));
-fullscreenButtons.forEach(button=>button.addEventListener('click',async()=>{
- const win=fullMapWindows[button.dataset.fullscreen];
- try{
-   if(document.fullscreenElement===win){await document.exitFullscreen();}
-   else if(document.fullscreenElement){await document.exitFullscreen();await win.requestFullscreen();}
-   else{await win.requestFullscreen();}
- }catch(err){console.error('Map fullscreen failed:',err);status('Full screen unavailable: '+err.message);}
-}));
-document.addEventListener('fullscreenchange',()=>{
- for(const button of fullscreenButtons){
-  const expanded=document.fullscreenElement===fullMapWindows[button.dataset.fullscreen];
-  button.setAttribute('aria-pressed',String(expanded));
-  button.title=expanded?'Exit full screen (Esc)':'Expand map to full screen';
-  button.setAttribute('aria-label',button.title);
- }
- // Keep existing zoom and position, but clamp to the current viewport boundaries.
- for(const key of Object.keys(fullMapWindows)){
-  const v=state.views[key];if(!v)continue;
-  const win=fullMapWindows[key];
-  v.x=Math.max(win.clientWidth*(1-v.zoom),Math.min(0,v.x));
-  v.y=Math.max(win.clientHeight*(1-v.zoom),Math.min(0,v.y));
-  const canvas=$(key==='nat'?'natCanvas':'riCanvas');
-  canvas.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;
- }
- requestAnimationFrame(alignLeftNorthToRight);
-});
+  let drag=null;
+  win.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,ox:v.x,oy:v.y};win.setPointerCapture(e.pointerId);win.classList.add('dragging');state.lastActive=name;});
+  win.addEventListener('pointermove',e=>{if(!drag)return;v.x=drag.ox+e.clientX-drag.x;v.y=drag.oy+e.clientY-drag.y;apply(true);});
+  function end(){if(!drag)return;drag=null;win.classList.remove('dragging');}
+  win.addEventListener('pointerup',end);win.addEventListener('pointercancel',end);
+  win.addEventListener('wheel',e=>{e.preventDefault();const r=win.getBoundingClientRect();state.lastActive=name;zoom(e.deltaY<0?1.18:1/1.18,e.clientX-r.left,e.clientY-r.top);},{passive:false});
 
+  v.in=()=>{state.lastActive=name;zoom(1.4,win.clientWidth/2,win.clientHeight/2);};
+  v.out=()=>{state.lastActive=name;zoom(1/1.4,win.clientWidth/2,win.clientHeight/2);};
+  v.reset=()=>{state.lastActive=name;reset();};
+  v.apply=apply;v.paint=paint;v.copyToPeer=copyToPeer;
+  reset();
+}
+
+function syncFrom(name){const v=state.views[name];if(v)v.copyToPeer();}
+function setSync(on){
+  state.sync=Boolean(on);
+  const b=$('syncMaps');
+  b.setAttribute('aria-pressed',String(state.sync));
+  const msg=state.sync?'Maps linked: zoom and pan together':'Maps unlinked: zoom and pan independently';
+  b.title=msg;b.setAttribute('aria-label',msg);
+  if(state.sync)syncFrom(state.lastActive||'nat');
+  status(state.sync?'Map navigation synchronized.':'Map navigation independent.');
+}
+
+function validAQM(m){if(!m||m.version!=='1.06.2'||!Array.isArray(m.frames)||m.frames.length!==72)throw Error('AQM manifest must declare 72 hours and version 1.06.2');if(m.frames.some((f,i)=>!f.valid_utc||!f.image||!f.source_cycle||new Date(f.valid_utc).getTime()!==Date.UTC(2026,6,15,i)))throw Error('AQM frame time, image, or source cycle missing');return m;}
+function setAQMCycle(frame){const el=$('riCycleLabel');if(!el||!frame)return;const cycle=String(frame.source_cycle||'').replace('T',' ').replace(':00:00Z','Z');el.textContent=`Cycle ${cycle}${frame.source_cycle_update?' • UPDATE':''}`;el.classList.toggle('cycleUpdate',Boolean(frame.source_cycle_update));}
+
+function show(i){
+  state.index=i;
+  const s=state.smoke.frames[i];
+  const smokePath=s.frames?.national||s.frames?.rhode_island;
+  $('natFrame').src=abs(smokePath);
+  $('natCard').textContent=`Smoke hour ${i+1}/72\n${fmt(s.valid_utc)}`;
+  $('clock').textContent=fmt(s.valid_utc);$('hourNo').textContent=`${i+1} / 72`;$('scrub').value=i;
+  if(state.aqm){const a=state.aqm.frames[i];$('riFrame').src=abs(a.image);setAQMCycle(a);$('riCard').textContent=`PM2.5 hour ${i+1}/72\n${fmt(a.valid_utc)}${a.source_cycle_update?'\nForecast cycle update':''}`;}
+  else{$('riFrame').removeAttribute('src');$('riCard').textContent='NOAA AQM unavailable';const el=$('riCycleLabel');el.textContent='AQM cycle unavailable';el.classList.remove('cycleUpdate');}
+  updateChartSelection(i);
+}
+function step(){show((state.index+1)%72);}
+function toggle(){if(state.timer!==null){stop();return;}state.timer=setInterval(step,Number($('speed').value));$('play').textContent='Ⅱ Pause';}
+async function getJSON(path){const r=await fetch(abs(path)+'?v=1077',{cache:'no-store'});if(!r.ok)throw Error(path+': HTTP '+r.status);return r.json();}
+
+async function loadBoundaryImages(){
+  // Both SVGs are REQUIRED independent georeferenced assets, not generated by this HTML.
+  // Do not silently substitute an RI-only PNG on the national comparison footprint.
+  const assets=[
+    {path:'overlays/permanent_world.svg',ids:['natWorldBoundary','riWorldBoundary']},
+    {path:'overlays/permanent_state.svg',ids:['natBoundary','riBoundary']}
+  ];
+  const problems=[];
+  for(const asset of assets){
+    try{
+      const response=await fetch(abs(asset.path),{cache:'no-store'});
+      if(!response.ok)throw Error('HTTP '+response.status);
+      const xml=await response.text();
+      if(!/<svg(?:\s|>)/i.test(xml))throw Error('response is not an SVG');
+      // Decode once before putting it into either map; a 200 response alone is insufficient.
+      await new Promise((resolve,reject)=>{
+        const probe=new Image();
+        probe.onload=resolve;
+        probe.onerror=()=>reject(Error('SVG image could not be decoded'));
+        probe.src=abs(asset.path)+'?v=1078';
+      });
+      for(const id of asset.ids){$(id).src=abs(asset.path)+'?v=1078';$(id).style.display='';}
+    }catch(e){
+      problems.push(asset.path+' ('+e.message+')');
+      for(const id of asset.ids){$(id).removeAttribute('src');$(id).style.display='none';}
+    }
+  }
+  const el=$('boundaryStatus');
+  el.classList.toggle('error',problems.length>0);
+  el.textContent=problems.length?'Boundaries unavailable: '+problems.join('; '):'World + state boundary assets loaded';
+  return problems;
+}
+
+async function load(){
+  stop();$('load').disabled=true;$('play').disabled=true;$('step').disabled=true;$('scrub').disabled=true;status('Loading certified historical assets');
+  try{
+    const m=await getJSON('frames.json');
+    if(!m||m.version!=='1.04.1'||m.frames?.length!==72)throw Error('Original HRRR frames.json not found or not v1.04.1');
+    state.smoke=m;
+    try{state.aqm=validAQM(await getJSON('aqm/frames.json'));}catch(e){state.aqm=null;console.warn('AQM pending',e);}
+    const boundaryProblems=await loadBoundaryImages();
+    buildTrendChart();
+    $('play').disabled=false;$('step').disabled=false;$('scrub').disabled=false;
+    show(Number.isInteger(m.peak_index)?m.peak_index:0);
+    status((state.aqm?'Both 72-hour image sequences loaded; navigation is linked by default.':'HRRR imagery loaded; AQM sequence unavailable.')+(boundaryProblems.length?' Boundary assets missing or invalid — see boundary status.':' Boundary assets loaded; verify geographic registration.'));
+  }catch(e){status('Viewer loading failed: '+e.message);console.error(e);}finally{$('load').disabled=false;}
+}
+
+function svgEl(tag,attrs={}){const el=document.createElementNS(SVGNS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));return el;}
+function buildTrendChart(){
+  const svg=$('trendChart');svg.replaceChildren();if(!state.smoke)return;
+  const data=state.smoke.frames.map((f,i)=>({i,mean:Number(f.ri_mean_ugm3),max:Number(f.ri_max_ugm3),time:f.valid_utc}));
+  if(data.some(d=>!Number.isFinite(d.mean)||!Number.isFinite(d.max))){$('chartReadout').textContent='HRRR regional mean/max statistics are not available in this manifest.';return;}
+  const W=1600,H=230,L=58,R=18,T=12,B=34;const plotW=W-L-R,plotH=H-T-B;
+  const rawMax=Math.max(...data.map(d=>d.max));const yMax=Math.max(10,Math.ceil(rawMax/50)*50);
+  const x=i=>L+(i/71)*plotW;const y=v=>T+plotH-(v/yMax)*plotH;
+  for(let n=0;n<=5;n++){const val=(yMax*n/5);const yy=y(val);svg.appendChild(svgEl('line',{x1:L,y1:yy,x2:W-R,y2:yy,class:'grid'}));const tx=svgEl('text',{x:L-8,y:yy+3,'text-anchor':'end',class:'axis'});tx.textContent=Math.round(val);svg.appendChild(tx);}
+  for(let i=0;i<72;i+=12){const xx=x(i);svg.appendChild(svgEl('line',{x1:xx,y1:T,x2:xx,y2:T+plotH,class:'grid'}));const tx=svgEl('text',{x:xx,y:H-10,'text-anchor':'middle',class:'axis'});tx.textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit',hour:'numeric',hour12:true}).format(new Date(data[i].time));svg.appendChild(tx);}
+  const yLab=svgEl('text',{x:12,y:T+plotH/2,transform:`rotate(-90 12 ${T+plotH/2})`,'text-anchor':'middle',class:'axis'});yLab.textContent='µg/m³';svg.appendChild(yLab);
+  const pathFor=key=>data.map((d,i)=>(i?'L':'M')+x(i).toFixed(2)+' '+y(d[key]).toFixed(2)).join(' ');
+  svg.appendChild(svgEl('path',{d:pathFor('mean'),class:'meanLine'}));svg.appendChild(svgEl('path',{d:pathFor('max'),class:'maxLine'}));
+  const cursor=svgEl('line',{id:'chartCursor',x1:x(0),x2:x(0),y1:T,y2:T+plotH,class:'cursor'});svg.appendChild(cursor);
+  const sm=svgEl('circle',{id:'chartSelMean',cx:x(0),cy:y(data[0].mean),r:5,class:'selMean'});const sx=svgEl('circle',{id:'chartSelMax',cx:x(0),cy:y(data[0].max),r:5,class:'selMax'});svg.append(sm,sx);
+  const hit=svgEl('rect',{x:L,y:T,width:plotW,height:plotH,class:'hit'});hit.addEventListener('pointerdown',e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W;const i=Math.max(0,Math.min(71,Math.round((px-L)/plotW*71)));stop();show(i);});svg.appendChild(hit);
+  svg.dataset.chart=JSON.stringify({W,H,L,R,T,B,plotW,plotH,yMax});
+  updateChartSelection(state.index||0);
+}
+function updateChartSelection(i){
+  if(!state.smoke)return;const svg=$('trendChart');if(!svg.dataset.chart)return;const c=JSON.parse(svg.dataset.chart);const d=state.smoke.frames[i];const x=c.L+(i/71)*c.plotW;const y=v=>c.T+c.plotH-(Number(v)/c.yMax)*c.plotH;
+  const cursor=$('chartCursor'),sm=$('chartSelMean'),sx=$('chartSelMax');if(cursor){cursor.setAttribute('x1',x);cursor.setAttribute('x2',x);}if(sm){sm.setAttribute('cx',x);sm.setAttribute('cy',y(d.ri_mean_ugm3));}if(sx){sx.setAttribute('cx',x);sx.setAttribute('cy',y(d.ri_max_ugm3));}
+  const peak=Math.max(...state.smoke.frames.map(f=>Number(f.ri_max_ugm3)).filter(Number.isFinite));
+  $('chartReadout').textContent=`Hour ${i+1}/72 • ${fmt(d.valid_utc)} • mean ${Number(d.ri_mean_ugm3).toFixed(1)} µg/m³ • max ${Number(d.ri_max_ugm3).toFixed(1)} µg/m³ • 72-h max ${peak.toFixed(1)} µg/m³`;
+}
 
 function renderHourTicks(){
- const top=$('timeTicks'),bottom=$('dateTicks');
- top.replaceChildren();bottom.replaceChildren();
- const start=Date.UTC(2026,6,15,0,0,0);
- const formatterTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:true});
- const formatterDate=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit',year:'2-digit'});
- // All 72 frames are one hour apart, from 2026-07-15 00Z to 2026-07-17 23Z.
- // Labels at 9 PM, 3 AM, 9 AM and 3 PM Eastern, every 6 hours.
- for(let i=0;i<72;i++){
-   const t=new Date(start+i*3600000);
-   const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hourCycle:'h23'}).formatToParts(t);
-   const hour=Number(parts.find(p=>p.type==='hour').value);
-   if(![21,3,9,15].includes(hour))continue;
-   const pos=(100*i/71)+'%';
-   const time=document.createElement('span');time.className='tick';time.style.left=pos;
-   time.textContent=formatterTime.format(t).replace(/\s/g,'').toLowerCase();
-   const date=document.createElement('span');date.className='tick';date.style.left=pos;
-   date.textContent=formatterDate.format(t);
-   top.appendChild(time);bottom.appendChild(date);
- }
+  const top=$('timeTicks'),bottom=$('dateTicks');top.replaceChildren();bottom.replaceChildren();const start=Date.UTC(2026,6,15,0,0,0);const formatterTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:true});const formatterDate=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit',year:'2-digit'});
+  for(let i=0;i<72;i++){const t=new Date(start+i*3600000);const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hourCycle:'h23'}).formatToParts(t);const hour=Number(parts.find(p=>p.type==='hour').value);if(![21,3,9,15].includes(hour))continue;const pos=(100*i/71)+'%';const time=document.createElement('span');time.className='tick';time.style.left=pos;time.textContent=formatterTime.format(t).replace(/\s/g,'').toLowerCase();const date=document.createElement('span');date.className='tick';date.style.left=pos;date.textContent=formatterDate.format(t);top.appendChild(time);bottom.appendChild(date);}
 }
+
+$('play').addEventListener('click',toggle);
+$('step').addEventListener('click',()=>{stop();if(state.smoke)step();});
+$('scrub').addEventListener('input',e=>{stop();if(state.smoke)show(+e.target.value);});
+$('speed').addEventListener('change',()=>{if(state.timer!==null){stop();toggle();}});
+$('load').addEventListener('click',load);
+
+$('syncMaps').addEventListener('click',()=>setSync(!state.sync));
+document.querySelectorAll('[data-map][data-action]').forEach(b=>b.addEventListener('click',()=>{const v=state.views[b.dataset.map];if(v)v[b.dataset.action]();}));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+
+const fullMapWindows={nat:$('natWin'),ri:$('riWin')};
+const fullscreenButtons=Array.from(document.querySelectorAll('[data-fullscreen]'));
+fullscreenButtons.forEach(button=>button.addEventListener('click',async()=>{const win=fullMapWindows[button.dataset.fullscreen];try{if(document.fullscreenElement===win)await document.exitFullscreen();else{if(document.fullscreenElement)await document.exitFullscreen();await win.requestFullscreen();}}catch(err){console.error(err);status('Full screen unavailable: '+err.message);}}));
+const trendPanel=$('trendPanel'),trendFullButton=$('trendFullscreen');
+trendFullButton.addEventListener('click',async()=>{try{if(document.fullscreenElement===trendPanel)await document.exitFullscreen();else{if(document.fullscreenElement)await document.exitFullscreen();await trendPanel.requestFullscreen();}}catch(err){console.error(err);status('Graph full screen unavailable: '+err.message);}});
+document.addEventListener('fullscreenchange',()=>{
+  for(const button of fullscreenButtons){const expanded=document.fullscreenElement===fullMapWindows[button.dataset.fullscreen];button.setAttribute('aria-pressed',String(expanded));button.title=expanded?'Exit full screen (Esc)':'Expand map to full screen';button.setAttribute('aria-label',button.title);}
+  const chartExpanded=document.fullscreenElement===trendPanel;trendFullButton.setAttribute('aria-pressed',String(chartExpanded));trendFullButton.title=chartExpanded?'Exit graph full screen (Esc)':'Expand 72-hour graph to full screen';trendFullButton.setAttribute('aria-label',trendFullButton.title);
+  requestAnimationFrame(()=>{for(const v of Object.values(state.views))v.paint();if(state.sync)syncFrom(state.lastActive);});
+});
+window.addEventListener('resize',()=>requestAnimationFrame(()=>{for(const v of Object.values(state.views))v.paint();if(state.sync)syncFrom(state.lastActive);}));
+
 renderHourTicks();
-// Align left N and arrow vertically to the right map's existing north indicator.
-function alignLeftNorthToRight(){
- const left=document.querySelector('#natWin .north');
- const right=document.querySelector('#riWin .north');
- if(!left||!right)return;
- left.style.transform='none';
- const delta=right.getBoundingClientRect().top-left.getBoundingClientRect().top;
- left.style.transform=`translateY(${delta.toFixed(2)}px)`;
-}
-window.addEventListener('resize',alignLeftNorthToRight);
-requestAnimationFrame(alignLeftNorthToRight);
-viewport('nat',{homeZoom:1,focusX:.2975681889886124,focusY:.5068665028456119,maxZoom:5});
-viewport('ri',{homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
-// v1.06.3: the identical permanent_world.svg and permanent_state.svg assets
-// are rendered in both map canvases. They therefore provide a direct
-// projection/alignment diagnostic between HRRR and AQM.
+viewport('nat',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
+viewport('ri',{minZoom:.6,homeZoom:1,focusX:.5,focusY:.5,maxZoom:5});
+setSync(true);
 load();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
