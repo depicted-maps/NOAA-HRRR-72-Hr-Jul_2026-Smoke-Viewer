@@ -1,21 +1,24 @@
 {
   "version": "1.06.2",
-  "model": "NOAA AQMv7 raw 1-hour average PM2.5 concentration, Rhode Island regional display",
-  "units": "\u00b5g/m\u00b3",
+  "render_build": "1.10.1",
+  "model": "NOAA AQMv7 raw 1-hour average PM2.5 concentration, national HRRR-aligned display",
+  "units": "µg/m³",
   "display_not_aqi": true,
   "hours": 72,
   "start_utc": "2026-07-15T00:00:00Z",
+  "authoritative_source_gdb": "C:\\GIS\\DEMO_72_Hr_Jul_2026_Smoke_National_AQM_Rasters_Jul_2026.gdb",
   "display_geometry": {
     "crs": "EPSG:3857",
     "width_pixels": 1280,
     "height_pixels": 720,
     "extent_3857": {
-      "xmin": -8310061.76941391,
-      "ymin": 4901794.955467968,
-      "xmax": -7610061.76941391,
-      "ymax": 5295544.955467968
+      "xmin": -13914936.349,
+      "ymin": 2700000.0,
+      "xmax": -7349936.349,
+      "ymax": 6392812.5
     },
-    "governed_reference": "Exact HRRR Rhode Island viewer footprint"
+    "governed_reference": "Exact HRRR national viewer alpha footprint",
+    "alpha_reference": "C:\\Data\\Map\\DEMO_HRRR_72Hr_Smoke_Event_Jul_2026\\Animation\\National_Frames_v1_01_0\\000.png"
   },
   "source_selection_policy": "Governed newest-selected NOAA AQM forecast cycle; no temporal blending, smoothing, interpolation, or alternate-cycle substitution.",
   "source_cycle_ranges": [
@@ -85,29 +88,11 @@
         "high_ugm3": null,
         "color": "#7E0023"
       }
-    ]
-  },
-  "qa": {
-    "footprint": {
-      "file": "AQM_RI_HRRR_Footprint_QA_v1_02_1.json",
-      "status": "PASS",
-      "color_mismatch_pixels": 0,
-      "invalid_color_pixels": 0,
-      "alpha_mismatch_pixels": 0,
-      "extent_3857": {
-        "xmin": -8310061.76941391,
-        "ymin": 4901794.955467968,
-        "xmax": -7610061.76941391,
-        "ymax": 5295544.955467968
-      }
-    },
-    "cycle_seam": {
-      "file": "AQM_Cycle_Seam_QA_v1_02_0.json",
-      "status": "PASS_READ_ONLY_MEASUREMENT_COMPLETE"
-    },
-    "cycle_overlap": {
-      "file": "AQM_Cycle_Overlap_QA_v1_03_0.json",
-      "status": "PASS_READ_ONLY_OVERLAP_MEASUREMENT_COMPLETE"
+    ],
+    "source_nodata_display_policy": {
+      "is_pm25_class": false,
+      "rgb": "#0F2033",
+      "meaning": "Authoritative AQM source NoData displayed with the viewer map background RGB while retaining the exact HRRR alpha footprint."
     }
   },
   "frames": [
@@ -116,720 +101,865 @@
       "frame_number": 1,
       "valid_utc": "2026-07-15T00:00:00Z",
       "valid_edt": "2026-07-14T20:00:00-04:00",
-      "image": "frames/rhode_island/000.png",
-      "image_sha256": "653ef3558b464adb375b4577b91ebe34e5b6e61da3da0b1befaadbbadc699115",
+      "image": "aqm/frames/national/000.png",
+      "image_sha256": "9396f6a25e8851ff75f2598d8a4b70bbaa6e228518f241251cbabbec3b81dd49",
+      "source_raster": "AQM_PM25_HRRR_20260715_00UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 1,
       "frame_number": 2,
       "valid_utc": "2026-07-15T01:00:00Z",
       "valid_edt": "2026-07-14T21:00:00-04:00",
-      "image": "frames/rhode_island/001.png",
-      "image_sha256": "a98d5c163d997d542c06f2957b242eff4ca2c35ba6198af058df35fcea957b85",
+      "image": "aqm/frames/national/001.png",
+      "image_sha256": "fedbdc6a9fe6f33b4870dc864933d2c048e3ec3658d2cd8d66070cf93d255847",
+      "source_raster": "AQM_PM25_HRRR_20260715_01UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 2,
       "frame_number": 3,
       "valid_utc": "2026-07-15T02:00:00Z",
       "valid_edt": "2026-07-14T22:00:00-04:00",
-      "image": "frames/rhode_island/002.png",
-      "image_sha256": "981721e27077920d5b6168009a348014343c4a3c5bc67938a8d219f5654148b5",
+      "image": "aqm/frames/national/002.png",
+      "image_sha256": "9c02ce5173fb5889a331beb0cd86bf527c3d3f3fa408351c7f7211a97124fb30",
+      "source_raster": "AQM_PM25_HRRR_20260715_02UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 3,
       "frame_number": 4,
       "valid_utc": "2026-07-15T03:00:00Z",
       "valid_edt": "2026-07-14T23:00:00-04:00",
-      "image": "frames/rhode_island/003.png",
-      "image_sha256": "2040b8e18b66092f39a2423d902f0f8d787a5996788ad05de6a09f5609c672b7",
+      "image": "aqm/frames/national/003.png",
+      "image_sha256": "732c13e2876158bdac2a13bb1a8f4b748dd7c7723ab52889eb2642bf4dc8fb80",
+      "source_raster": "AQM_PM25_HRRR_20260715_03UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 4,
       "frame_number": 5,
       "valid_utc": "2026-07-15T04:00:00Z",
       "valid_edt": "2026-07-15T00:00:00-04:00",
-      "image": "frames/rhode_island/004.png",
-      "image_sha256": "87c90c40b6bf8afd39d49763e598cb107aa6ad2905aad3bcb1b1d8b9521ff2a8",
+      "image": "aqm/frames/national/004.png",
+      "image_sha256": "7bf6b7d5a7a7fde47d5d1e0c7c62a115a702c13bbd7dfca3cacaa0522f538bcf",
+      "source_raster": "AQM_PM25_HRRR_20260715_04UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 5,
       "frame_number": 6,
       "valid_utc": "2026-07-15T05:00:00Z",
       "valid_edt": "2026-07-15T01:00:00-04:00",
-      "image": "frames/rhode_island/005.png",
-      "image_sha256": "0b70a498578eba22c38369ad196c613cc3566336773cec3b4b682d70fb9d6fc8",
+      "image": "aqm/frames/national/005.png",
+      "image_sha256": "81b1124f6ef160ae6c3e72f41b83b9be75174b8385835282de95a92d7ebc9deb",
+      "source_raster": "AQM_PM25_HRRR_20260715_05UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 6,
       "frame_number": 7,
       "valid_utc": "2026-07-15T06:00:00Z",
       "valid_edt": "2026-07-15T02:00:00-04:00",
-      "image": "frames/rhode_island/006.png",
-      "image_sha256": "ded227e95bca2e6603175d11c1d705c4b21b8dc65efab94d4b659f0fc969651a",
+      "image": "aqm/frames/national/006.png",
+      "image_sha256": "f66e635781d990776fb89936fe636bdf3a97764ecb7463abfd5e21c0ea3b1883",
+      "source_raster": "AQM_PM25_HRRR_20260715_06UTC_ugm3",
       "source_cycle": "2026-07-13T12:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 7,
       "frame_number": 8,
       "valid_utc": "2026-07-15T07:00:00Z",
       "valid_edt": "2026-07-15T03:00:00-04:00",
-      "image": "frames/rhode_island/007.png",
-      "image_sha256": "077a927e9ba14270b7d4549a642e903a71d820b694c7439b17eb33f925ee3de9",
+      "image": "aqm/frames/national/007.png",
+      "image_sha256": "d2eb53fc843847d5282ee3ced3347c5b732d073f9b23c285fc5034517619bb0b",
+      "source_raster": "AQM_PM25_HRRR_20260715_07UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": true
+      "source_cycle_update": true,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 8,
       "frame_number": 9,
       "valid_utc": "2026-07-15T08:00:00Z",
       "valid_edt": "2026-07-15T04:00:00-04:00",
-      "image": "frames/rhode_island/008.png",
-      "image_sha256": "38f5c54d904bd21599ee00e0116f60ec10d35ce111d8a88310740b230469521a",
+      "image": "aqm/frames/national/008.png",
+      "image_sha256": "dfda5ebff8e6fb09e72a08b2169da53d4ee58bcf4c1e0f1b969cc87cf5971a1e",
+      "source_raster": "AQM_PM25_HRRR_20260715_08UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 9,
       "frame_number": 10,
       "valid_utc": "2026-07-15T09:00:00Z",
       "valid_edt": "2026-07-15T05:00:00-04:00",
-      "image": "frames/rhode_island/009.png",
-      "image_sha256": "98b9807dbc3c3ec429325cb1de259e5ad1dd951694c5344448e83cbf7d85c05b",
+      "image": "aqm/frames/national/009.png",
+      "image_sha256": "0ff74ad8ef369d37b3052ad299d7e6e9413969bf8f2fa905ed15dd7603434e37",
+      "source_raster": "AQM_PM25_HRRR_20260715_09UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 10,
       "frame_number": 11,
       "valid_utc": "2026-07-15T10:00:00Z",
       "valid_edt": "2026-07-15T06:00:00-04:00",
-      "image": "frames/rhode_island/010.png",
-      "image_sha256": "1402543400f8be8b199a22d7b473a77f75c084d74c187df74ae0f80daa6dd420",
+      "image": "aqm/frames/national/010.png",
+      "image_sha256": "9e3049e4560b6fee242d3599d9cba54cd62b95bfbf0b67ca0faff09f4f262019",
+      "source_raster": "AQM_PM25_HRRR_20260715_10UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 11,
       "frame_number": 12,
       "valid_utc": "2026-07-15T11:00:00Z",
       "valid_edt": "2026-07-15T07:00:00-04:00",
-      "image": "frames/rhode_island/011.png",
-      "image_sha256": "e87c0f46a5ac7e5349a7cd4af85658c9afdceeee6685d2dbd17fe70861d3b7e9",
+      "image": "aqm/frames/national/011.png",
+      "image_sha256": "76384b38a9bea44f8cc60b75a4106be98c193898d40aed3765f70c9fece9bc1b",
+      "source_raster": "AQM_PM25_HRRR_20260715_11UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 12,
       "frame_number": 13,
       "valid_utc": "2026-07-15T12:00:00Z",
       "valid_edt": "2026-07-15T08:00:00-04:00",
-      "image": "frames/rhode_island/012.png",
-      "image_sha256": "122ee7ed58345136a688a3aaa4245a0b91935759f6146717d23ff844b4ccd91c",
+      "image": "aqm/frames/national/012.png",
+      "image_sha256": "e1087bddf848f06242982d18ac17f5cf305abd76d40fd43880883ad7467c8ab2",
+      "source_raster": "AQM_PM25_HRRR_20260715_12UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 13,
       "frame_number": 14,
       "valid_utc": "2026-07-15T13:00:00Z",
       "valid_edt": "2026-07-15T09:00:00-04:00",
-      "image": "frames/rhode_island/013.png",
-      "image_sha256": "23c62b4ee58168a5d0a7317f3cf5e613c0ef1b98bfeab89ab532a0d1a82dbed3",
+      "image": "aqm/frames/national/013.png",
+      "image_sha256": "dfa9bd07d3c6f0698e3a635b5717fad0cf9c39590a403d4b33e24430cb9715aa",
+      "source_raster": "AQM_PM25_HRRR_20260715_13UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 14,
       "frame_number": 15,
       "valid_utc": "2026-07-15T14:00:00Z",
       "valid_edt": "2026-07-15T10:00:00-04:00",
-      "image": "frames/rhode_island/014.png",
-      "image_sha256": "b934d83cde6974a06eb3d7852ade1ae7fa8e266387d52b754f55187f318f6321",
+      "image": "aqm/frames/national/014.png",
+      "image_sha256": "153400c5da9133b3aeaea154c746a83fbcb1169dcf966dc58d1de53192825d87",
+      "source_raster": "AQM_PM25_HRRR_20260715_14UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 15,
       "frame_number": 16,
       "valid_utc": "2026-07-15T15:00:00Z",
       "valid_edt": "2026-07-15T11:00:00-04:00",
-      "image": "frames/rhode_island/015.png",
-      "image_sha256": "16cd3bdc08e946421f013a378df93d466d880e6503fbef7943d7334811fec2de",
+      "image": "aqm/frames/national/015.png",
+      "image_sha256": "a53623067270a4d6256b39bf27bd1e90ca6fea752697715443c7e7672de1b5ea",
+      "source_raster": "AQM_PM25_HRRR_20260715_15UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 16,
       "frame_number": 17,
       "valid_utc": "2026-07-15T16:00:00Z",
       "valid_edt": "2026-07-15T12:00:00-04:00",
-      "image": "frames/rhode_island/016.png",
-      "image_sha256": "af088f42eff51df1ac755ca930aff2c8e396bbbcae6ae9d4529e8c6a57a94541",
+      "image": "aqm/frames/national/016.png",
+      "image_sha256": "c9a403ba94c8e6a402dbf1fd1752d58a1a895ebacc1353c364a63abc98259dd5",
+      "source_raster": "AQM_PM25_HRRR_20260715_16UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 17,
       "frame_number": 18,
       "valid_utc": "2026-07-15T17:00:00Z",
       "valid_edt": "2026-07-15T13:00:00-04:00",
-      "image": "frames/rhode_island/017.png",
-      "image_sha256": "645f5cbc4a3f90739211ffd9f1703637cfe005adceea1b9fd4f22d7ad96f15ee",
+      "image": "aqm/frames/national/017.png",
+      "image_sha256": "d5560f2293036b4f26e6d5c82a5e7776e9e3e2a0aebc8b6a8b14e0fbcff5f97a",
+      "source_raster": "AQM_PM25_HRRR_20260715_17UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 18,
       "frame_number": 19,
       "valid_utc": "2026-07-15T18:00:00Z",
       "valid_edt": "2026-07-15T14:00:00-04:00",
-      "image": "frames/rhode_island/018.png",
-      "image_sha256": "74e4884a57fbfb79f956c102a4c7624135f4c34e7641dbdb13dd116550552c0b",
+      "image": "aqm/frames/national/018.png",
+      "image_sha256": "30302802bd13f8b5fda0a7072ae71a90763d67e7f5d82b78fa02602ec91b85ad",
+      "source_raster": "AQM_PM25_HRRR_20260715_18UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 19,
       "frame_number": 20,
       "valid_utc": "2026-07-15T19:00:00Z",
       "valid_edt": "2026-07-15T15:00:00-04:00",
-      "image": "frames/rhode_island/019.png",
-      "image_sha256": "5bbc65e70878ccb8e78e34b72332a700e7bf88b4d26060c062ae476509e60acb",
+      "image": "aqm/frames/national/019.png",
+      "image_sha256": "45cea69dec59181e64bd0c145dcbec31aba9d342add3f57848a8202e26056a97",
+      "source_raster": "AQM_PM25_HRRR_20260715_19UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 20,
       "frame_number": 21,
       "valid_utc": "2026-07-15T20:00:00Z",
       "valid_edt": "2026-07-15T16:00:00-04:00",
-      "image": "frames/rhode_island/020.png",
-      "image_sha256": "aed22bbb6549e9e80b3c4108afe1dbecb5a572281ef7464d725d31fec6897e14",
+      "image": "aqm/frames/national/020.png",
+      "image_sha256": "bfca6cf17f1b8c7f95ca2173dcbf0dcc6fc59b2c967cc0604e2c76c7c4239b55",
+      "source_raster": "AQM_PM25_HRRR_20260715_20UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 21,
       "frame_number": 22,
       "valid_utc": "2026-07-15T21:00:00Z",
       "valid_edt": "2026-07-15T17:00:00-04:00",
-      "image": "frames/rhode_island/021.png",
-      "image_sha256": "1f7989cf86c45c36e62ad59d1b2699b62ec752740c2d68a4d75706202b61984d",
+      "image": "aqm/frames/national/021.png",
+      "image_sha256": "75d69698e82bb4091f9804386634566682338738e671e91ba838fd7c3a307703",
+      "source_raster": "AQM_PM25_HRRR_20260715_21UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 22,
       "frame_number": 23,
       "valid_utc": "2026-07-15T22:00:00Z",
       "valid_edt": "2026-07-15T18:00:00-04:00",
-      "image": "frames/rhode_island/022.png",
-      "image_sha256": "51723e570cd3fd0f29601ebbdab0e5f4f916b713ec4f672fb557373b33984157",
+      "image": "aqm/frames/national/022.png",
+      "image_sha256": "3d7db3fa506f79106ae9706c2fe0b62fd6408253053bd13b42d586ce10cf3297",
+      "source_raster": "AQM_PM25_HRRR_20260715_22UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 23,
       "frame_number": 24,
       "valid_utc": "2026-07-15T23:00:00Z",
       "valid_edt": "2026-07-15T19:00:00-04:00",
-      "image": "frames/rhode_island/023.png",
-      "image_sha256": "f2c66bf33413438e764e8b3ac103d3ef7dc27cc0f1cf241d82e06f186f56e0e3",
+      "image": "aqm/frames/national/023.png",
+      "image_sha256": "8a9262e0a288580520b3fbc8ead87fc382ca80dae4b5d232012f5b2f90b6257e",
+      "source_raster": "AQM_PM25_HRRR_20260715_23UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 24,
       "frame_number": 25,
       "valid_utc": "2026-07-16T00:00:00Z",
       "valid_edt": "2026-07-15T20:00:00-04:00",
-      "image": "frames/rhode_island/024.png",
-      "image_sha256": "628a29298ba519567ef0c328c045861808b6486baed6e30690f9d0cb75955079",
+      "image": "aqm/frames/national/024.png",
+      "image_sha256": "e9025ed70ccf2360bf382e5b16e93af61a4b00c5bb28da7ce5261ef012323bed",
+      "source_raster": "AQM_PM25_HRRR_20260716_00UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 25,
       "frame_number": 26,
       "valid_utc": "2026-07-16T01:00:00Z",
       "valid_edt": "2026-07-15T21:00:00-04:00",
-      "image": "frames/rhode_island/025.png",
-      "image_sha256": "4231c2d77fa953188d67a9e4b7e88f5f83f574e71ee7bc3eff34c1a1f41ac7b2",
+      "image": "aqm/frames/national/025.png",
+      "image_sha256": "79940d518261c372e2588f28fb60c4eb48e379c84f49a9e111b0ccb530dda29b",
+      "source_raster": "AQM_PM25_HRRR_20260716_01UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 26,
       "frame_number": 27,
       "valid_utc": "2026-07-16T02:00:00Z",
       "valid_edt": "2026-07-15T22:00:00-04:00",
-      "image": "frames/rhode_island/026.png",
-      "image_sha256": "d5681746f0592162b5674c1535df686996f7974e39ed87c7263256b0b4570800",
+      "image": "aqm/frames/national/026.png",
+      "image_sha256": "0b6f796cdded4efd6cc830ec07e861d825b6592754bdb758084b51ebc0c60eed",
+      "source_raster": "AQM_PM25_HRRR_20260716_02UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 27,
       "frame_number": 28,
       "valid_utc": "2026-07-16T03:00:00Z",
       "valid_edt": "2026-07-15T23:00:00-04:00",
-      "image": "frames/rhode_island/027.png",
-      "image_sha256": "29d880f7b197901d514fdbd63b28e837927600a822dc9753180fc97936dd754b",
+      "image": "aqm/frames/national/027.png",
+      "image_sha256": "61c1a2e61f83b886e405af152947dabe0a52316ef29c125be9b74770660ce0f8",
+      "source_raster": "AQM_PM25_HRRR_20260716_03UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 28,
       "frame_number": 29,
       "valid_utc": "2026-07-16T04:00:00Z",
       "valid_edt": "2026-07-16T00:00:00-04:00",
-      "image": "frames/rhode_island/028.png",
-      "image_sha256": "c19d0ce5c2ba5f4678594beaf098701500aac44aaaaf3b1d63b15e3f57de4113",
+      "image": "aqm/frames/national/028.png",
+      "image_sha256": "3481fb4244dc8c2c3041725eb2bf99838392f72a2cbbb9d3f55b4cbddcf7734a",
+      "source_raster": "AQM_PM25_HRRR_20260716_04UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 29,
       "frame_number": 30,
       "valid_utc": "2026-07-16T05:00:00Z",
       "valid_edt": "2026-07-16T01:00:00-04:00",
-      "image": "frames/rhode_island/029.png",
-      "image_sha256": "d0c3b8308bb9ce5921ad9a22414c775aff36a95529bba56825f1b4c1265d76ff",
+      "image": "aqm/frames/national/029.png",
+      "image_sha256": "e1761f6f961b47b6b7f3173d73052ef53e7bcc7e957bba3f33226cbb199c7d8c",
+      "source_raster": "AQM_PM25_HRRR_20260716_05UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 30,
       "frame_number": 31,
       "valid_utc": "2026-07-16T06:00:00Z",
       "valid_edt": "2026-07-16T02:00:00-04:00",
-      "image": "frames/rhode_island/030.png",
-      "image_sha256": "dcc00746b60d715d55313dd13fb48abc635e39018dbbfd371e5ff7610adbfec6",
+      "image": "aqm/frames/national/030.png",
+      "image_sha256": "c4a606e68550489d5bca3ba021e91b5e45cb24a9df3063d49ad1725ebca7a668",
+      "source_raster": "AQM_PM25_HRRR_20260716_06UTC_ugm3",
       "source_cycle": "2026-07-15T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 31,
       "frame_number": 32,
       "valid_utc": "2026-07-16T07:00:00Z",
       "valid_edt": "2026-07-16T03:00:00-04:00",
-      "image": "frames/rhode_island/031.png",
-      "image_sha256": "ab8ba553c7faf4306f0e28cc1c2086b4c65d90393e29d8982f80c89930d29472",
+      "image": "aqm/frames/national/031.png",
+      "image_sha256": "a775deaa3eddc13b9540dc92b94f0293759aa06bae624414198ef068f079a2cc",
+      "source_raster": "AQM_PM25_HRRR_20260716_07UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": true
+      "source_cycle_update": true,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 32,
       "frame_number": 33,
       "valid_utc": "2026-07-16T08:00:00Z",
       "valid_edt": "2026-07-16T04:00:00-04:00",
-      "image": "frames/rhode_island/032.png",
-      "image_sha256": "f6945c44d23d94bbd23265383975decdf1ff7c8ac2a969c5b9afa1dc2654ec6c",
+      "image": "aqm/frames/national/032.png",
+      "image_sha256": "83d32ae5448d1e40e5ab1dd6566d764a669912ec2909ba2a08ce244dea8ed2fb",
+      "source_raster": "AQM_PM25_HRRR_20260716_08UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 33,
       "frame_number": 34,
       "valid_utc": "2026-07-16T09:00:00Z",
       "valid_edt": "2026-07-16T05:00:00-04:00",
-      "image": "frames/rhode_island/033.png",
-      "image_sha256": "f5c9f380ed58f6bfd36a2c1eabb737d30a042cb6f82e4a99fb89ac9e93dbe097",
+      "image": "aqm/frames/national/033.png",
+      "image_sha256": "54a2f77e61bc470d8d9867f223a77956869803fc4f1d44b10fee3db344ddd4ed",
+      "source_raster": "AQM_PM25_HRRR_20260716_09UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 34,
       "frame_number": 35,
       "valid_utc": "2026-07-16T10:00:00Z",
       "valid_edt": "2026-07-16T06:00:00-04:00",
-      "image": "frames/rhode_island/034.png",
-      "image_sha256": "1da9f9b97cb3e6039860ac960b028153b9493fc14f56d285fe584e44649848bb",
+      "image": "aqm/frames/national/034.png",
+      "image_sha256": "c7f5c1c46094c8abe296ae99bb2249fd360fd747c49ee4c3b1138d50964a6b79",
+      "source_raster": "AQM_PM25_HRRR_20260716_10UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 35,
       "frame_number": 36,
       "valid_utc": "2026-07-16T11:00:00Z",
       "valid_edt": "2026-07-16T07:00:00-04:00",
-      "image": "frames/rhode_island/035.png",
-      "image_sha256": "bf26d6fe6becf73cb07a41521e1e2d40beae4a272566babf423d0771bb11aeee",
+      "image": "aqm/frames/national/035.png",
+      "image_sha256": "dd4fa41c9763df204986310a65b09a5026f0420f70e797159f5cfa65bc8e01d2",
+      "source_raster": "AQM_PM25_HRRR_20260716_11UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 36,
       "frame_number": 37,
       "valid_utc": "2026-07-16T12:00:00Z",
       "valid_edt": "2026-07-16T08:00:00-04:00",
-      "image": "frames/rhode_island/036.png",
-      "image_sha256": "964bf137ed1207d4768b7a175fe690f2da2e1e43ffccbbc10ec34a18c0e7fc97",
+      "image": "aqm/frames/national/036.png",
+      "image_sha256": "8a8306c7d926d53fbb6bb7b1c60941a6038e07bd4f03d378f6874c8ad4a83eb6",
+      "source_raster": "AQM_PM25_HRRR_20260716_12UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 37,
       "frame_number": 38,
       "valid_utc": "2026-07-16T13:00:00Z",
       "valid_edt": "2026-07-16T09:00:00-04:00",
-      "image": "frames/rhode_island/037.png",
-      "image_sha256": "851a067b717ff679e7b5293af110e0866420ce519bf3129c2760e31d13c1ac56",
+      "image": "aqm/frames/national/037.png",
+      "image_sha256": "05a11f04ee6b153caf720866743555bf197e100faa50eddc9549948e79b5d29a",
+      "source_raster": "AQM_PM25_HRRR_20260716_13UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 38,
       "frame_number": 39,
       "valid_utc": "2026-07-16T14:00:00Z",
       "valid_edt": "2026-07-16T10:00:00-04:00",
-      "image": "frames/rhode_island/038.png",
-      "image_sha256": "391499c5650ae511ac1a638e07be225f59c334af8866b1a06f34cf6bc437117b",
+      "image": "aqm/frames/national/038.png",
+      "image_sha256": "a13cd71f1b306b573d1b97aedd8dee03f86a299756d49385e905c012b8d0e204",
+      "source_raster": "AQM_PM25_HRRR_20260716_14UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 39,
       "frame_number": 40,
       "valid_utc": "2026-07-16T15:00:00Z",
       "valid_edt": "2026-07-16T11:00:00-04:00",
-      "image": "frames/rhode_island/039.png",
-      "image_sha256": "68ea69625250a4c20bff78943cdc1e9fe3a46283c9a27749674a674ef6ebb5af",
+      "image": "aqm/frames/national/039.png",
+      "image_sha256": "35379cd9a8aa615188aa3d151b6e3428d3ac15e15aa3229a7aed3f76b30822cb",
+      "source_raster": "AQM_PM25_HRRR_20260716_15UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 40,
       "frame_number": 41,
       "valid_utc": "2026-07-16T16:00:00Z",
       "valid_edt": "2026-07-16T12:00:00-04:00",
-      "image": "frames/rhode_island/040.png",
-      "image_sha256": "8f825e1d44023f3c4b765f7282f00c99fb28ce6369c885f85066685193faf183",
+      "image": "aqm/frames/national/040.png",
+      "image_sha256": "79ef0a2e02fb67ebe1525ab3ece087bf14908929b6553e7e3498fa19b13e875f",
+      "source_raster": "AQM_PM25_HRRR_20260716_16UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 41,
       "frame_number": 42,
       "valid_utc": "2026-07-16T17:00:00Z",
       "valid_edt": "2026-07-16T13:00:00-04:00",
-      "image": "frames/rhode_island/041.png",
-      "image_sha256": "265702ae17d036f04890de1b07520c179cdea8ca6dd359872f494627252b3684",
+      "image": "aqm/frames/national/041.png",
+      "image_sha256": "26bc6a79286f8fb57c65006417039beb1b4eadba3fd8a7969f5416c80ad6fc61",
+      "source_raster": "AQM_PM25_HRRR_20260716_17UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 42,
       "frame_number": 43,
       "valid_utc": "2026-07-16T18:00:00Z",
       "valid_edt": "2026-07-16T14:00:00-04:00",
-      "image": "frames/rhode_island/042.png",
-      "image_sha256": "eef0a4fc9945c79ed12490da1d895aad678774df0bbef5441307740938724a97",
+      "image": "aqm/frames/national/042.png",
+      "image_sha256": "d6044f470fa9acebecdf3fb99aca0795b62a54af60ee29eda731038b4a01d9e7",
+      "source_raster": "AQM_PM25_HRRR_20260716_18UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 43,
       "frame_number": 44,
       "valid_utc": "2026-07-16T19:00:00Z",
       "valid_edt": "2026-07-16T15:00:00-04:00",
-      "image": "frames/rhode_island/043.png",
-      "image_sha256": "15290dca69f017342c8c0872bf69b67c04580ba3f2bde379e6567440b88e09dc",
+      "image": "aqm/frames/national/043.png",
+      "image_sha256": "0cf2856ab2206dff79ef4070b0098b721579fbeeafff3c0e013931e3166051f6",
+      "source_raster": "AQM_PM25_HRRR_20260716_19UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 44,
       "frame_number": 45,
       "valid_utc": "2026-07-16T20:00:00Z",
       "valid_edt": "2026-07-16T16:00:00-04:00",
-      "image": "frames/rhode_island/044.png",
-      "image_sha256": "379ad75663187a94dddde472dfdb9b4098216fdb5cee93481b8dbf4bbc88e359",
+      "image": "aqm/frames/national/044.png",
+      "image_sha256": "610bab71453ece0cd515d3034f74c2f88aa4b67135d4762e9fa876cfa4bd7aed",
+      "source_raster": "AQM_PM25_HRRR_20260716_20UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 45,
       "frame_number": 46,
       "valid_utc": "2026-07-16T21:00:00Z",
       "valid_edt": "2026-07-16T17:00:00-04:00",
-      "image": "frames/rhode_island/045.png",
-      "image_sha256": "452c3e7175835e8f44f4659be90624da370b4fdd0058ebcaf3e6c87a77639216",
+      "image": "aqm/frames/national/045.png",
+      "image_sha256": "6c7e1fe855c774de89caac37cc46ebfb18dea4e59717ba1fe1f8af14e2b785cd",
+      "source_raster": "AQM_PM25_HRRR_20260716_21UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 46,
       "frame_number": 47,
       "valid_utc": "2026-07-16T22:00:00Z",
       "valid_edt": "2026-07-16T18:00:00-04:00",
-      "image": "frames/rhode_island/046.png",
-      "image_sha256": "5454151b43aa93920aee9b0385f636d98d29bd7659c3465cf73a1d801b349aee",
+      "image": "aqm/frames/national/046.png",
+      "image_sha256": "70ba0d8083e19a1970aa230d2bf218f48626fed353f8148f58500772c17e47c8",
+      "source_raster": "AQM_PM25_HRRR_20260716_22UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 47,
       "frame_number": 48,
       "valid_utc": "2026-07-16T23:00:00Z",
       "valid_edt": "2026-07-16T19:00:00-04:00",
-      "image": "frames/rhode_island/047.png",
-      "image_sha256": "cb47975934c61d6c9587a82e76b112c407ed9d767aa1bf30f2e83fe61505dbf0",
+      "image": "aqm/frames/national/047.png",
+      "image_sha256": "3916cecaf819fd76be6f8d7f9245ce755515e488871a5b290d1ba0f0b8a02881",
+      "source_raster": "AQM_PM25_HRRR_20260716_23UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 48,
       "frame_number": 49,
       "valid_utc": "2026-07-17T00:00:00Z",
       "valid_edt": "2026-07-16T20:00:00-04:00",
-      "image": "frames/rhode_island/048.png",
-      "image_sha256": "49f4784ca38bd84d5db681a263d01f91a25357b461bf4f88d5b5c37826305cb1",
+      "image": "aqm/frames/national/048.png",
+      "image_sha256": "8010b01d146e14093690d455c726da1858af193fc2373f6020f58bde45aa6ba1",
+      "source_raster": "AQM_PM25_HRRR_20260717_00UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 49,
       "frame_number": 50,
       "valid_utc": "2026-07-17T01:00:00Z",
       "valid_edt": "2026-07-16T21:00:00-04:00",
-      "image": "frames/rhode_island/049.png",
-      "image_sha256": "4c7c746affcfcfd0edd25cb5aefe1bcbb976d09b4d1b4d3177e428cbc9e206da",
+      "image": "aqm/frames/national/049.png",
+      "image_sha256": "4a4a33bd434f1e8b436672e8ee9ead04f01b4900eef3c9258f8044e5695fe068",
+      "source_raster": "AQM_PM25_HRRR_20260717_01UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 50,
       "frame_number": 51,
       "valid_utc": "2026-07-17T02:00:00Z",
       "valid_edt": "2026-07-16T22:00:00-04:00",
-      "image": "frames/rhode_island/050.png",
-      "image_sha256": "c4308b681cf6b9d7c43297baaa75e40fe5354fe2221ab5d1ab9993f74936614d",
+      "image": "aqm/frames/national/050.png",
+      "image_sha256": "4961fddd25de0f969f528f95d882c32fefe2f26f0e40d00bde910d47ce599753",
+      "source_raster": "AQM_PM25_HRRR_20260717_02UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 51,
       "frame_number": 52,
       "valid_utc": "2026-07-17T03:00:00Z",
       "valid_edt": "2026-07-16T23:00:00-04:00",
-      "image": "frames/rhode_island/051.png",
-      "image_sha256": "e7771a06cb884c7c2ab9119cd74d2446ef8d79a99ee036bba737d2fc8e11416a",
+      "image": "aqm/frames/national/051.png",
+      "image_sha256": "1ff5499e8a515aa2b3452b0ecdde0609445e66e0f131db3343fa73243596b16b",
+      "source_raster": "AQM_PM25_HRRR_20260717_03UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 52,
       "frame_number": 53,
       "valid_utc": "2026-07-17T04:00:00Z",
       "valid_edt": "2026-07-17T00:00:00-04:00",
-      "image": "frames/rhode_island/052.png",
-      "image_sha256": "0dd4fbc8343e975171a3db5f86f2ff643ab7a57f5dd4bfb0d4b92232564ec935",
+      "image": "aqm/frames/national/052.png",
+      "image_sha256": "30ea8e8edbec9df507fc585ea7e07d66ce1638ab386dbc61d42a9ad5b29c88d0",
+      "source_raster": "AQM_PM25_HRRR_20260717_04UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 53,
       "frame_number": 54,
       "valid_utc": "2026-07-17T05:00:00Z",
       "valid_edt": "2026-07-17T01:00:00-04:00",
-      "image": "frames/rhode_island/053.png",
-      "image_sha256": "81d4908dfd4e7e333ac90bfa9d79a02dc1ba122f6abedd1904ef8c2e7873f6e1",
+      "image": "aqm/frames/national/053.png",
+      "image_sha256": "5f863eb538519f8517fcd903310eb34e9ab20ae4d8e175492ea274ea871298a7",
+      "source_raster": "AQM_PM25_HRRR_20260717_05UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 54,
       "frame_number": 55,
       "valid_utc": "2026-07-17T06:00:00Z",
       "valid_edt": "2026-07-17T02:00:00-04:00",
-      "image": "frames/rhode_island/054.png",
-      "image_sha256": "c636c43138b188434218b984e8ff915091b54af886e8f50afe88940a2974c746",
+      "image": "aqm/frames/national/054.png",
+      "image_sha256": "8fb2e11c40f1bc270ee83672bb226d33a88c859116fcc537b9e49bd67a5941db",
+      "source_raster": "AQM_PM25_HRRR_20260717_06UTC_ugm3",
       "source_cycle": "2026-07-16T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 55,
       "frame_number": 56,
       "valid_utc": "2026-07-17T07:00:00Z",
       "valid_edt": "2026-07-17T03:00:00-04:00",
-      "image": "frames/rhode_island/055.png",
-      "image_sha256": "951458c85d187e6ff2fbc48a54a42fff1c45f28ade5cdcc9f6ed419830f30aef",
+      "image": "aqm/frames/national/055.png",
+      "image_sha256": "ef7393cc844b6c44cb1f86ba334dcfbdd79d02c52c6046a5e2709c4369b93b5b",
+      "source_raster": "AQM_PM25_HRRR_20260717_07UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": true
+      "source_cycle_update": true,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 56,
       "frame_number": 57,
       "valid_utc": "2026-07-17T08:00:00Z",
       "valid_edt": "2026-07-17T04:00:00-04:00",
-      "image": "frames/rhode_island/056.png",
-      "image_sha256": "b5d0f4b7555cd6259874097b4551d4fb29aa6c00cff8876116fbc4dd159419bc",
+      "image": "aqm/frames/national/056.png",
+      "image_sha256": "fb02791601671667303d4cdbe1c9fa11a4a566b560e35699fad568059127a7d3",
+      "source_raster": "AQM_PM25_HRRR_20260717_08UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 57,
       "frame_number": 58,
       "valid_utc": "2026-07-17T09:00:00Z",
       "valid_edt": "2026-07-17T05:00:00-04:00",
-      "image": "frames/rhode_island/057.png",
-      "image_sha256": "91239dbd5c21483b182cb958387112f3264826286bbae519add5c0b7b5ab9bb5",
+      "image": "aqm/frames/national/057.png",
+      "image_sha256": "728fb3354ae55e190610cc01e8bdb53fb01efdd6de680f44fbe856d8f52954e0",
+      "source_raster": "AQM_PM25_HRRR_20260717_09UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 58,
       "frame_number": 59,
       "valid_utc": "2026-07-17T10:00:00Z",
       "valid_edt": "2026-07-17T06:00:00-04:00",
-      "image": "frames/rhode_island/058.png",
-      "image_sha256": "4b11993335dd5bc2635d799f317a1ed70f4547d9cc7c54b22d4b442dc239ab3c",
+      "image": "aqm/frames/national/058.png",
+      "image_sha256": "6561c92fbcbbaa0db13c0cd053affe44722c802b0e93dd6b31142aa30c3dbda2",
+      "source_raster": "AQM_PM25_HRRR_20260717_10UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 59,
       "frame_number": 60,
       "valid_utc": "2026-07-17T11:00:00Z",
       "valid_edt": "2026-07-17T07:00:00-04:00",
-      "image": "frames/rhode_island/059.png",
-      "image_sha256": "531bdae13c5cba96142de12e84b06ca4cd712204d41bd41dfdc4c460bdfbfa38",
+      "image": "aqm/frames/national/059.png",
+      "image_sha256": "a7d7190b53a61cde7129cb47c7c640dcf8acf6a57a23b9c3d14045859bbccf9f",
+      "source_raster": "AQM_PM25_HRRR_20260717_11UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 60,
       "frame_number": 61,
       "valid_utc": "2026-07-17T12:00:00Z",
       "valid_edt": "2026-07-17T08:00:00-04:00",
-      "image": "frames/rhode_island/060.png",
-      "image_sha256": "de369c4b38f4d45ca087d623636c2cb6acb80c5c144e62075bc3874b9a6c59ed",
+      "image": "aqm/frames/national/060.png",
+      "image_sha256": "c55d7b5f6e559093e2533f9a9db454690a04189f3671e60a15dea7b3604a02bc",
+      "source_raster": "AQM_PM25_HRRR_20260717_12UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 61,
       "frame_number": 62,
       "valid_utc": "2026-07-17T13:00:00Z",
       "valid_edt": "2026-07-17T09:00:00-04:00",
-      "image": "frames/rhode_island/061.png",
-      "image_sha256": "c694ae7e3113d8ed5ab137c5fe5848a01951e75bc70f2918b2591979dc0c6e00",
+      "image": "aqm/frames/national/061.png",
+      "image_sha256": "14c74f924aacb5b673d3e56c86dc08ef83de5fc3080c9c35d75ed9b5f9c56c00",
+      "source_raster": "AQM_PM25_HRRR_20260717_13UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 62,
       "frame_number": 63,
       "valid_utc": "2026-07-17T14:00:00Z",
       "valid_edt": "2026-07-17T10:00:00-04:00",
-      "image": "frames/rhode_island/062.png",
-      "image_sha256": "47338f18daa4e71403dca3448b0290de5f2b7777a81c34e706da8d14c2a1e91d",
+      "image": "aqm/frames/national/062.png",
+      "image_sha256": "8298f5a85c620acd58a45bdad915ad17c91a0508ed7ea286bb0b60efb494da61",
+      "source_raster": "AQM_PM25_HRRR_20260717_14UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 63,
       "frame_number": 64,
       "valid_utc": "2026-07-17T15:00:00Z",
       "valid_edt": "2026-07-17T11:00:00-04:00",
-      "image": "frames/rhode_island/063.png",
-      "image_sha256": "386168a8a30e4f7abbf473c43f061e0bf2ac81653e2fb6ed1e2b7145a5122e67",
+      "image": "aqm/frames/national/063.png",
+      "image_sha256": "c278af8c0e693927738f5771771da8b779c5a864afb4250a492d7c2a8e25f7c2",
+      "source_raster": "AQM_PM25_HRRR_20260717_15UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 64,
       "frame_number": 65,
       "valid_utc": "2026-07-17T16:00:00Z",
       "valid_edt": "2026-07-17T12:00:00-04:00",
-      "image": "frames/rhode_island/064.png",
-      "image_sha256": "352f85581e4c5938fa6c3d342dad5a098c353088fdb7e577760674621ee31026",
+      "image": "aqm/frames/national/064.png",
+      "image_sha256": "c66eacdb9056ca8a88d07bc1a77deb8a12850e780b78cdb301c6da0438c45cea",
+      "source_raster": "AQM_PM25_HRRR_20260717_16UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 65,
       "frame_number": 66,
       "valid_utc": "2026-07-17T17:00:00Z",
       "valid_edt": "2026-07-17T13:00:00-04:00",
-      "image": "frames/rhode_island/065.png",
-      "image_sha256": "be4669d9d5a66565741c709ec86ff7b2de5b928d7df87cd23015dfb7d4ec59f7",
+      "image": "aqm/frames/national/065.png",
+      "image_sha256": "4ff51d215538ac72e915a7840683d935e5e0469ad25c2cad8a8957b143c3b520",
+      "source_raster": "AQM_PM25_HRRR_20260717_17UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 66,
       "frame_number": 67,
       "valid_utc": "2026-07-17T18:00:00Z",
       "valid_edt": "2026-07-17T14:00:00-04:00",
-      "image": "frames/rhode_island/066.png",
-      "image_sha256": "cbf50a2ce4c272f4353f0fca409f79645549c7400efcedb94b2b3201d291d5d6",
+      "image": "aqm/frames/national/066.png",
+      "image_sha256": "8e1af5721a8de0b1082a4169bb2926cdb404b849fba9617e6e91551a7795b922",
+      "source_raster": "AQM_PM25_HRRR_20260717_18UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 67,
       "frame_number": 68,
       "valid_utc": "2026-07-17T19:00:00Z",
       "valid_edt": "2026-07-17T15:00:00-04:00",
-      "image": "frames/rhode_island/067.png",
-      "image_sha256": "9da4bb4243c114b34598b05863ab37674a72d684d696273796e17c7fb14e53ae",
+      "image": "aqm/frames/national/067.png",
+      "image_sha256": "53a326a584561fbfdcfde3e10bc2f95dc7a46e96699f66836ca2fee59d625aec",
+      "source_raster": "AQM_PM25_HRRR_20260717_19UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 68,
       "frame_number": 69,
       "valid_utc": "2026-07-17T20:00:00Z",
       "valid_edt": "2026-07-17T16:00:00-04:00",
-      "image": "frames/rhode_island/068.png",
-      "image_sha256": "cef31f9a6f554429e335c2bd849c3a6260d0a3d7a27bce13ea35858c17144dd0",
+      "image": "aqm/frames/national/068.png",
+      "image_sha256": "e204080034c82dbe992b807bfba118116dd2a1bb7f5d59b68e52ddfe98f602d3",
+      "source_raster": "AQM_PM25_HRRR_20260717_20UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 69,
       "frame_number": 70,
       "valid_utc": "2026-07-17T21:00:00Z",
       "valid_edt": "2026-07-17T17:00:00-04:00",
-      "image": "frames/rhode_island/069.png",
-      "image_sha256": "83b1ae26e79559868c521bcd8b79ccc7bd9cfe3c29c7fa7ca0ff1a03b0ce481a",
+      "image": "aqm/frames/national/069.png",
+      "image_sha256": "f15572f73684c4aa07c8a18615e899823893edb9ac531347e9a6849aaa730712",
+      "source_raster": "AQM_PM25_HRRR_20260717_21UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 70,
       "frame_number": 71,
       "valid_utc": "2026-07-17T22:00:00Z",
       "valid_edt": "2026-07-17T18:00:00-04:00",
-      "image": "frames/rhode_island/070.png",
-      "image_sha256": "5210b86e49a645248a73daae834302f81a4952a172e662265e03b41b4bc11465",
+      "image": "aqm/frames/national/070.png",
+      "image_sha256": "5b8e71b4856bb95e7139ea8f25792e2943b5343ca657f8a360328d0a4319a6dd",
+      "source_raster": "AQM_PM25_HRRR_20260717_22UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     },
     {
       "index": 71,
       "frame_number": 72,
       "valid_utc": "2026-07-17T23:00:00Z",
       "valid_edt": "2026-07-17T19:00:00-04:00",
-      "image": "frames/rhode_island/071.png",
-      "image_sha256": "d8e0648d25522e033193789805d1ef630bfe31f1bd52dfe4d2ef511269039d7e",
+      "image": "aqm/frames/national/071.png",
+      "image_sha256": "ee7a4c8faa9809d1edefe576c40f5b5463aa7bdd621609a2a9a65599cbc6b98b",
+      "source_raster": "AQM_PM25_HRRR_20260717_23UTC_ugm3",
       "source_cycle": "2026-07-17T06:00:00Z",
-      "source_cycle_update": false
+      "source_cycle_update": false,
+      "source_nodata_display_pixels": 8692
     }
-  ]
+  ],
+  "deployment_path_policy": "AQM image paths are repository-root-relative because the current root-level index.html resolves frame.image with document.baseURI."
 }
