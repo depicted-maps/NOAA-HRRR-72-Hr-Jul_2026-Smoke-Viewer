@@ -2,7 +2,7 @@
   "version": "1.06.2",
   "render_version": "1.08.0",
   "model": "NOAA AQMv7 raw 1-hour average PM2.5 concentration, HRRR national footprint display",
-  "units": "\u00b5g/m\u00b3",
+  "units": "µg/m³",
   "display_not_aqi": true,
   "hours": 72,
   "start_utc": "2026-07-15T00:00:00Z",
@@ -105,7 +105,7 @@
       "valid_utc": "2026-07-15T00:00:00Z",
       "valid_edt": "2026-07-14T20:00:00-04:00",
       "image": "frames/national/000.png",
-      "image_sha256": "ff50d1b806e092c86357515f1df6ba1f63d80c0771617be4b3e26d9bfc5250ff",
+      "image_sha256": "7502df5d146e4d24ea6b78182eac83c4acb52a600e463dbe94411806810b9e24",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -115,7 +115,7 @@
       "valid_utc": "2026-07-15T01:00:00Z",
       "valid_edt": "2026-07-14T21:00:00-04:00",
       "image": "frames/national/001.png",
-      "image_sha256": "20e406d68ec8dceff37d90b6f5971ad482becd8bebba83b32b73146644679967",
+      "image_sha256": "0f2f7323577ea5fd300d651d1ee8b949a69bb6e84e40f53158b500820b635203",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -125,7 +125,7 @@
       "valid_utc": "2026-07-15T02:00:00Z",
       "valid_edt": "2026-07-14T22:00:00-04:00",
       "image": "frames/national/002.png",
-      "image_sha256": "b9ca58ab4647e3b2b1b71db28fb74b09ea7b18eacf60bf1da833723be158c0bb",
+      "image_sha256": "1515f4ebc981b82ec81466d7aa752929453bd98eae8ff138095da1446812877c",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -135,7 +135,7 @@
       "valid_utc": "2026-07-15T03:00:00Z",
       "valid_edt": "2026-07-14T23:00:00-04:00",
       "image": "frames/national/003.png",
-      "image_sha256": "776ebdc12a90f7267ce251113a2c48c1f29ebdb79d7b0f226e3055ae9439400e",
+      "image_sha256": "5b72929c63998b42ea4edf8a1c36e2213253a0dd8e5e5719bc5e68e81f94000e",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -145,7 +145,7 @@
       "valid_utc": "2026-07-15T04:00:00Z",
       "valid_edt": "2026-07-15T00:00:00-04:00",
       "image": "frames/national/004.png",
-      "image_sha256": "925b849e9da2f677300b59bf89ce50d8673e629722839b9c215984604c56945f",
+      "image_sha256": "d9ff39b3cdad9333fdffabb3409c79a66d991f2a728360e5129da8beb9908040",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -155,7 +155,7 @@
       "valid_utc": "2026-07-15T05:00:00Z",
       "valid_edt": "2026-07-15T01:00:00-04:00",
       "image": "frames/national/005.png",
-      "image_sha256": "2b6652a2ca359826b7887905548914a93e845f8e0f74e6863fc26fb8a929932a",
+      "image_sha256": "33cddf4defc544705a266fb9b295e0a260ffaa4fbbe5b641b7da809f622ea2a3",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -165,7 +165,7 @@
       "valid_utc": "2026-07-15T06:00:00Z",
       "valid_edt": "2026-07-15T02:00:00-04:00",
       "image": "frames/national/006.png",
-      "image_sha256": "07f32a340d6c694c3c8aa8c378daa62b7b20b45926817ac03b414741cce6fc2c",
+      "image_sha256": "496d2b726b18bca2f60dd620744434a13d23f394d7cd73cc431c01c3cd849350",
       "source_cycle": "2026-07-13T12:00:00Z",
       "source_cycle_update": false
     },
@@ -175,7 +175,7 @@
       "valid_utc": "2026-07-15T07:00:00Z",
       "valid_edt": "2026-07-15T03:00:00-04:00",
       "image": "frames/national/007.png",
-      "image_sha256": "c766c14090de7d56383eb8c4032000192cd6de26e0278b1c80d0fe09dff0cd8e",
+      "image_sha256": "44ba25b17fe00f6b407d205deaf0e97cddd8b0b11f97686ab51d343562724167",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": true
     },
@@ -185,7 +185,7 @@
       "valid_utc": "2026-07-15T08:00:00Z",
       "valid_edt": "2026-07-15T04:00:00-04:00",
       "image": "frames/national/008.png",
-      "image_sha256": "69127d8d4f0b192196e6a93e755daa55abc4f9e4018393249632872a45673dc9",
+      "image_sha256": "e58b0fcb00f5b62647cbe1880b4f7fcad486ed878408b6f151e39773e8a021a6",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -195,7 +195,7 @@
       "valid_utc": "2026-07-15T09:00:00Z",
       "valid_edt": "2026-07-15T05:00:00-04:00",
       "image": "frames/national/009.png",
-      "image_sha256": "50417441da02f7ff9e5a5bcbf9b64d5cc1598f5768c50397043fa6f24023fcef",
+      "image_sha256": "e35a403332c6277f80cd4c906a1525c50c589b4f0392d56e934799c26a607d3a",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -205,7 +205,7 @@
       "valid_utc": "2026-07-15T10:00:00Z",
       "valid_edt": "2026-07-15T06:00:00-04:00",
       "image": "frames/national/010.png",
-      "image_sha256": "7a2ec52009aa74d8d894baf33a3644d74fdb7e22533ce346eed1105f60e1ed44",
+      "image_sha256": "0470facbbc8e28d0bda0b1d5154f850aeb73861261b2f2998ccc96faa2989dd1",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -215,7 +215,7 @@
       "valid_utc": "2026-07-15T11:00:00Z",
       "valid_edt": "2026-07-15T07:00:00-04:00",
       "image": "frames/national/011.png",
-      "image_sha256": "3ea4e0a618f22c6e486267ca3ce4a23fc57f3981ae605795f200a286a265fe07",
+      "image_sha256": "1bfdf9cf109e6f4e02af80bb02cf0c3aef2246ac9339e84c9b4a7232ce52bfb2",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -225,7 +225,7 @@
       "valid_utc": "2026-07-15T12:00:00Z",
       "valid_edt": "2026-07-15T08:00:00-04:00",
       "image": "frames/national/012.png",
-      "image_sha256": "49a10deab706cb2e0115e2520a1bc88f9b2010d946318e2e7ea540c459766f9b",
+      "image_sha256": "8c7285f446c152641387a5cf0d79b659c278244e9fc5375f961cac7e6060591a",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -235,7 +235,7 @@
       "valid_utc": "2026-07-15T13:00:00Z",
       "valid_edt": "2026-07-15T09:00:00-04:00",
       "image": "frames/national/013.png",
-      "image_sha256": "f4b9c8b752750623389f9bb7d0f6d91901ab5eb48923e30b825cca9078d2983c",
+      "image_sha256": "7edb813ce47a5c73198c6d1ba64bcef57d8553d4483ed42c9e6b39e6eaf634e8",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -245,7 +245,7 @@
       "valid_utc": "2026-07-15T14:00:00Z",
       "valid_edt": "2026-07-15T10:00:00-04:00",
       "image": "frames/national/014.png",
-      "image_sha256": "9aa1134dc70c8860287ea080886075afcb247351a6be3eb05effb563209aa11d",
+      "image_sha256": "6778ceaf9eaaba6995f301ec215dfbb901e50e5aa818c77753a5b8f5faf74424",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -255,7 +255,7 @@
       "valid_utc": "2026-07-15T15:00:00Z",
       "valid_edt": "2026-07-15T11:00:00-04:00",
       "image": "frames/national/015.png",
-      "image_sha256": "a44a3d9454384581dfec3c3b78a2f765927220327d19f36abc92dcac31b0602b",
+      "image_sha256": "a8fe59bb8c2950f48f12192e8684416906e08aba00dd3427006545401f54720a",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -265,7 +265,7 @@
       "valid_utc": "2026-07-15T16:00:00Z",
       "valid_edt": "2026-07-15T12:00:00-04:00",
       "image": "frames/national/016.png",
-      "image_sha256": "ee35587c151a866ef2749db5cfaec53281a6cba4aeba30c61d1b2eed999d8d5b",
+      "image_sha256": "f715be6967bf136130ba41ea607addd916c3cd5f17df969f795517690cb8f946",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -275,7 +275,7 @@
       "valid_utc": "2026-07-15T17:00:00Z",
       "valid_edt": "2026-07-15T13:00:00-04:00",
       "image": "frames/national/017.png",
-      "image_sha256": "aad1ccd8a1f54b7cfb5a393d99eb0da46685ee641868de443718a1123beb7186",
+      "image_sha256": "a23a68d0d99c78ea04e5c803322bc8b8d6610976e6a80a9420eb25aa54e3d2af",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -285,7 +285,7 @@
       "valid_utc": "2026-07-15T18:00:00Z",
       "valid_edt": "2026-07-15T14:00:00-04:00",
       "image": "frames/national/018.png",
-      "image_sha256": "ade18d5891a8eb10f936903113e6cc6d24183467b2f33ed5883ec2fc8226342c",
+      "image_sha256": "a72063a590307f4bf761c2d295ab7a0acd78d5371ffaf40eb241070f32f58656",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -295,7 +295,7 @@
       "valid_utc": "2026-07-15T19:00:00Z",
       "valid_edt": "2026-07-15T15:00:00-04:00",
       "image": "frames/national/019.png",
-      "image_sha256": "b4868e292aa13f320671ba52fe3706e5d4a3627c4ba4746122cb6b8de2b03463",
+      "image_sha256": "ba12ae133d9f97531fb2fdf146d6cfe3265df4a01c731cc30108a9aab2310687",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -305,7 +305,7 @@
       "valid_utc": "2026-07-15T20:00:00Z",
       "valid_edt": "2026-07-15T16:00:00-04:00",
       "image": "frames/national/020.png",
-      "image_sha256": "2d837dd7d800132f2078649ba0b6931c1d87992224e1bf627b50024af2b1de59",
+      "image_sha256": "b928b07b04c330abf5dd0fb5f4c806e970eadf08e425f0a81deeed8f239b9279",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -315,7 +315,7 @@
       "valid_utc": "2026-07-15T21:00:00Z",
       "valid_edt": "2026-07-15T17:00:00-04:00",
       "image": "frames/national/021.png",
-      "image_sha256": "a29b5130b38b632ec9776161e19d209dce11ee8682646241726f7ff41af79b0b",
+      "image_sha256": "a3c514392ceeaee0a9c0665bd176d2ebebdb5664baaf2a66120d345a0ff3c852",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -325,7 +325,7 @@
       "valid_utc": "2026-07-15T22:00:00Z",
       "valid_edt": "2026-07-15T18:00:00-04:00",
       "image": "frames/national/022.png",
-      "image_sha256": "38d73c8cef9f6ed6c3d0416202f876496905679d1d8a9ef7573a58e26a7d9544",
+      "image_sha256": "151429b83eac79c361fa9e068f5fdde186d54750a526442bc92e65f20ef1cb17",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -335,7 +335,7 @@
       "valid_utc": "2026-07-15T23:00:00Z",
       "valid_edt": "2026-07-15T19:00:00-04:00",
       "image": "frames/national/023.png",
-      "image_sha256": "d1b2d5dea6c812624e83d6194869dbefc845434dc73ee844388b15e46b3fe914",
+      "image_sha256": "6e5e4323bd1deb16db6334ad4b426b91248ae700418eefa39ca590da882d1b39",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -345,7 +345,7 @@
       "valid_utc": "2026-07-16T00:00:00Z",
       "valid_edt": "2026-07-15T20:00:00-04:00",
       "image": "frames/national/024.png",
-      "image_sha256": "66080e5bd7f1ec1cc21e2919347420c7d8acd1bd5cafacba0fae3009e1e18e51",
+      "image_sha256": "7cff28d9d023c3c38e09007725bbfa72dc599591b5b2fd42740bfd4be69f5357",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -355,7 +355,7 @@
       "valid_utc": "2026-07-16T01:00:00Z",
       "valid_edt": "2026-07-15T21:00:00-04:00",
       "image": "frames/national/025.png",
-      "image_sha256": "e55c0c3790c528e041c365a238e97e49ec535e26a418934be06c1faf9db15bf7",
+      "image_sha256": "1fcba3117acdcfc4fa369df230d533c7272c0b23397979077f03b6607a0f8916",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -365,7 +365,7 @@
       "valid_utc": "2026-07-16T02:00:00Z",
       "valid_edt": "2026-07-15T22:00:00-04:00",
       "image": "frames/national/026.png",
-      "image_sha256": "29e2c49e57372611c630fffd807341fe0777889699ad2368225b1b597f0617db",
+      "image_sha256": "0ba7a9f483eaad845e11d9ed46e9ca9af4eea3e38194b87528a93ccae86f334b",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -375,7 +375,7 @@
       "valid_utc": "2026-07-16T03:00:00Z",
       "valid_edt": "2026-07-15T23:00:00-04:00",
       "image": "frames/national/027.png",
-      "image_sha256": "c6cdcb363dcdfa36efc55206bb6137d510aa114234c8976a285b95dd1cfde1a2",
+      "image_sha256": "22f33ae465d01e5c2e7d1f773096e53fe69c25e73afe5a1c07cfa1a5cb852b78",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -385,7 +385,7 @@
       "valid_utc": "2026-07-16T04:00:00Z",
       "valid_edt": "2026-07-16T00:00:00-04:00",
       "image": "frames/national/028.png",
-      "image_sha256": "b201a60b128c3f781024cff1e5039667c3b27026e80c0b55f43ca5e503778534",
+      "image_sha256": "422d37d743f1459ca8d73592e8bc86f8df1f41f07e7207cc486cd4a3ab49c164",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -395,7 +395,7 @@
       "valid_utc": "2026-07-16T05:00:00Z",
       "valid_edt": "2026-07-16T01:00:00-04:00",
       "image": "frames/national/029.png",
-      "image_sha256": "a4ddc757a88b5e361e0830bc9845025bef294f55d33a44bfbfe21471da173f43",
+      "image_sha256": "8a50a0cd5aa7d61589f8e5792ed0699a0013af7c0b6a4245a1704dc3e7dd0bf7",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -405,7 +405,7 @@
       "valid_utc": "2026-07-16T06:00:00Z",
       "valid_edt": "2026-07-16T02:00:00-04:00",
       "image": "frames/national/030.png",
-      "image_sha256": "c629c4f11feeab90f35544aa63de72990c7f9c10a2d81fef0f0ed0f9b5132308",
+      "image_sha256": "95cdbd22fcfe777f655dae75a04c78ba53fb3f98e5e2b36e66a19cb5aa46d524",
       "source_cycle": "2026-07-15T06:00:00Z",
       "source_cycle_update": false
     },
@@ -415,7 +415,7 @@
       "valid_utc": "2026-07-16T07:00:00Z",
       "valid_edt": "2026-07-16T03:00:00-04:00",
       "image": "frames/national/031.png",
-      "image_sha256": "f80197d0be515542b189a7ec6f6c471838eddb9fd95f78c3fa9006d2d0e84b98",
+      "image_sha256": "a17a659413f464a67a353e831b1240c11113e4ab28b38a8a5de9fb9777305fc2",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": true
     },
@@ -425,7 +425,7 @@
       "valid_utc": "2026-07-16T08:00:00Z",
       "valid_edt": "2026-07-16T04:00:00-04:00",
       "image": "frames/national/032.png",
-      "image_sha256": "bb2631f719a70a0f09bb3a222bb0cf8215c030441c051c1945aa21d032200d44",
+      "image_sha256": "6c76d38b9ef8d4b8e005945e4c32aa7852c9a52e845fe8deccdeece03f4ba1b1",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -435,7 +435,7 @@
       "valid_utc": "2026-07-16T09:00:00Z",
       "valid_edt": "2026-07-16T05:00:00-04:00",
       "image": "frames/national/033.png",
-      "image_sha256": "6d0e264e0b3cff2f46f0744ab375fcd32606d9b7611be5b8ab97e835816af76d",
+      "image_sha256": "b2731aed817f75788146f92c7307b2fc6077424fa785131542bd36c2fa651da8",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -445,7 +445,7 @@
       "valid_utc": "2026-07-16T10:00:00Z",
       "valid_edt": "2026-07-16T06:00:00-04:00",
       "image": "frames/national/034.png",
-      "image_sha256": "a56b6c0e3b0627feadc34aed2b89a0dd22c786a858f7045f1bcef33e8585d573",
+      "image_sha256": "5ad8b1b2e14ab0839675ef6447e9f9f88ea336721aa91abeb9a93d823219f376",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -455,7 +455,7 @@
       "valid_utc": "2026-07-16T11:00:00Z",
       "valid_edt": "2026-07-16T07:00:00-04:00",
       "image": "frames/national/035.png",
-      "image_sha256": "b0d43649b3a22a66796903d27e85681962a02d26cf5fd6dde3869e9468fa752e",
+      "image_sha256": "29f2062f6541a4c3d9b735ea383df4f2403d43146a6164d7a5bb7da10bac610d",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -465,7 +465,7 @@
       "valid_utc": "2026-07-16T12:00:00Z",
       "valid_edt": "2026-07-16T08:00:00-04:00",
       "image": "frames/national/036.png",
-      "image_sha256": "be9410dd04b0422d6856d992e051f6f214d53f60d2838b33504f194709dfe474",
+      "image_sha256": "ae5314787328d7cafc16db7cb6f1dc3500f5fcaa5cf72701fd5bdf5c76ce60be",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -475,7 +475,7 @@
       "valid_utc": "2026-07-16T13:00:00Z",
       "valid_edt": "2026-07-16T09:00:00-04:00",
       "image": "frames/national/037.png",
-      "image_sha256": "09ffaaa602d1c03d2efa978b5c521cedca506ad18b7921e3e280306c551c92b3",
+      "image_sha256": "85b88befba28202c7edf68639130d2eae7bd57b7649146ea48e1a740e48651d6",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -485,7 +485,7 @@
       "valid_utc": "2026-07-16T14:00:00Z",
       "valid_edt": "2026-07-16T10:00:00-04:00",
       "image": "frames/national/038.png",
-      "image_sha256": "f72b0c5502001102f1f6c34da01dd80f94b3559e39841eff18dafa0035d0cfef",
+      "image_sha256": "4331105afb21687f5f7328f4f7ff98632460f1158e95cbe9e655f15de9a61d42",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -495,7 +495,7 @@
       "valid_utc": "2026-07-16T15:00:00Z",
       "valid_edt": "2026-07-16T11:00:00-04:00",
       "image": "frames/national/039.png",
-      "image_sha256": "361971b13f4cddafa0bb9d62e0c3d5f9ecd87ed19d195f8468f9a0a2ff1bcc01",
+      "image_sha256": "8995e752f305295f7ad4338100edacb1f4904de59d801bc56382055f3a19f20e",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -505,7 +505,7 @@
       "valid_utc": "2026-07-16T16:00:00Z",
       "valid_edt": "2026-07-16T12:00:00-04:00",
       "image": "frames/national/040.png",
-      "image_sha256": "fc88fa35040e7e48a3d85beb2c452dcbdecc583467336206680f7ae71964d3da",
+      "image_sha256": "35017fe965efb885f66ac6d2eb5ea0066941cca2bd0d685892d3c1078fb18ef8",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -515,7 +515,7 @@
       "valid_utc": "2026-07-16T17:00:00Z",
       "valid_edt": "2026-07-16T13:00:00-04:00",
       "image": "frames/national/041.png",
-      "image_sha256": "033daf5dcfe209f104cea6719f2157bc3f427f566cdc0f77a2d40bab4c5ff82c",
+      "image_sha256": "3d324142e88828b058ac8129217f1042c38c67d2f4d4ed2f47aa8c237784c38c",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -525,7 +525,7 @@
       "valid_utc": "2026-07-16T18:00:00Z",
       "valid_edt": "2026-07-16T14:00:00-04:00",
       "image": "frames/national/042.png",
-      "image_sha256": "5c94157a477d64e508167ba8327ce673ba1119a6e96b163a8eb9d6cac40696cc",
+      "image_sha256": "b9b2edf556354273e7a2b4e23b060671251d30aecb66b1f11bb6bc95261b6d0b",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -535,7 +535,7 @@
       "valid_utc": "2026-07-16T19:00:00Z",
       "valid_edt": "2026-07-16T15:00:00-04:00",
       "image": "frames/national/043.png",
-      "image_sha256": "6ea8611e28550e2a8cd7e5f62690a155131bbc7096c31f31ad70324a1f91df12",
+      "image_sha256": "cc144819963e480a18d02952441f8f1bbbae85f9e94441c3b2405bfc606fbcbc",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -545,7 +545,7 @@
       "valid_utc": "2026-07-16T20:00:00Z",
       "valid_edt": "2026-07-16T16:00:00-04:00",
       "image": "frames/national/044.png",
-      "image_sha256": "ee9d6b20ad0b876bd0dfbdcb0870af2e6ef2db9068965de9dea704743120d4ea",
+      "image_sha256": "c1cd2ec9b6b96c33e4b77d877589ac3a110eb0169968be00a0552fbe25e8cac0",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -555,7 +555,7 @@
       "valid_utc": "2026-07-16T21:00:00Z",
       "valid_edt": "2026-07-16T17:00:00-04:00",
       "image": "frames/national/045.png",
-      "image_sha256": "0173ae3b4c5ed8884bf6b68ea95c5373e8cc7168ff63015aba8c409bfb2e479e",
+      "image_sha256": "d029f06dac836ad6f4015faebfcab318cb4a736a21965deddfbb03f23ff22a68",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -565,7 +565,7 @@
       "valid_utc": "2026-07-16T22:00:00Z",
       "valid_edt": "2026-07-16T18:00:00-04:00",
       "image": "frames/national/046.png",
-      "image_sha256": "d7feebf8d381a2a36a29bcd1bc14d6c708e09501858e1010e57531c07c63f5c0",
+      "image_sha256": "c22a5e8713467dd75a432e373ca9b516580c2b806ee7f3509e78592364eb1bce",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -575,7 +575,7 @@
       "valid_utc": "2026-07-16T23:00:00Z",
       "valid_edt": "2026-07-16T19:00:00-04:00",
       "image": "frames/national/047.png",
-      "image_sha256": "fb6be2b6429b7c899799afb87d32114390c4663be933cebd8863500a35602ade",
+      "image_sha256": "8372ae065bf7f679a8ab873f6d94c43e69e64c2b257997a52725faadbb33006d",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -585,7 +585,7 @@
       "valid_utc": "2026-07-17T00:00:00Z",
       "valid_edt": "2026-07-16T20:00:00-04:00",
       "image": "frames/national/048.png",
-      "image_sha256": "92d79477dc60c0601338c1cf1498b80a601aa6041220d141674a3aaf343b6e90",
+      "image_sha256": "4bc24485a98ceec1a4de25632163145e46a6c5db98f76b833050671ffe97a4e3",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -595,7 +595,7 @@
       "valid_utc": "2026-07-17T01:00:00Z",
       "valid_edt": "2026-07-16T21:00:00-04:00",
       "image": "frames/national/049.png",
-      "image_sha256": "41ba7344781a7a65f51a2464e3d635ae8f33e51bc0a69e854e02808f80d60bfb",
+      "image_sha256": "c1a61349a822ea69efc04449e93a29a83371100c34823cbc8abe83688af2ed29",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -605,7 +605,7 @@
       "valid_utc": "2026-07-17T02:00:00Z",
       "valid_edt": "2026-07-16T22:00:00-04:00",
       "image": "frames/national/050.png",
-      "image_sha256": "55b9347d30f9fba8c51b5e10b1d70541c866173cef7f3f65bfae86db0c862f9d",
+      "image_sha256": "b3fe78a78042896ee9ec460dfbf53b061448961bbe3b4dbb0f23304344fef9f5",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -615,7 +615,7 @@
       "valid_utc": "2026-07-17T03:00:00Z",
       "valid_edt": "2026-07-16T23:00:00-04:00",
       "image": "frames/national/051.png",
-      "image_sha256": "5b97b57760e69953f2a14786034c79bfe0741b92df9e795cb01bdc7a2edbe3a9",
+      "image_sha256": "5b389270b04d8b5d8d8fa36a004bc3b56f5ad2dd1867e4ac6ddf880935a12a2f",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -625,7 +625,7 @@
       "valid_utc": "2026-07-17T04:00:00Z",
       "valid_edt": "2026-07-17T00:00:00-04:00",
       "image": "frames/national/052.png",
-      "image_sha256": "dc7b46b9ed5c9c489ba009cb1e4e71bf3c758941c7a45aada3460047f898521f",
+      "image_sha256": "bf42f45420aa37e94732fb5cd838e7cb69bb9347d49475d389e933741c04961c",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -635,7 +635,7 @@
       "valid_utc": "2026-07-17T05:00:00Z",
       "valid_edt": "2026-07-17T01:00:00-04:00",
       "image": "frames/national/053.png",
-      "image_sha256": "9013cf84a0989131b622b70112b12ce66ad8d93b25ca78b8ba1b580d0f9b8ff6",
+      "image_sha256": "78a34e4b2de2cf2a32389aa18b7aadf89a25cf930ef4af2405052203ff64e96b",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -645,7 +645,7 @@
       "valid_utc": "2026-07-17T06:00:00Z",
       "valid_edt": "2026-07-17T02:00:00-04:00",
       "image": "frames/national/054.png",
-      "image_sha256": "c9aac169e2ff52bcbaf2f29e620519d1e79a6af3cdfdeff73945e85513a2892d",
+      "image_sha256": "505140389520f131d5b845919fc096073824f3bb01d37e5e7f3bed7c0ffed49c",
       "source_cycle": "2026-07-16T06:00:00Z",
       "source_cycle_update": false
     },
@@ -655,7 +655,7 @@
       "valid_utc": "2026-07-17T07:00:00Z",
       "valid_edt": "2026-07-17T03:00:00-04:00",
       "image": "frames/national/055.png",
-      "image_sha256": "8e1086379a31f43b7a86818837da6e8c1e460341bdedb2bb6141c652d4c09481",
+      "image_sha256": "c7975a23088a50c990f5d15d2d0b751353d3202b8d2c0810cfcd5d1c2eeacb09",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": true
     },
@@ -665,7 +665,7 @@
       "valid_utc": "2026-07-17T08:00:00Z",
       "valid_edt": "2026-07-17T04:00:00-04:00",
       "image": "frames/national/056.png",
-      "image_sha256": "6203b092bc70e3cdf31c9ae8be13a07348ca2568f4e75aaef9b5f83e452268d6",
+      "image_sha256": "6611f4ef230119903a157df03ed7d47d76d62d2a001f7f6ce11d26c3919587c4",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -675,7 +675,7 @@
       "valid_utc": "2026-07-17T09:00:00Z",
       "valid_edt": "2026-07-17T05:00:00-04:00",
       "image": "frames/national/057.png",
-      "image_sha256": "ee50fc3a214df8f11132dc41f7571180f01b8644e7beceeaeb226c3dd490e374",
+      "image_sha256": "b54ddc41822228cde8bf1cacb12af865c3fade907c5b8dcbc76d951c31f91f14",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -685,7 +685,7 @@
       "valid_utc": "2026-07-17T10:00:00Z",
       "valid_edt": "2026-07-17T06:00:00-04:00",
       "image": "frames/national/058.png",
-      "image_sha256": "6a51afedf1fcd8022d368d0ff8e30f6ee19f66514474328e690ced3495c73b50",
+      "image_sha256": "9020052dd9d49014575a662a7707f71e398cff31d9bba4e5b8b9d84232936bb3",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -695,7 +695,7 @@
       "valid_utc": "2026-07-17T11:00:00Z",
       "valid_edt": "2026-07-17T07:00:00-04:00",
       "image": "frames/national/059.png",
-      "image_sha256": "b04070a8bb613b4ed52938273f208189b9eeda25e98b460b4b1db9f407ea57a9",
+      "image_sha256": "1ac6920a1ef9145a3b7bcc44199d7169f1d6ededafcde8316b3c999e498cf705",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -705,7 +705,7 @@
       "valid_utc": "2026-07-17T12:00:00Z",
       "valid_edt": "2026-07-17T08:00:00-04:00",
       "image": "frames/national/060.png",
-      "image_sha256": "e09c2536bcdb5b1d1c25b95b861dbb2f44984c13ac2ee8023c574f38d44d962b",
+      "image_sha256": "d810083adc36e9ca3ccd4140d9021b227e587b9de225add2ef5da83155d58f4f",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -715,7 +715,7 @@
       "valid_utc": "2026-07-17T13:00:00Z",
       "valid_edt": "2026-07-17T09:00:00-04:00",
       "image": "frames/national/061.png",
-      "image_sha256": "ef1d7d0a0065a9b267caa6c0242d2bb03038896a8b322a68dcbf666ff92c75d5",
+      "image_sha256": "f277ce2b0cce801b44b1dde1ee37a4fa13f36e454c6b7ab26806dd3bb3531d4f",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -725,7 +725,7 @@
       "valid_utc": "2026-07-17T14:00:00Z",
       "valid_edt": "2026-07-17T10:00:00-04:00",
       "image": "frames/national/062.png",
-      "image_sha256": "7220aa4cfaf0b243082923d3dd5d175c8f9dd26dc28bfa73f0803787fde92b64",
+      "image_sha256": "954090e85d951e8c79adabf60a1b1c9c0e40761fd2d8b8247cffb29f9ca18796",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -735,7 +735,7 @@
       "valid_utc": "2026-07-17T15:00:00Z",
       "valid_edt": "2026-07-17T11:00:00-04:00",
       "image": "frames/national/063.png",
-      "image_sha256": "d7a1e6ef5709650843166792024d09ec2e0c532c92d21c5377796a4f0caa1056",
+      "image_sha256": "77ca40d11556327091833fe407e9b8b4bca94a8ea5a38963d6e068effaba8e2c",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -745,7 +745,7 @@
       "valid_utc": "2026-07-17T16:00:00Z",
       "valid_edt": "2026-07-17T12:00:00-04:00",
       "image": "frames/national/064.png",
-      "image_sha256": "b923646879a8e45d29db502d02bdbc9d2575b3413315314d889a2eef808665c4",
+      "image_sha256": "ad572bfc949835184d92bcc5d8c6bf7886e80a8897c4534d94e33333312e0f21",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -755,7 +755,7 @@
       "valid_utc": "2026-07-17T17:00:00Z",
       "valid_edt": "2026-07-17T13:00:00-04:00",
       "image": "frames/national/065.png",
-      "image_sha256": "ea8a2a808225d45d5647e2b63cae1653dbb2fb47855a00fe7001e5593b3a1a7b",
+      "image_sha256": "a4dfae8cfe6cd92572a1434bb528ce2640ea56bc957ce450d22afe2e9d9506b7",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -765,7 +765,7 @@
       "valid_utc": "2026-07-17T18:00:00Z",
       "valid_edt": "2026-07-17T14:00:00-04:00",
       "image": "frames/national/066.png",
-      "image_sha256": "31533bfd605147e1a8809369fc0a50f8120d8b228c16e0680ed801653d9b7eb4",
+      "image_sha256": "fec910e9de5f5dcc48f2ffa6f45e21c9b60c09f4f811e75deff5eb8ba4b639a0",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -775,7 +775,7 @@
       "valid_utc": "2026-07-17T19:00:00Z",
       "valid_edt": "2026-07-17T15:00:00-04:00",
       "image": "frames/national/067.png",
-      "image_sha256": "4fef4d1d902a439abce4cb0f301fc92c0ab040e72238b75beeb2d1daed760474",
+      "image_sha256": "0d527a6c1402c988dec60883633445cd273266d13c6729b487af8a5afd1196e6",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -785,7 +785,7 @@
       "valid_utc": "2026-07-17T20:00:00Z",
       "valid_edt": "2026-07-17T16:00:00-04:00",
       "image": "frames/national/068.png",
-      "image_sha256": "a9c90b33629789ab93092ed136785a3fb8bec5be5dd9d57670f321bbd632db5b",
+      "image_sha256": "1c2e151ad9222477e6bc6af8a099a88077da0b924fbdf1b9527da39851bcd21d",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -795,7 +795,7 @@
       "valid_utc": "2026-07-17T21:00:00Z",
       "valid_edt": "2026-07-17T17:00:00-04:00",
       "image": "frames/national/069.png",
-      "image_sha256": "1adb87f2327dd3345efdc4b2ae8ffca1910bd96cc07c60102b602c1620349935",
+      "image_sha256": "68b6fcf6876737d21d9b4048f3dda89808d264d5d1c7048a189f94fbc122f3b9",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -805,7 +805,7 @@
       "valid_utc": "2026-07-17T22:00:00Z",
       "valid_edt": "2026-07-17T18:00:00-04:00",
       "image": "frames/national/070.png",
-      "image_sha256": "582e83e74dbbd4c9f4cbc733738418416b38b3ab13d1997919e45d460850e68f",
+      "image_sha256": "6f6a10ba5757c195071e12e7edbd0cfd5e1e028b5961d7e1444e1cf2e94dbd6d",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     },
@@ -815,7 +815,7 @@
       "valid_utc": "2026-07-17T23:00:00Z",
       "valid_edt": "2026-07-17T19:00:00-04:00",
       "image": "frames/national/071.png",
-      "image_sha256": "b4c546a46334467c1a6851e67fa572171df04a927f7eced0c121a795fdb7e4d3",
+      "image_sha256": "e7b7e973781954ba71c1cf545d9bef76d1bc2485d93170fcb27345233259d91c",
       "source_cycle": "2026-07-17T06:00:00Z",
       "source_cycle_update": false
     }
