@@ -1,0 +1,25 @@
+{
+  "version": "1.00.3",
+  "boundary_line": "white 0.8 screen pixels, no halo",
+  "geometry_source": "Native Lambert projection reference vectors from v1.00.2",
+  "state_coverage": "RI ONLY - not continental state coverage",
+  "source_datum_registration": "REQUIRES VISUAL QA",
+  "smoke_lowest_class": "transparent (<5 \u00b5g/m3), not zero",
+  "AQM_good_class": "green valid data, not transparent",
+  "paths": {
+    "world": {
+      "original_paths": 58716,
+      "viewport_intersecting_paths": 17342,
+      "retained_vertices": 644855,
+      "new_bytes": 11853610
+    },
+    "state": {
+      "original_paths": 181,
+      "viewport_intersecting_paths": 181,
+      "retained_vertices": 105863,
+      "new_bytes": 2011693
+    }
+  },
+  "hr_frames_transparency_modified": 144,
+  "hr_baseline_low_class_pixels_made_transparent": 48818682
+}
